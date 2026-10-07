@@ -328,10 +328,16 @@ export default function DashboardPage() {
 
         <div className="flex flex-wrap items-center gap-2 shrink-0">
           <Link
+            href="/tanitim"
+            className="px-3.5 py-2 bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs rounded-xl transition-all shadow-xs flex items-center gap-1.5"
+          >
+            <span>Tanıtım & PDF Katalog →</span>
+          </Link>
+          <Link
             href="/ayarlar?tab=kilavuz"
             className="px-3.5 py-2 bg-slate-100 hover:bg-emerald-50 hover:text-emerald-800 text-slate-700 font-bold text-xs rounded-xl transition-all border border-slate-200 hover:border-emerald-300"
           >
-            Kullanım Kılavuzu →
+            Kullanım Kılavuzu
           </Link>
           <Link
             href="/ayarlar?tab=sozluk"

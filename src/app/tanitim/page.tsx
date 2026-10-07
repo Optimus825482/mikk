@@ -806,6 +806,15 @@ export default function TanitimPage() {
               </Link>
 
               <a
+                href="/MilkIQ_Tanitim_Katalogu.pdf"
+                download="MilkIQ_Tanitim_Katalogu.pdf"
+                className="px-6 py-3.5 bg-sky-600 hover:bg-sky-500 text-white font-bold text-sm rounded-2xl shadow-md transition-all active:scale-95 flex items-center gap-2"
+              >
+                <Download className="w-4 h-4 text-white" />
+                <span>PDF Kataloğu İndir</span>
+              </a>
+
+              <a
                 href="/MilkIQ_Tanitim_Sunumu.pptx"
                 download="MilkIQ_Tanitim_Sunumu.pptx"
                 className="px-6 py-3.5 bg-slate-800 hover:bg-slate-700 text-white font-bold text-sm rounded-2xl border border-slate-700 shadow-md transition-all active:scale-95 flex items-center gap-2"
@@ -882,6 +891,17 @@ export default function TanitimPage() {
             {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
             <span className="hidden md:inline">{isPlaying ? 'Durdur' : 'Oynat'}</span>
           </button>
+
+          {/* PDF İndir Butonu */}
+          <a
+            href="/MilkIQ_Tanitim_Katalogu.pdf"
+            download="MilkIQ_Tanitim_Katalogu.pdf"
+            className="px-3 py-2 rounded-xl text-xs font-bold bg-slate-900 text-slate-300 border border-slate-800 hover:text-white hover:border-slate-700 transition-all flex items-center gap-1.5"
+            title="PDF Tanıtım Kataloğu İndir"
+          >
+            <Download className="w-4 h-4 text-sky-400" />
+            <span className="hidden sm:inline">PDF İndir</span>
+          </a>
 
           {/* PPTX İndir Butonu */}
           <a

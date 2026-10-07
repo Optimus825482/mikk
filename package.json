@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build:pptx": "node scripts/generate-pptx.js",
-    "build": "node scripts/generate-pptx.js && next build",
+    "build:pdf": "node scripts/generate-pdf.js",
+    "build": "node scripts/generate-pptx.js && node scripts/generate-pdf.js && next build",
     "start": "next start",
     "lint": "next lint",
     "prisma:generate": "prisma generate",

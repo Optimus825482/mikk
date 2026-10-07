@@ -40,11 +40,54 @@ import {
 import { calculateRation, DEFAULT_SETTINGS } from '@/lib/calculator';
 import ConfirmModal, { ConfirmVariant } from '@/components/ConfirmModal';
 
+const LACTATION_GROUPS = [
+  {
+    id: 'erken',
+    name: 'Erken Laktasyon (Pik)',
+    dim: 'DIM: 1 - 100 Gün',
+    phase: 'Faz 1 (Pik Dönemi)',
+    color: 'border-rose-400 bg-rose-50/70 text-rose-800',
+    activeBorder: 'border-rose-500 ring-2 ring-rose-400/50 bg-rose-50/90 shadow-md',
+    badge: 'bg-rose-100 text-rose-800 border-rose-300',
+    defaultLiveWeight: 650,
+    defaultTargetMilk: 34,
+    description: 'Doğum sonrası negatif enerji dengesini önleyen yüksek enerjili yoğun rasyon. Karaciğer ve rumen koruyucu premiksler.',
+    targetNote: 'Maksimum pik verimi ve kilo kaybını sınırlama'
+  },
+  {
+    id: 'orta',
+    name: 'Orta Laktasyon (Plato)',
+    dim: 'DIM: 101 - 200 Gün',
+    phase: 'Faz 2 (Plato Dönemi)',
+    color: 'border-sky-400 bg-sky-50/70 text-sky-800',
+    activeBorder: 'border-sky-500 ring-2 ring-sky-400/50 bg-sky-50/90 shadow-md',
+    badge: 'bg-sky-100 text-sky-800 border-sky-300',
+    defaultLiveWeight: 620,
+    defaultTargetMilk: 26,
+    description: 'Yem tüketim kapasitesinin en üst düzeye ulaştığı dönem. Süt verimi platosunu uzatan dengeli kaba/kesif yem oranı.',
+    targetNote: 'Düzenli verim ve tohumlama başarısı'
+  },
+  {
+    id: 'gec',
+    name: 'Geç Laktasyon & Kuru Dönem',
+    dim: 'DIM: 200+ & Kuru',
+    phase: 'Faz 3 (Yenilenme)',
+    color: 'border-emerald-400 bg-emerald-50/70 text-emerald-800',
+    activeBorder: 'border-emerald-500 ring-2 ring-emerald-400/50 bg-emerald-50/90 shadow-md',
+    badge: 'bg-emerald-100 text-emerald-800 border-emerald-300',
+    defaultLiveWeight: 680,
+    defaultTargetMilk: 14,
+    description: 'Aşırı yağlanmayı önleyen yüksek lifli, düşük enerjili kaba yem ağırlıklı rasyon. Anyonik tuz dengesi ve meme dokusu yenilenmesi.',
+    targetNote: 'Sorunsuz doğum ve sağlıklı yeni buzağı'
+  }
+];
+
 export default function RationPage() {
   const [feeds, setFeeds] = useState<Feed[]>([]);
   const [settings, setSettings] = useState<SystemSetting>(DEFAULT_SETTINGS);
-  const [liveWeight, setLiveWeight] = useState<number>(600);
-  const [targetMilk, setTargetMilk] = useState<number>(25);
+  const [liveWeight, setLiveWeight] = useState<number>(650);
+  const [targetMilk, setTargetMilk] = useState<number>(34);
+  const [selectedLactationGroup, setSelectedLactationGroup] = useState<string>('erken');
 
   // Confirm Modal State
   const [confirmConfig, setConfirmConfig] = useState<{
@@ -505,8 +548,70 @@ export default function RationPage() {
             <span>1. Adım: Hayvan Bilgileri & Süt Hedefi</span>
           </h2>
           <span className="text-xs text-slate-400 font-medium">
-            Rasyon bu hedeflere göre optimize edilecektir
+            Laktasyon fazına ve hedeflere göre rasyon optimizasyonu
           </span>
+        </div>
+
+        {/* LAKTASYON DİNAMİKLERİ VE SÜRÜ GRUBU SEÇİMİ (NRC) */}
+        <div className="mb-5 space-y-2.5">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-bold text-slate-800 flex items-center space-x-1.5">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Sürü Laktasyon Evresi & Besleme Şablonu (NRC)</span>
+            </span>
+            <span className="text-[11px] text-slate-500 hidden sm:inline">
+              Grup seçerek canlı ağırlık ve hedef sütü otomatik ayarlayabilirsiniz
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {LACTATION_GROUPS.map((g) => {
+              const isSelected = selectedLactationGroup === g.id;
+              return (
+                <button
+                  key={g.id}
+                  type="button"
+                  onClick={() => {
+                    setSelectedLactationGroup(g.id);
+                    setLiveWeight(g.defaultLiveWeight);
+                    setTargetMilk(g.defaultTargetMilk);
+                  }}
+                  className={`p-3.5 rounded-2xl border text-left transition-all active:scale-[0.99] flex flex-col justify-between space-y-2 relative ${
+                    isSelected
+                      ? g.activeBorder
+                      : 'border-slate-200 bg-slate-50/70 hover:bg-white hover:border-slate-300'
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className={`text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-md border ${g.badge}`}>
+                      {g.dim}
+                    </span>
+                    {isSelected && (
+                      <span className="text-[10px] font-black text-emerald-700 bg-emerald-100 border border-emerald-300 px-1.5 py-0.5 rounded-md flex items-center gap-1">
+                        <Check className="w-3 h-3" /> Seçili
+                      </span>
+                    )}
+                  </div>
+
+                  <div>
+                    <h3 className="text-sm font-black text-slate-900 leading-tight">
+                      {g.name}
+                    </h3>
+                    <p className="text-[11px] text-slate-600 line-clamp-2 mt-1 leading-snug">
+                      {g.description}
+                    </p>
+                  </div>
+
+                  <div className="pt-1.5 border-t border-slate-200/80 flex items-center justify-between text-[11px]">
+                    <span className="text-slate-500 font-medium">Hedef:</span>
+                    <span className="font-bold text-slate-800">
+                      {g.defaultLiveWeight} kg • {g.defaultTargetMilk} L
+                    </span>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -753,6 +858,11 @@ export default function RationPage() {
                     <span className="px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[10px] font-black rounded-md">
                       ONAYLI
                     </span>
+                    {selectedLactationGroup && (
+                      <span className="px-2 py-0.5 bg-slate-900 text-emerald-400 text-[10px] font-bold rounded-md hidden sm:inline-block">
+                        {LACTATION_GROUPS.find(g => g.id === selectedLactationGroup)?.name} • {LACTATION_GROUPS.find(g => g.id === selectedLactationGroup)?.dim}
+                      </span>
+                    )}
                   </div>
                   <p className="text-xs text-slate-500 flex items-center space-x-1.5 mt-0.5">
                     <Clock className="w-3.5 h-3.5 text-slate-400" />

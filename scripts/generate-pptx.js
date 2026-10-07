@@ -972,7 +972,7 @@ async function createPresentation() {
         subtitle: 'Kritik Sistem Alarmları Anında Cebinizde',
         bullets: [
           'Olası API veya veritabanı hatalarında otomatik tetikleme.',
-          'Doğrudan yetkili e-posta adresine detaylı hata raporu.',
+          'Geliştirici Erkan Erdem\'e hata detayları anında iletilir (7/24 Takip).',
           'PIN korumalı güvenli SMTP yönetim paneli (/mailayar).'
         ],
         icon: '✉️'
@@ -1216,7 +1216,7 @@ async function createPresentation() {
       fontFace: 'Segoe UI'
     });
 
-    slide.addText('Canlı Sistem: https://milkiq.erkanerdem.online\nGeliştirici Portfolyosu: https://erkanerdem.online\nDestek & İletişim: erkanerdem8254@gmail.com', {
+    slide.addText('Canlı Sistem: https://milkiq.erkanerdem.online\nGeliştirici Portfolyosu: https://erkanerdem.online\n7/24 Kesintisiz Geliştirici Takibi & Teknik Destek', {
       x: 1.2,
       y: 5.25,
       w: 6.5,

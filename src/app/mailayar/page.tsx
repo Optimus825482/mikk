@@ -242,7 +242,7 @@ export default function MailAyarPage() {
                       Gmail & Hata Bildirim Ayarları
                     </h1>
                     <p className="text-xs text-slate-400 mt-0.5">
-                      Sistemde oluşan hatalar otomatik olarak bu yapılandırma ile bildirilir.
+                      Uygulama geliştiricisi Erkan Erdem&apos;e hata detayları ve bilgileri anında gönderilir. Uygulama 7/24 geliştirici takibindedir.
                     </p>
                   </div>
                 </div>

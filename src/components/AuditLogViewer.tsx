@@ -138,7 +138,7 @@ export default function AuditLogViewer() {
             </h2>
           </div>
           <p className="text-xs text-slate-300 max-w-xl leading-relaxed">
-            Kullanıcı girişleri, rasyon değişiklikleri, yem/gider güncellemeleri ve tüm sistem olayları; IP adresi, konum ve cihaz bilgileriyle birlikte kayıt altına alınır.
+            Kullanıcı girişleri, rasyon değişiklikleri, yem/gider güncellemeleri kayıt altındadır. Kritik hatalarda uygulama geliştiricisi Erkan Erdem&apos;e hata detayları ve bilgileri anında gönderilir (7/24 Geliştirici Takibi).
           </p>
         </div>
 

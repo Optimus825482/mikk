@@ -675,7 +675,7 @@ export default function TanitimPage() {
               </div>
               <h4 className="text-base font-bold text-white">Gmail Hata Alarmı</h4>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Kritik veritabanı veya sistem aksamalarında erkanerdem8254@gmail.com adresine detaylı hata raporu anında iletilir.
+                Uygulama geliştiricisi Erkan Erdem&apos;e hata detayları ve bilgileri anında gönderilir. Uygulama 7/24 geliştirici takibindedir.
               </p>
             </div>
           </div>
@@ -829,7 +829,7 @@ export default function TanitimPage() {
                 Erkan Erdem
               </a>
             </div>
-            <div>https://milkiq.erkanerdem.online • erkanerdem8254@gmail.com</div>
+            <div>https://milkiq.erkanerdem.online • 7/24 Geliştirici Takibi & Teknik Destek</div>
           </div>
         </div>
       ),

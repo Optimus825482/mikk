@@ -427,7 +427,7 @@ function AyarlarContent() {
               <div>
                 <h2 className="text-base font-black text-white">Gmail Hata Bildirimi & Sistem Yönetimi</h2>
                 <p className="text-xs text-slate-300 mt-0.5">
-                  Uygulama hatalarının erkanerdem8254@gmail.com adresine otomatik bildirilmesi için SMTP ayarlarını yapılandırın.
+                  Uygulama geliştiricisi Erkan Erdem&apos;e hata detayları ve bilgileri anında gönderilir. Uygulama 7/24 geliştirici takibindedir.
                 </p>
               </div>
             </div>

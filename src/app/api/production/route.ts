@@ -15,6 +15,10 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Tarih, toplam süt ve inek sayısı zorunludur' }, { status: 400 });
     }
 
+    const list = await getDailyProductions();
+    const existing = list.find(p => p.date === date);
+    const isUpdate = !!existing;
+
     const saved = await saveDailyProduction({
       date,
       totalMilk: Number(totalMilk),
@@ -23,10 +27,10 @@ export async function POST(req: NextRequest) {
     });
 
     await logAuditEvent({
-      action: 'PRODUCTION_SAVE',
+      action: isUpdate ? 'PRODUCTION_UPDATE' : 'PRODUCTION_SAVE',
       category: 'URETIM',
       level: 'INFO',
-      message: `Günlük süt üretimi girildi: ${saved.date} (Toplam: ${saved.totalMilk} L, ${saved.milkingCows} İnek, Ort: ${saved.averagePerCow} L/baş)`,
+      message: `${isUpdate ? 'Mevcut günün süt üretimi güncellendi' : 'Yeni günlük süt üretimi kaydedildi'}: ${saved.date} (Toplam: ${saved.totalMilk} L, ${saved.milkingCows} İnek, Ort: ${saved.averagePerCow} L/baş)`,
       details: saved,
       req,
     });

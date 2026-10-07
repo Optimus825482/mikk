@@ -268,40 +268,23 @@
       "updatedAt": "2026-10-06T22:14:39.878Z"
     }
   ],
-  "expenses": [
-    {
-      "id": "exp-1",
-      "category": "ELEKTRIK",
-      "amount": 3200,
-      "month": "2026-10",
-      "description": "Sağımhane ve soğutma tankı elektrik faturası",
-      "createdAt": "2026-10-06T22:14:39.878Z"
-    },
-    {
-      "id": "exp-2",
-      "category": "VETERINER_ILAC",
-      "amount": 2500,
-      "month": "2026-10",
-      "description": "Aşı ve genel sürü sağlığı giderleri",
-      "createdAt": "2026-10-06T22:14:39.878Z"
-    },
-    {
-      "id": "exp-3",
-      "category": "MAZOT_TRAKTOR",
-      "amount": 4000,
-      "month": "2026-10",
-      "description": "Yem karma vagonu ve traktör yakıtı",
-      "createdAt": "2026-10-06T22:14:39.878Z"
-    }
-  ],
+  "expenses": [],
   "dailyProductions": [
     {
-      "id": "prod-today",
       "date": "2026-10-06",
-      "totalMilk": 500,
-      "milkingCows": 20,
-      "averagePerCow": 25,
-      "notes": "Sabah ve akşam sağımı toplamı"
+      "totalMilk": 1,
+      "milkingCows": 16,
+      "notes": "",
+      "id": "prod-today",
+      "averagePerCow": 0.1
+    },
+    {
+      "date": "2026-10-01",
+      "totalMilk": 200,
+      "milkingCows": 16,
+      "notes": "",
+      "id": "prod-1791367341909",
+      "averagePerCow": 12.5
     }
   ],
   "factoryFeeds": [
@@ -1904,51 +1887,116 @@
       "description": "Crown Head Expander teknolojisi ile üretilen %100 jelatinize mısır. Yüksek sindirilebilirlik ve enerji desteği sağlar (40 kg çuval: 950 TL)."
     }
   ],
-  "costReports": [
-    {
-      "month": "2026-10",
-      "title": "Ekim 2026 Çiftlik Maliyet & Kârlılık Raporu",
-      "daysInMonth": 31,
-      "totalMilkProduction": 500,
-      "dailyAverageMilk": 500,
-      "milkingCowsCount": 20,
-      "feedCostPerLiter": 8.72,
-      "dailyFeedCostPerCow": 218.05,
-      "overheadCostPerLiter": 19.4,
-      "totalCostPerLiter": 28.12,
-      "netProfitPerLiter": -11.62,
-      "milkSalePrice": 16.5,
-      "totalFeedCost": 4360,
-      "totalOverheadCost": 9700,
-      "totalOperatingCost": 14060,
-      "totalRevenue": 8250,
-      "netProfitTotal": -5810,
-      "expenseBreakdown": [
-        {
-          "category": "MAZOT_TRAKTOR",
-          "categoryLabel": "Mazot & Makine/Traktör",
-          "amount": 4000,
-          "percentage": 41.2
-        },
-        {
-          "category": "ELEKTRIK",
-          "categoryLabel": "Elektrik",
-          "amount": 3200,
-          "percentage": 33
-        },
-        {
-          "category": "VETERINER_ILAC",
-          "categoryLabel": "Hayvan Sağlığı & Veteriner",
-          "amount": 2500,
-          "percentage": 25.8
-        }
-      ],
-      "notes": "ASSDD",
-      "id": "report-1791352586764",
-      "createdAt": "2026-10-07T05:56:26.764Z"
-    }
-  ],
+  "costReports": [],
   "auditLogs": [
+    {
+      "id": "log-1791367383236-w419s",
+      "action": "PRODUCTION_SAVE",
+      "category": "URETIM",
+      "level": "INFO",
+      "message": "Günlük süt üretimi girildi: 2026-10-06 (Toplam: 1 L, 16 İnek, Ort: 0.1 L/baş)",
+      "details": {
+        "date": "2026-10-06",
+        "totalMilk": 1,
+        "milkingCows": 16,
+        "notes": "",
+        "id": "prod-today",
+        "averagePerCow": 0.1
+      },
+      "ipAddress": "::1",
+      "location": "Konum Alınamadı",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+      "device": "Chrome (Windows - Masaüstü)",
+      "createdAt": "2026-10-07T10:03:03.236Z"
+    },
+    {
+      "id": "log-1791367375459-4kvws",
+      "action": "PRODUCTION_SAVE",
+      "category": "URETIM",
+      "level": "INFO",
+      "message": "Günlük süt üretimi girildi: 2026-10-06 (Toplam: 200 L, 16 İnek, Ort: 12.5 L/baş)",
+      "details": {
+        "date": "2026-10-06",
+        "totalMilk": 200,
+        "milkingCows": 16,
+        "notes": "",
+        "id": "prod-today",
+        "averagePerCow": 12.5
+      },
+      "ipAddress": "::1",
+      "location": "Konum Alınamadı",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+      "device": "Chrome (Windows - Masaüstü)",
+      "createdAt": "2026-10-07T10:02:55.459Z"
+    },
+    {
+      "id": "log-1791367342154-kxu4b",
+      "action": "PRODUCTION_SAVE",
+      "category": "URETIM",
+      "level": "INFO",
+      "message": "Günlük süt üretimi girildi: 2026-10-01 (Toplam: 200 L, 16 İnek, Ort: 12.5 L/baş)",
+      "details": {
+        "date": "2026-10-01",
+        "totalMilk": 200,
+        "milkingCows": 16,
+        "notes": "",
+        "id": "prod-1791367341909",
+        "averagePerCow": 12.5
+      },
+      "ipAddress": "::1",
+      "location": "Konum Alınamadı",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+      "device": "Chrome (Windows - Masaüstü)",
+      "createdAt": "2026-10-07T10:02:22.154Z"
+    },
+    {
+      "id": "log-1791367288813-w5ubg",
+      "action": "EXPENSE_DELETE",
+      "category": "GIDER",
+      "level": "WARN",
+      "message": "Gider kaydı silindi (ID: exp-2)",
+      "details": {
+        "expenseId": "exp-2",
+        "success": true
+      },
+      "ipAddress": "::1",
+      "location": "Konum Alınamadı",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+      "device": "Chrome (Windows - Masaüstü)",
+      "createdAt": "2026-10-07T10:01:28.814Z"
+    },
+    {
+      "id": "log-1791367281295-cds5t",
+      "action": "EXPENSE_DELETE",
+      "category": "GIDER",
+      "level": "WARN",
+      "message": "Gider kaydı silindi (ID: exp-1)",
+      "details": {
+        "expenseId": "exp-1",
+        "success": true
+      },
+      "ipAddress": "::1",
+      "location": "Konum Alınamadı",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+      "device": "Chrome (Windows - Masaüstü)",
+      "createdAt": "2026-10-07T10:01:21.295Z"
+    },
+    {
+      "id": "log-1791367274202-s9ktt",
+      "action": "EXPENSE_DELETE",
+      "category": "GIDER",
+      "level": "WARN",
+      "message": "Gider kaydı silindi (ID: exp-3)",
+      "details": {
+        "expenseId": "exp-3",
+        "success": true
+      },
+      "ipAddress": "::1",
+      "location": "Konum Alınamadı",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+      "device": "Chrome (Windows - Masaüstü)",
+      "createdAt": "2026-10-07T10:01:14.202Z"
+    },
     {
       "id": "log-1791366221564-m1avu",
       "action": "LOGIN_SUCCESS",

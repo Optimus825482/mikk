@@ -417,6 +417,60 @@ export async function saveDailyProduction(entry: Omit<DailyProduction, 'id' | 'a
   return newEntry;
 }
 
+export async function updateDailyProduction(
+  id: string,
+  data: { date?: string; totalMilk?: number; milkingCows?: number; notes?: string }
+): Promise<{ success: boolean; production?: DailyProduction; message?: string }> {
+  const store = readLocalStore();
+  const idx = store.dailyProductions.findIndex(p => p.id === id);
+  if (idx < 0) {
+    return { success: false, message: 'Kayıt bulunamadı.' };
+  }
+
+  const current = store.dailyProductions[idx];
+  const targetDate = data.date || current.date;
+
+  // Aynı gün için başka bir kayıt var mı kontrolü (Aynı gün için sadece tek bir kayıt)
+  if (targetDate !== current.date) {
+    const duplicate = store.dailyProductions.find(p => p.date === targetDate && p.id !== id);
+    if (duplicate) {
+      return { 
+        success: false, 
+        message: `${targetDate} tarihine ait zaten bir süt üretim kaydı bulunmaktadır! Aynı gün için mükerrer kayıt girilemez.` 
+      };
+    }
+  }
+
+  const totalMilk = data.totalMilk !== undefined ? Number(data.totalMilk) : current.totalMilk;
+  const milkingCows = data.milkingCows !== undefined ? Number(data.milkingCows) : current.milkingCows;
+  const notes = data.notes !== undefined ? data.notes : current.notes;
+  const averagePerCow = milkingCows > 0 ? Number((totalMilk / milkingCows).toFixed(1)) : 0;
+
+  const updated: DailyProduction = {
+    ...current,
+    date: targetDate,
+    totalMilk,
+    milkingCows,
+    notes,
+    averagePerCow,
+  };
+
+  store.dailyProductions[idx] = updated;
+  writeLocalStore(store);
+  return { success: true, production: updated };
+}
+
+export async function deleteDailyProduction(id: string): Promise<boolean> {
+  const store = readLocalStore();
+  const initialLen = store.dailyProductions.length;
+  store.dailyProductions = store.dailyProductions.filter(p => p.id !== id);
+  if (store.dailyProductions.length !== initialLen) {
+    writeLocalStore(store);
+    return true;
+  }
+  return false;
+}
+
 // --- FACTORY FEEDS ---
 export async function getFactoryFeeds(): Promise<FactoryFeed[]> {
   const store = readLocalStore();

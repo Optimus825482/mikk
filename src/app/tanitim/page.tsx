@@ -154,7 +154,7 @@ export default function TanitimPage() {
               Milk<span className="text-emerald-400">IQ</span>
             </h1>
             <p className="text-lg sm:text-2xl font-medium text-slate-300 max-w-2xl mx-auto">
-              Modern Süt Çiftlikleri İçin Geleceğin Besleme ve Karlılık Platformu
+              Aile İşletmeleri İçin Geleceğin Besleme ve Karlılık Platformu
             </p>
           </div>
 

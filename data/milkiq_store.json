@@ -1950,6 +1950,18 @@
   ],
   "auditLogs": [
     {
+      "id": "log-1791366221564-m1avu",
+      "action": "LOGIN_SUCCESS",
+      "category": "AUTH",
+      "level": "INFO",
+      "message": "Kullanıcı PIN kodu ile başarıyla sisteme giriş yaptı.",
+      "ipAddress": "::1",
+      "location": "Konum Alınamadı",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+      "device": "Chrome (Windows - Masaüstü)",
+      "createdAt": "2026-10-07T09:43:41.564Z"
+    },
+    {
       "id": "log-1791358738313-k50p8",
       "action": "SYSTEM_VERIFY",
       "category": "SISTEM",

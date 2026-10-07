@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getFeeds, addFeed, resetFeedsToDefaults } from '@/lib/storage';
+import { logAuditEvent } from '@/lib/audit';
 
 export async function GET() {
   const feeds = await getFeeds();
@@ -11,6 +12,13 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     if (body.action === 'reset_defaults') {
       const feeds = await resetFeedsToDefaults();
+      await logAuditEvent({
+        action: 'FEED_RESET',
+        category: 'YEM',
+        level: 'WARN',
+        message: 'Tüm yem kataloğu varsayılan standart değerlere sıfırlandı.',
+        req,
+      });
       return NextResponse.json({ success: true, feeds });
     }
 
@@ -31,8 +39,25 @@ export async function POST(req: NextRequest) {
       isDefault: false,
     });
 
+    await logAuditEvent({
+      action: 'FEED_CREATE',
+      category: 'YEM',
+      level: 'INFO',
+      message: `Yeni yem maddesi tanımlandı: "${newFeed.name}" (${newFeed.unitPrice} TL/kg, KM: %${newFeed.dryMatter}, HP: %${newFeed.protein})`,
+      details: newFeed,
+      req,
+    });
+
     return NextResponse.json(newFeed, { status: 201 });
   } catch (error: any) {
+    await logAuditEvent({
+      action: 'FEED_CREATE_ERROR',
+      category: 'YEM',
+      level: 'ERROR',
+      message: `Yem eklenirken hata oluştu: ${error?.message}`,
+      details: { stack: error?.stack },
+      req,
+    });
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

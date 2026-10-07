@@ -2,6 +2,7 @@
 
 import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 import { 
   Settings, 
   KeyRound, 
@@ -25,16 +26,19 @@ import {
   Building2,
   Printer,
   Tractor,
-  FolderArchive
+  FolderArchive,
+  Mail,
+  Lock
 } from 'lucide-react';
 import { SystemSetting } from '@/types';
 import { DEFAULT_SETTINGS } from '@/lib/calculator';
 import { GLOSSARY_TERMS } from '@/lib/glossary';
+import AuditLogViewer from '@/components/AuditLogViewer';
 
 function AyarlarContent() {
   const searchParams = useSearchParams();
-  const initialTab = (searchParams.get('tab') as 'ayarlar' | 'kilavuz' | 'sozluk' | 'hakkinda') || 'ayarlar';
-  const [activeTab, setActiveTab] = useState<'ayarlar' | 'kilavuz' | 'sozluk' | 'hakkinda'>(initialTab);
+  const initialTab = (searchParams.get('tab') as 'ayarlar' | 'kilavuz' | 'sozluk' | 'hakkinda' | 'audit') || 'ayarlar';
+  const [activeTab, setActiveTab] = useState<'ayarlar' | 'kilavuz' | 'sozluk' | 'hakkinda' | 'audit'>(initialTab);
 
   // Glossary Tab State
   const [glossarySearch, setGlossarySearch] = useState('');
@@ -55,8 +59,8 @@ function AyarlarContent() {
 
   useEffect(() => {
     const tabParam = searchParams.get('tab');
-    if (tabParam === 'kilavuz' || tabParam === 'hakkinda' || tabParam === 'ayarlar' || tabParam === 'sozluk') {
-      setActiveTab(tabParam as 'ayarlar' | 'kilavuz' | 'sozluk' | 'hakkinda');
+    if (tabParam === 'kilavuz' || tabParam === 'hakkinda' || tabParam === 'ayarlar' || tabParam === 'sozluk' || tabParam === 'audit') {
+      setActiveTab(tabParam as 'ayarlar' | 'kilavuz' | 'sozluk' | 'hakkinda' | 'audit');
     }
   }, [searchParams]);
 
@@ -219,6 +223,17 @@ function AyarlarContent() {
           >
             <Info className="w-3.5 h-3.5" />
             <span>Hakkında</span>
+          </button>
+          <button
+            onClick={() => setActiveTab('audit')}
+            className={`px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center space-x-1.5 whitespace-nowrap ${
+              activeTab === 'audit'
+                ? 'bg-emerald-700 text-white shadow-xs'
+                : 'text-slate-600 hover:text-slate-900'
+            }`}
+          >
+            <ShieldCheck className="w-3.5 h-3.5" />
+            <span>İşlem Günlüğü (Audit)</span>
           </button>
         </div>
       </div>
@@ -399,6 +414,29 @@ function AyarlarContent() {
             <p className="text-xs text-slate-300">
               <strong>MilkIQ</strong>; yerel PostgreSQL 17 veritabanı ve güvenli depolama mimarisiyle sıfır kesinti ve anlık reaktif hesaplama sağlar.
             </p>
+          </div>
+
+          {/* MAIL SETTINGS & AUDIT LOG ACCESS CARD */}
+          <div className="bg-gradient-to-r from-slate-900 to-emerald-950 text-white p-6 rounded-3xl shadow-sm border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-start space-x-3">
+              <div className="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
+                <Mail className="w-5 h-5" />
+              </div>
+              <div>
+                <h2 className="text-base font-black text-white">Gmail Hata Bildirimi & Sistem Yönetimi</h2>
+                <p className="text-xs text-slate-300 mt-0.5">
+                  Uygulama hatalarının erkanerdem8254@gmail.com adresine otomatik bildirilmesi için SMTP ayarlarını yapılandırın.
+                </p>
+              </div>
+            </div>
+
+            <Link
+              href="/mailayar"
+              className="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl shadow-md transition-all shrink-0 flex items-center space-x-1.5 active:scale-95"
+            >
+              <Lock className="w-4 h-4 text-emerald-200" />
+              <span>Mail Ayarları (518518) →</span>
+            </Link>
           </div>
         </div>
       )}
@@ -858,6 +896,11 @@ function AyarlarContent() {
             </div>
           </div>
         </div>
+      )}
+
+      {/* TAB 5: İŞLEM GÜNLÜĞÜ (AUDIT LOGS) */}
+      {activeTab === 'audit' && (
+        <AuditLogViewer />
       )}
     </div>
   );

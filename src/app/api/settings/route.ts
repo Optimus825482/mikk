@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSettings, updateSettings } from '@/lib/storage';
+import { logAuditEvent } from '@/lib/audit';
 
 export async function GET() {
   const settings = await getSettings();
-  // Don't expose pin in raw GET if not needed, or return safe view
   return NextResponse.json({
     milkSalePrice: settings.milkSalePrice,
     proteinPerLiter: settings.proteinPerLiter,
@@ -23,8 +23,26 @@ export async function POST(req: NextRequest) {
       defaultLiveWeight: body.defaultLiveWeight !== undefined ? Number(body.defaultLiveWeight) : undefined,
       defaultTargetMilk: body.defaultTargetMilk !== undefined ? Number(body.defaultTargetMilk) : undefined,
     });
+
+    await logAuditEvent({
+      action: 'SETTINGS_UPDATE',
+      category: 'AYARLAR',
+      level: 'INFO',
+      message: `Sistem zooteknik ve fiyat parametreleri güncellendi (Süt Satış: ${updated.milkSalePrice} TL/L, Canlı Ağırlık: ${updated.defaultLiveWeight} kg, Hedef Süt: ${updated.defaultTargetMilk} L)`,
+      details: updated,
+      req,
+    });
+
     return NextResponse.json(updated);
   } catch (error: any) {
+    await logAuditEvent({
+      action: 'SETTINGS_ERROR',
+      category: 'AYARLAR',
+      level: 'ERROR',
+      message: `Ayarlar güncellenirken hata oluştu: ${error?.message}`,
+      details: { stack: error?.stack },
+      req,
+    });
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

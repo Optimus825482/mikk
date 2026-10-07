@@ -262,6 +262,22 @@ async function main() {
     console.log(`✅ ${store.costReports.length} adet aylık maliyet raporu başarıyla yüklendi.`);
   }
 
+  // 8. Mail Settings Singleton Initializer
+  await prisma.mailSetting.upsert({
+    where: { id: 'singleton' },
+    update: {},
+    create: {
+      id: 'singleton',
+      smtpHost: 'smtp.gmail.com',
+      smtpPort: 465,
+      smtpSecure: true,
+      smtpUser: 'erkanerdem8254@gmail.com',
+      toEmail: 'erkanerdem8254@gmail.com',
+      isEnabled: false,
+    },
+  });
+  console.log('✅ Mail Ayarları singleton başlangıç kaydı hazırlandı.');
+
   console.log('🎉 MilkIQ tüm veritabanı tohumlama işlemi eksiksiz tamamlandı!');
 }
 

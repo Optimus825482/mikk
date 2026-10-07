@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getExpenses, addExpense, deleteExpense } from '@/lib/storage';
+import { logAuditEvent } from '@/lib/audit';
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -22,8 +23,26 @@ export async function POST(req: NextRequest) {
       month,
       description,
     });
+
+    await logAuditEvent({
+      action: 'EXPENSE_CREATE',
+      category: 'GIDER',
+      level: 'INFO',
+      message: `Genel işletme gideri kaydedildi: ${newExpense.category} (${newExpense.amount} TL - Dönem: ${newExpense.month}${newExpense.description ? ` - ${newExpense.description}` : ''})`,
+      details: newExpense,
+      req,
+    });
+
     return NextResponse.json(newExpense, { status: 201 });
   } catch (error: any) {
+    await logAuditEvent({
+      action: 'EXPENSE_ERROR',
+      category: 'GIDER',
+      level: 'ERROR',
+      message: `Gider kaydedilirken hata oluştu: ${error?.message}`,
+      details: { stack: error?.stack },
+      req,
+    });
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
@@ -35,8 +54,26 @@ export async function DELETE(req: NextRequest) {
     if (!id) return NextResponse.json({ error: 'ID gereklidir' }, { status: 400 });
 
     const success = await deleteExpense(id);
+
+    await logAuditEvent({
+      action: 'EXPENSE_DELETE',
+      category: 'GIDER',
+      level: 'WARN',
+      message: `Gider kaydı silindi (ID: ${id})`,
+      details: { expenseId: id, success },
+      req,
+    });
+
     return NextResponse.json({ success });
   } catch (error: any) {
+    await logAuditEvent({
+      action: 'EXPENSE_DELETE_ERROR',
+      category: 'GIDER',
+      level: 'ERROR',
+      message: `Gider silinirken hata oluştu: ${error?.message}`,
+      details: { stack: error?.stack },
+      req,
+    });
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

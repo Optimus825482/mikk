@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getDailyProductions, saveDailyProduction } from '@/lib/storage';
+import { logAuditEvent } from '@/lib/audit';
 
 export async function GET() {
   const list = await getDailyProductions();
@@ -21,8 +22,25 @@ export async function POST(req: NextRequest) {
       notes: notes || '',
     });
 
+    await logAuditEvent({
+      action: 'PRODUCTION_SAVE',
+      category: 'URETIM',
+      level: 'INFO',
+      message: `Günlük süt üretimi girildi: ${saved.date} (Toplam: ${saved.totalMilk} L, ${saved.milkingCows} İnek, Ort: ${saved.averagePerCow} L/baş)`,
+      details: saved,
+      req,
+    });
+
     return NextResponse.json(saved);
   } catch (error: any) {
+    await logAuditEvent({
+      action: 'PRODUCTION_ERROR',
+      category: 'URETIM',
+      level: 'ERROR',
+      message: `Süt üretimi kaydedilirken hata oluştu: ${error?.message}`,
+      details: { stack: error?.stack },
+      req,
+    });
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

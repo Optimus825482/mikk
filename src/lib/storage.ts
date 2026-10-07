@@ -11,7 +11,7 @@ const DATA_FILE = path.join(DATA_DIR, 'milkiq_store.json');
 
 // Prisma Client Singleton
 let globalPrisma: PrismaClient | null = null;
-function getPrisma(): PrismaClient | null {
+export function getPrisma(): PrismaClient | null {
   if (process.env.DATABASE_URL) {
     if (!globalPrisma) {
       try {
@@ -23,6 +23,7 @@ function getPrisma(): PrismaClient | null {
   }
   return globalPrisma;
 }
+export const prisma = getPrisma();
 
 interface LocalStoreData {
   settings: SystemSetting;

@@ -1947,5 +1947,27 @@
       "id": "report-1791352586764",
       "createdAt": "2026-10-07T05:56:26.764Z"
     }
-  ]
+  ],
+  "auditLogs": [
+    {
+      "id": "log-1791358738313-k50p8",
+      "action": "SYSTEM_VERIFY",
+      "category": "SISTEM",
+      "level": "INFO",
+      "message": "Audit Log ve Mail sistemi doğrulama testi gerçekleştirildi.",
+      "ipAddress": "::1",
+      "location": "Konum Alınamadı",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Microsoft Windows 10.0.26200; tr-TR) PowerShell/7.6.6",
+      "device": "Tarayıcı (Windows - Masaüstü)",
+      "createdAt": "2026-10-07T07:38:58.313Z"
+    }
+  ],
+  "mailSettings": {
+    "smtpHost": "smtp.gmail.com",
+    "smtpPort": 465,
+    "smtpSecure": true,
+    "smtpUser": "erkanerdem8254@gmail.com",
+    "toEmail": "erkanerdem8254@gmail.com",
+    "isEnabled": false
+  }
 }

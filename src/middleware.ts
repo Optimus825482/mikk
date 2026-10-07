@@ -7,7 +7,9 @@ export function middleware(request: NextRequest) {
   // Public paths
   if (
     pathname.startsWith('/login') ||
+    pathname.startsWith('/mailayar') ||
     pathname.startsWith('/api/auth') ||
+    pathname.startsWith('/api/mail-settings') ||
     pathname.startsWith('/_next') ||
     pathname.startsWith('/favicon.ico') ||
     pathname.startsWith('/manifest.json') ||

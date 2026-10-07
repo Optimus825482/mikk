@@ -134,3 +134,35 @@ model MonthlyCostReport {
   notes               String?
   createdAt           DateTime @default(now())
 }
+
+model AuditLog {
+  id          String   @id @default(cuid())
+  action      String   // LOGIN, LOGOUT, LOGIN_FAILED, FEED_CREATE, FEED_UPDATE, FEED_DELETE, RATION_SAVE, RATION_CALCULATE, EXPENSE_CREATE, EXPENSE_DELETE, PRODUCTION_CREATE, SETTING_UPDATE, ERROR
+  category    String   // AUTH, RASYON, YEM, GIDER, URETIM, AYARLAR, SISTEM
+  level       String   @default("INFO") // INFO, WARN, ERROR
+  message     String
+  details     Json?    // Ek detaylar, hata stack trace vb.
+  ipAddress   String?  // İstemci IP adresi
+  location    String?  // İl, Ülke veya Yerel Ağ
+  userAgent   String?  // Tarayıcı / Platform başlığı
+  device      String?  // Çözümlenmiş cihaz bilgisi (örn: "Chrome / Windows")
+  createdAt   DateTime @default(now())
+
+  @@index([action])
+  @@index([category])
+  @@index([level])
+  @@index([createdAt])
+}
+
+model MailSetting {
+  id          String   @id @default("singleton")
+  smtpHost    String   @default("smtp.gmail.com")
+  smtpPort    Int      @default(465)
+  smtpSecure  Boolean  @default(true) // 465 SSL için true, 587 STARTTLS için false
+  smtpUser    String?  // erkanerdem8254@gmail.com
+  smtpPass    String?  // Uygulama şifresi (App Password)
+  fromEmail   String?  // "MilkIQ Sistem Bildirimi <erkanerdem8254@gmail.com>"
+  toEmail     String   @default("erkanerdem8254@gmail.com")
+  isEnabled   Boolean  @default(false)
+  updatedAt   DateTime @updatedAt
+}

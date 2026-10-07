@@ -38,6 +38,7 @@ import {
   FEED_CATEGORY_CONFIG 
 } from '@/types';
 import { calculateRation, DEFAULT_SETTINGS } from '@/lib/calculator';
+import { generateLactationAdvice, LactationAdvice } from '@/lib/advisory';
 import ConfirmModal, { ConfirmVariant } from '@/components/ConfirmModal';
 
 const LACTATION_GROUPS = [
@@ -185,6 +186,11 @@ export default function RationPage() {
   const results: RationCalculationResult = useMemo(() => {
     return calculateRation(itemsForCalc, feeds, liveWeight, targetMilk, settings);
   }, [itemsForCalc, feeds, liveWeight, targetMilk, settings]);
+
+  // Akıllı Zooteknik Tavsiye ve Yönlendirme Listesi (Laktasyon Evresi Bazlı)
+  const advisoryList: LactationAdvice[] = useMemo(() => {
+    return generateLactationAdvice(selectedLactationGroup, results, liveWeight, targetMilk);
+  }, [selectedLactationGroup, results, liveWeight, targetMilk]);
 
   // Sürü ve Öğün Hesaplamaları
   const safeAnimalCount = Math.max(1, Number(animalCount) || 1);
@@ -687,6 +693,85 @@ export default function RationPage() {
             </p>
           </div>
         </div>
+
+        {/* AKILLI ZOOTEKNİK TAVSİYE & YÖNLENDİRME PANELİ (CANLI) */}
+        {advisoryList.length > 0 && (
+          <div className="mt-5 pt-4 border-t border-slate-200/90 space-y-3">
+            <div className="flex items-center justify-between flex-wrap gap-2">
+              <div className="flex items-center space-x-2">
+                <Sparkles className="w-4 h-4 text-emerald-600" />
+                <h3 className="text-xs font-black text-slate-900 uppercase tracking-wider">
+                  Akıllı Laktasyon Danışmanı & Zooteknik Tavsiyeler
+                </h3>
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-900 text-emerald-300">
+                  {LACTATION_GROUPS.find(g => g.id === selectedLactationGroup)?.name}
+                </span>
+              </div>
+              <span className="text-[11px] text-slate-400 font-medium hidden sm:inline">
+                Rasyondaki besin değerlerine göre anlık hesaplanır
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {advisoryList.map((adv) => {
+                const isDanger = adv.type === 'DANGER';
+                const isWarning = adv.type === 'WARNING';
+                const isSuccess = adv.type === 'SUCCESS';
+
+                const borderBg = isDanger
+                  ? 'border-rose-300 bg-rose-50/80 text-rose-950'
+                  : isWarning
+                  ? 'border-amber-300 bg-amber-50/80 text-amber-950'
+                  : isSuccess
+                  ? 'border-emerald-300 bg-emerald-50/80 text-emerald-950'
+                  : 'border-blue-200 bg-blue-50/80 text-blue-950';
+
+                const icon = isDanger
+                  ? <AlertTriangle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
+                  : isWarning
+                  ? <AlertCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                  : isSuccess
+                  ? <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                  : <Info className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />;
+
+                const badge = isDanger
+                  ? 'bg-rose-200 text-rose-900'
+                  : isWarning
+                  ? 'bg-amber-200 text-amber-900'
+                  : isSuccess
+                  ? 'bg-emerald-200 text-emerald-900'
+                  : 'bg-blue-200 text-blue-900';
+
+                return (
+                  <div
+                    key={adv.id}
+                    className={`p-3.5 rounded-2xl border ${borderBg} space-y-1.5 transition-all shadow-2xs`}
+                  >
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="flex items-center space-x-1.5">
+                        {icon}
+                        <h4 className="text-xs font-black tracking-tight leading-snug">
+                          {adv.title}
+                        </h4>
+                      </div>
+                      <span className={`text-[9px] font-black uppercase px-2 py-0.5 rounded-md ${badge} shrink-0`}>
+                        {adv.category}
+                      </span>
+                    </div>
+
+                    <p className="text-[11px] leading-relaxed opacity-90 pl-5">
+                      {adv.message}
+                    </p>
+
+                    <div className="mt-1 pt-1.5 border-t border-black/5 text-[11px] font-bold pl-5 text-slate-800">
+                      💡 {adv.action}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* FEED SELECTION TABS & LIMIT INFO BANNER */}
@@ -1184,6 +1269,80 @@ export default function RationPage() {
                     </tr>
                   </tfoot>
                 </table>
+              </div>
+            </div>
+
+            {/* AKILLI ZOOTEKNİK DEĞERLENDİRME & LAKTASYON TAVSİYELERİ (RAPOR BÖLÜMÜ) */}
+            <div className="pt-6 border-t-2 border-slate-200/90 space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div className="flex items-center space-x-2">
+                  <Sparkles className="w-5 h-5 text-emerald-600" />
+                  <h3 className="text-base font-black text-slate-900 tracking-tight">
+                    Uzman Zooteknik Değerlendirme & Laktasyon Besleme Tavsiyeleri
+                  </h3>
+                </div>
+                <span className="text-xs font-bold px-3 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300 self-start sm:self-auto">
+                  {LACTATION_GROUPS.find(g => g.id === selectedLactationGroup)?.name} • {LACTATION_GROUPS.find(g => g.id === selectedLactationGroup)?.dim}
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                {advisoryList.map((adv) => {
+                  const isDanger = adv.type === 'DANGER';
+                  const isWarning = adv.type === 'WARNING';
+                  const isSuccess = adv.type === 'SUCCESS';
+
+                  const borderBg = isDanger
+                    ? 'border-rose-300 bg-rose-50/90 text-rose-950'
+                    : isWarning
+                    ? 'border-amber-300 bg-amber-50/90 text-amber-950'
+                    : isSuccess
+                    ? 'border-emerald-300 bg-emerald-50/90 text-emerald-950'
+                    : 'border-blue-200 bg-blue-50/90 text-blue-950';
+
+                  const icon = isDanger
+                    ? <AlertTriangle className="w-5 h-5 text-rose-600 shrink-0" />
+                    : isWarning
+                    ? <AlertCircle className="w-5 h-5 text-amber-600 shrink-0" />
+                    : isSuccess
+                    ? <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+                    : <Info className="w-5 h-5 text-blue-600 shrink-0" />;
+
+                  const badge = isDanger
+                    ? 'bg-rose-200 text-rose-900 border-rose-300'
+                    : isWarning
+                    ? 'bg-amber-200 text-amber-900 border-amber-300'
+                    : isSuccess
+                    ? 'bg-emerald-200 text-emerald-900 border-emerald-300'
+                    : 'bg-blue-200 text-blue-900 border-blue-300';
+
+                  return (
+                    <div
+                      key={adv.id}
+                      className={`p-4 rounded-2xl border ${borderBg} space-y-2 shadow-xs`}
+                    >
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex items-center space-x-2">
+                          {icon}
+                          <h4 className="text-sm font-black tracking-tight">
+                            {adv.title}
+                          </h4>
+                        </div>
+                        <span className={`text-[10px] font-black uppercase px-2.5 py-0.5 rounded-md border ${badge} shrink-0`}>
+                          {adv.category}
+                        </span>
+                      </div>
+
+                      <p className="text-xs leading-relaxed opacity-90 pl-7">
+                        {adv.message}
+                      </p>
+
+                      <div className="mt-1 pt-2 border-t border-black/10 text-xs font-bold pl-7 text-slate-900">
+                        💡 {adv.action}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
 

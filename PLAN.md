@@ -1,10 +1,10 @@
-# MilkIQ: Akıllı Süt, Rasyon & Maliyet Zekası Sistemi
+# MilkIQ: Akıllı Süt, Rasyon & Maliyet Sistemi
 ## Detaylı Uygulama Mimarisi, Zooteknik Hesaplama ve Geliştirme Planı
 
 ---
 
 ### 1. Proje Özeti ve Vizyonu
-**MilkIQ**, süt sığırcılığı işletmelerinde **besleme (rasyon zekası)** ile **finansal maliyet yönetimini (1 litre süt maliyeti, genel giderler, anlık kârlılık)** tek bir çatı altında birleştiren yeni nesil, teknolojik, yüksek kontrastlı ve mobil öncelikli (PWA) bir karar destek platformudur.
+**MilkIQ**, süt sığırcılığı işletmelerinde **besleme (rasyon sistemi)** ile **finansal maliyet yönetimini (1 litre süt maliyeti, genel giderler, anlık kârlılık)** tek bir çatı altında birleştiren yeni nesil, teknolojik, yüksek kontrastlı ve mobil öncelikli (PWA) bir karar destek platformudur.
 
 Yetiştirici;
 1. Elindeki kaba ve kesif yemleri (Kuru Madde, Ham Protein, Nişasta ve Fiyat) sisteme bir kez tanımlar.
@@ -23,7 +23,7 @@ Yetiştirici;
 
 ### 2. İsim, Marka Kimliği ve Logo Konsepti
 * **Uygulama Adı:** **MilkIQ**
-* **Alt Başlık / Slogan:** *Akıllı Süt, Rasyon & Maliyet Zekası*
+* **Alt Başlık / Slogan:** *Akıllı Süt, Rasyon & Maliyet Sistemi*
 * **Logo Tasarımı:**
   - Modern zümrüt yeşili, teknolojik veri ağı/bağlantı noktaları, süt damlası ve inek silüeti sentezi.
   - Mobil ana ekran ve PWA için yüksek kontrastlı App Icon (192x192, 512x512, SVG & PNG).

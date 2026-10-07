@@ -70,7 +70,7 @@ export default function LoginPage() {
             <span className="text-emerald-400">IQ</span>
           </h1>
           <p className="text-sm font-medium text-emerald-300/80 mt-1">
-            Akıllı Süt, Rasyon & Maliyet Zekası
+            Akıllı Süt, Rasyon & Maliyet Sistemi
           </p>
         </div>
 

@@ -117,7 +117,7 @@ export default function AboutModal({ forceOpen = false, onClose }: AboutModalPro
                 <Sparkles className="w-4 h-4 text-emerald-600" />
               </h2>
               <p className="text-xs font-semibold text-emerald-700">
-                Akıllı Süt, Rasyon & Maliyet Zekası Platformu
+                Akıllı Süt, Rasyon & Maliyet Sistemi Platformu
               </p>
             </div>
           </div>

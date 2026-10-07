@@ -66,7 +66,7 @@ export default function Navbar() {
                 <span className="text-xl font-black text-emerald-600 tracking-tight">IQ</span>
               </div>
               <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider hidden sm:block">
-                Akıllı Süt & Rasyon Zekası
+                Akıllı Süt & Rasyon Sistemi
               </p>
             </div>
           </Link>

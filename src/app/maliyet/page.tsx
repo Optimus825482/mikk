@@ -359,7 +359,7 @@ export default function CostAnalysisPage() {
           <div className="flex items-center space-x-2">
             <TrendingUp className="w-6 h-6 text-emerald-600" />
             <h1 className="text-2xl font-black text-slate-900 tracking-tight">
-              Maliyet & Kârlılık Zekası
+              Maliyet & Kârlılık Sistemi
             </h1>
           </div>
           <p className="text-sm text-slate-500 mt-1">
@@ -1101,7 +1101,7 @@ export default function CostAnalysisPage() {
 
           {/* Alt Bilgi */}
           <div className="pt-1.5 text-center text-[8px] text-slate-500 font-medium border-t border-slate-200">
-            MilkIQ Akıllı Süt, Rasyon & Maliyet Zekası Sistemi tarafından otomatik üretilmiştir.
+            MilkIQ Akıllı Süt, Rasyon & Maliyet Sistemi tarafından otomatik üretilmiştir.
           </div>
         </div>
       </div>

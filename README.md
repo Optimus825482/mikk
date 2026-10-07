@@ -1,4 +1,4 @@
-# 🥛 MilkIQ: Akıllı Süt, Rasyon & Maliyet Zekası Sistemi
+# 🥛 MilkIQ: Akıllı Süt, Rasyon & Maliyet Sistemi
 
 **MilkIQ**, küçük ve orta ölçekli süt hayvancılığı işletmeleri için tasarlanmış, **rasyon hazırlama**, **kaba yem asidoz tolerans kontrolü**, **potansiyel süt verimi tahmini**, **aylık genel gider takibi** ve **1 litre sütün anlık net maliyeti ile kârlılık analizini** bir araya getiren yeni nesil, mobil öncelikli (PWA) bir karar destek platformudur.
 
@@ -33,7 +33,7 @@
    - Sağılan toplam süt ve inek sayısı girişi.
    - İnek başına günlük ortalama litre takibi.
 
-6. **💰 Entegre Maliyet & Kârlılık Zekası:**
+6. **💰 Entegre Maliyet & Kârlılık Sistemi:**
    - 1 Litre Süt Yem Maliyeti + 1 Litre Genel Gider Payı = **1 Litre Sütün Net Toplam Maliyeti**.
    - Süt Satış Fiyatı simülatörü ile **Litre Başı Net Kâr Marjı**, **Günlük Net İşletme Kârı** ve **Aylık Tahmini Kâr**.
 

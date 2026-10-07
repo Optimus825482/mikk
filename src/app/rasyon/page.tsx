@@ -1685,7 +1685,7 @@ export default function RationPage() {
           </div>
 
           <div className="pt-2 text-center text-[9px] text-slate-500 font-medium border-t border-slate-200">
-            MilkIQ Akıllı Süt, Rasyon & Maliyet Zekası Sistemi tarafından otomatik üretilmiştir.
+            MilkIQ Akıllı Süt, Rasyon & Maliyet Sistemi tarafından otomatik üretilmiştir.
           </div>
         </div>
       </div>
@@ -1929,7 +1929,7 @@ export default function RationPage() {
           </div>
 
           <div className="text-center text-[8px] text-slate-500 font-medium pt-1 border-t border-slate-200">
-            MilkIQ Akıllı Süt, Rasyon & Maliyet Zekası Sistemi tarafından otomatik üretilmiştir.
+            MilkIQ Akıllı Süt, Rasyon & Maliyet Sistemi tarafından otomatik üretilmiştir.
           </div>
         </div>
       </div>

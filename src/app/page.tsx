@@ -118,7 +118,7 @@ export default function DashboardPage() {
             <span>Süt Çiftliği Karar Destek Sistemi</span>
           </span>
           <h1 className="text-2xl sm:text-4xl font-black tracking-tight">
-            Süt, Rasyon & Maliyet Zekası
+            Süt, Rasyon & Maliyet Sistemi
           </h1>
           <p className="text-emerald-100/90 text-sm sm:text-base mt-2">
             Rasyon dengesini koruyun, asidozu önleyin ve 1 litre sütünüzün gerçek maliyetini anlık olarak kontrol altında tutun.

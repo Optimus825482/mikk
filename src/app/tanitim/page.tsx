@@ -187,7 +187,7 @@ export default function TanitimPage() {
 
           <div className="flex flex-wrap items-center justify-center gap-3 pt-2 text-xs text-slate-400">
             <span className="bg-slate-800/80 px-3 py-1.5 rounded-full border border-slate-700">
-              Geliştirici: <strong className="text-white">Erkan Erdem</strong>
+              Geliştirici: <strong className="text-white">Veteriner Hekim Erkan Erdem</strong>
             </span>
             <a
               href="https://erkanerdem.online"
@@ -835,7 +835,7 @@ export default function TanitimPage() {
                 rel="noopener noreferrer"
                 className="text-emerald-400 hover:underline font-bold"
               >
-                Erkan Erdem
+                Veteriner Hekim Erkan Erdem
               </a>
             </div>
             <div>https://milkiq.erkanerdem.online • 7/24 Geliştirici Takibi & Teknik Destek</div>

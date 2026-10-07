@@ -15,7 +15,8 @@ import {
   ArrowUpRight,
   ShieldCheck,
   Plus,
-  ExternalLink
+  ExternalLink,
+  Scale
 } from 'lucide-react';
 import { Feed, MonthlyExpense, DailyProduction, SystemSetting } from '@/types';
 import { calculateRation, DEFAULT_SETTINGS } from '@/lib/calculator';
@@ -99,6 +100,31 @@ export default function DashboardPage() {
   const totalCostPerLiter = feedCostPerLiter + overheadCostPerLiter;
   const milkSalePrice = settings.milkSalePrice || 16.5;
   const netProfitPerLiter = milkSalePrice - totalCostPerLiter;
+
+  // Süt / Yem Paritesi Hesabı
+  const referenceMilkFeed = useMemo(() => {
+    if (ration?.items && ration.items.length > 0) {
+      const rationFeedItems = ration.items
+        .map((item: any) => {
+          const f = feeds.find(feed => feed.id === item.feedId);
+          return f ? { ...f, amount: item.freshAmount } : null;
+        })
+        .filter(Boolean) as (Feed & { amount: number })[];
+
+      const milkYem = rationFeedItems.find(f => f.category === 'HAZIR_YEM' || f.name.toLowerCase().includes('süt yemi'));
+      if (milkYem) return milkYem;
+
+      const maxKesif = rationFeedItems.filter(f => f.type === 'KESIF').sort((a, b) => b.amount - a.amount)[0];
+      if (maxKesif) return maxKesif;
+    }
+
+    const defaultMilkYem = feeds.find(f => f.category === 'HAZIR_YEM' || f.name.toLowerCase().includes('süt yemi')) ||
+                           feeds.find(f => f.type === 'KESIF');
+    return defaultMilkYem || null;
+  }, [ration, feeds]);
+
+  const milkFeedPrice = referenceMilkFeed ? referenceMilkFeed.unitPrice : 12.00;
+  const parityRatio = milkFeedPrice > 0 ? Number((milkSalePrice / milkFeedPrice).toFixed(2)) : 0;
 
   if (loading) {
     return (
@@ -269,6 +295,36 @@ export default function DashboardPage() {
           </div>
           <span className="hidden sm:inline">Kaba Yem: %{rationCalc.roughagePercentage}</span>
         </div>
+
+        {/* Süt / Yem Paritesi Mini İndikatörü */}
+        <div className="flex flex-wrap items-center justify-between gap-2 p-3.5 bg-slate-50 border border-slate-200/90 rounded-2xl text-xs">
+          <div className="flex items-center space-x-2">
+            <Scale className="w-4 h-4 text-emerald-700 shrink-0" />
+            <span className="font-bold text-slate-700">Süt / Yem Paritesi:</span>
+            <strong className={`text-sm font-black ${
+              parityRatio >= 1.3 ? 'text-emerald-700' : 'text-amber-700'
+            }`}>
+              {parityRatio.toFixed(2)}
+            </strong>
+            <span className="text-slate-500 font-medium hidden sm:inline">
+              (1L Süt = {parityRatio.toFixed(2)} kg {referenceMilkFeed?.name || 'Süt Yemi'})
+            </span>
+          </div>
+
+          <Link
+            href="/maliyet"
+            className={`px-3 py-1 rounded-full text-[11px] font-extrabold border transition-all flex items-center gap-1 active:scale-95 ${
+              parityRatio >= 1.50
+                ? 'bg-emerald-100 text-emerald-900 border-emerald-300 hover:bg-emerald-200'
+                : parityRatio >= 1.30
+                ? 'bg-teal-100 text-teal-900 border-teal-300 hover:bg-teal-200'
+                : 'bg-amber-100 text-amber-900 border-amber-300 hover:bg-amber-200'
+            }`}
+          >
+            <span>{parityRatio >= 1.50 ? '📈 Yüksek Kâr (>1.50)' : parityRatio >= 1.30 ? '✅ Sağlıklı Denge (1.30-1.50)' : '⚠️ Riskli Eşik (<1.30)'}</span>
+            <span>→</span>
+          </Link>
+        </div>
       </div>
 
       {/* COST ANALYSIS HIGHLIGHT BANNER (NAVIGATE TO MALIYET PAGE) */}
@@ -368,7 +424,7 @@ export default function DashboardPage() {
             rel="noopener noreferrer"
             className="font-bold text-emerald-700 hover:text-emerald-800 bg-emerald-50 hover:bg-emerald-100/90 transition-all px-2 py-0.5 rounded-md border border-emerald-200/70 shadow-2xs inline-flex items-center gap-1 group"
           >
-            <span>Erkan Erdem</span>
+            <span>Veteriner Hekim Erkan Erdem</span>
             <ExternalLink className="w-3 h-3 text-emerald-600 group-hover:translate-x-0.5 transition-transform" />
           </a>
         </p>

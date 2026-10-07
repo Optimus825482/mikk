@@ -25,7 +25,8 @@ import {
   Sparkles,
   Info,
   Layers,
-  ArrowRight
+  ArrowRight,
+  Scale
 } from 'lucide-react';
 import { 
   Feed, 
@@ -62,6 +63,7 @@ export default function CostAnalysisPage() {
   const [settings, setSettings] = useState<SystemSetting>(DEFAULT_SETTINGS);
   const [milkSalePrice, setMilkSalePrice] = useState<number>(16.5);
   const [reportNotes, setReportNotes] = useState<string>('');
+  const [selectedParityFeedId, setSelectedParityFeedId] = useState<string>('');
   
   const [loading, setLoading] = useState<boolean>(true);
   const [savingReport, setSavingReport] = useState<boolean>(false);
@@ -248,6 +250,80 @@ export default function CostAnalysisPage() {
   const feedCostPercent = totalCostPerLiter > 0 ? (feedCostPerLiter / totalCostPerLiter) * 100 : 0;
   const overheadPercent = totalCostPerLiter > 0 ? (overheadCostPerLiter / totalCostPerLiter) * 100 : 0;
   const marginPercent = totalCostPerLiter > 0 ? (netProfitPerLiter / totalCostPerLiter) * 100 : 0;
+
+  // 6. Süt / Yem Paritesi Hesabı
+  // Formül: 1 Litre Çiğ Süt Satış Fiyatı (₺) / 1 Kg Süt Yemi Fiyatı (₺)
+  const referenceMilkFeed = useMemo(() => {
+    if (ration?.items && ration.items.length > 0) {
+      const rationFeedItems = ration.items
+        .map((item: any) => {
+          const f = feeds.find(feed => feed.id === item.feedId);
+          return f ? { ...f, amount: item.freshAmount } : null;
+        })
+        .filter(Boolean) as (Feed & { amount: number })[];
+
+      const milkYem = rationFeedItems.find(f => f.category === 'HAZIR_YEM' || f.name.toLowerCase().includes('süt yemi'));
+      if (milkYem) return milkYem;
+
+      const maxKesif = rationFeedItems.filter(f => f.type === 'KESIF').sort((a, b) => b.amount - a.amount)[0];
+      if (maxKesif) return maxKesif;
+    }
+
+    const defaultMilkYem = feeds.find(f => f.category === 'HAZIR_YEM' || f.name.toLowerCase().includes('süt yemi')) ||
+                           feeds.find(f => f.type === 'KESIF');
+    return defaultMilkYem || null;
+  }, [ration, feeds]);
+
+  const activeReferenceFeed = useMemo(() => {
+    if (selectedParityFeedId) {
+      const found = feeds.find(f => f.id === selectedParityFeedId);
+      if (found) return found;
+    }
+    return referenceMilkFeed;
+  }, [selectedParityFeedId, feeds, referenceMilkFeed]);
+
+  const activeReferenceFeedPrice = activeReferenceFeed ? activeReferenceFeed.unitPrice : 12.00;
+  const parityRatio = activeReferenceFeedPrice > 0 ? Number((milkSalePrice / activeReferenceFeedPrice).toFixed(2)) : 0;
+
+  const parityStatus = useMemo(() => {
+    if (parityRatio >= 1.50) {
+      return {
+        level: 'EXCELLENT',
+        label: 'Çok Yüksek Kârlılık (> 1.50)',
+        badgeBg: 'bg-emerald-100 text-emerald-900 border-emerald-300',
+        textColor: 'text-emerald-700',
+        barColor: 'bg-emerald-500',
+        desc: '1 Litre süt geliri ile 1.50 kg üzerinde yem alınabiliyor. İşletmeniz çok güçlü ve sürdürülebilir bir kâr marjına sahiptir.'
+      };
+    } else if (parityRatio >= 1.30) {
+      return {
+        level: 'HEALTHY',
+        label: 'Sağlıklı Sürdürülebilir Denge (1.30 - 1.50)',
+        badgeBg: 'bg-teal-100 text-teal-900 border-teal-300',
+        textColor: 'text-teal-700',
+        barColor: 'bg-teal-500',
+        desc: 'Parite ideal 1.30 - 1.50 kârlılık bandında. Süt satışı yem maliyetini karşılayıp çiftliğe net kâr bırakmaktadır.'
+      };
+    } else if (parityRatio >= 1.15) {
+      return {
+        level: 'WARNING',
+        label: 'Hassas Eşik / Dikkat (1.15 - 1.30)',
+        badgeBg: 'bg-amber-100 text-amber-900 border-amber-300',
+        textColor: 'text-amber-700',
+        barColor: 'bg-amber-500',
+        desc: 'Parite 1.30 ideal seviyesinin altında. Kâr marjı daralıyor; kaba yem kalitesini artırıp fabrika yemini optimize etmeniz önerilir.'
+      };
+    } else {
+      return {
+        level: 'DANGER',
+        label: 'Kritik Risk / Zarar Eşiği (< 1.15)',
+        badgeBg: 'bg-rose-100 text-rose-900 border-rose-300',
+        textColor: 'text-rose-700',
+        barColor: 'bg-rose-500',
+        desc: 'Parite 1.15 altında! Süt satışı yem harcamasını karşılamakta zorlanıyor. Süt satış fiyatı veya yem rasyonu acilen gözden geçirilmelidir.'
+      };
+    }
+  }, [parityRatio]);
 
   // Aylık Raporu Arşive Kaydet
   const handleSaveReport = async () => {
@@ -548,6 +624,115 @@ export default function CostAnalysisPage() {
                 <span>Süt Satış:</span>
                 <span>{milkSalePrice.toFixed(2)} ₺</span>
               </p>
+            </div>
+          </div>
+
+          {/* SÜT / YEM PARİTESİ İNDİKATÖRÜ KARTI */}
+          <div className="bg-white p-5 sm:p-6 rounded-3xl border border-slate-200 shadow-xs space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0">
+                  <Scale className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <h3 className="text-base font-black text-slate-900 tracking-tight">
+                      📈 Süt / Yem Paritesi İndikatörü
+                    </h3>
+                    <span className={`px-2.5 py-0.5 rounded-full text-[11px] font-extrabold border ${parityStatus.badgeBg}`}>
+                      {parityStatus.label}
+                    </span>
+                  </div>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    1 Litre çiğ süt satıldığında satın alınabilen fabrika süt yemi miktarı (kg)
+                  </p>
+                </div>
+              </div>
+
+              {/* Referans Yem Seçimi */}
+              <div className="flex items-center space-x-2 self-start sm:self-auto">
+                <span className="text-xs font-bold text-slate-500 whitespace-nowrap">Kıyaslanan Yem:</span>
+                <select
+                  value={selectedParityFeedId || (activeReferenceFeed?.id || '')}
+                  onChange={(e) => setSelectedParityFeedId(e.target.value)}
+                  className="h-9 px-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-800 focus:bg-white focus:border-emerald-500"
+                >
+                  {feeds
+                    .filter(f => f.type === 'KESIF' || f.category === 'HAZIR_YEM')
+                    .map(f => (
+                      <option key={f.id} value={f.id}>
+                        {f.name} ({f.unitPrice.toFixed(2)} ₺/kg)
+                      </option>
+                    ))}
+                </select>
+              </div>
+            </div>
+
+            {/* Parite Metrik & Gösterge Izgarası */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-center">
+              {/* Sol: Büyük Rakam */}
+              <div className="lg:col-span-4 bg-slate-50 p-4 rounded-2xl border border-slate-100 flex flex-col justify-center text-center sm:text-left">
+                <span className="text-xs font-bold text-slate-500 uppercase tracking-wider block">
+                  Hesaplanan Parite Oranı
+                </span>
+                <div className="mt-1 flex items-baseline justify-center sm:justify-start space-x-2">
+                  <span className={`text-4xl sm:text-5xl font-black tracking-tight ${parityStatus.textColor}`}>
+                    {parityRatio.toFixed(2)}
+                  </span>
+                  <span className="text-sm font-bold text-slate-500">
+                    kg Yem / L Süt
+                  </span>
+                </div>
+                <div className="text-[11px] text-slate-600 font-semibold mt-2 pt-2 border-t border-slate-200/80 flex items-center justify-between">
+                  <span>1L Süt: <strong className="text-slate-900">{milkSalePrice.toFixed(2)} ₺</strong></span>
+                  <span>1kg Yem: <strong className="text-slate-900">{activeReferenceFeedPrice.toFixed(2)} ₺</strong></span>
+                </div>
+              </div>
+
+              {/* Sağ: Görsel Parite Skalası & Bar */}
+              <div className="lg:col-span-8 space-y-3">
+                {/* 4 Renkli Aralık Göstergesi */}
+                <div>
+                  <div className="flex justify-between text-[11px] font-bold text-slate-600 mb-1.5 flex-wrap gap-1">
+                    <span className="text-rose-600">&lt; 1.15 Zarar Eşiği</span>
+                    <span className="text-amber-600">1.15 - 1.30 Riskli</span>
+                    <span className="text-teal-600 font-black">1.30 - 1.50 İdeal Denge</span>
+                    <span className="text-emerald-700 font-black">&gt; 1.50 Yüksek Kâr</span>
+                  </div>
+
+                  {/* Range Bar */}
+                  <div className="relative h-4 bg-slate-200 rounded-full overflow-hidden flex shadow-inner">
+                    <div className="w-[25%] bg-rose-500 h-full" title="< 1.15 Kritik Zarar" />
+                    <div className="w-[20%] bg-amber-400 h-full" title="1.15 - 1.30 Hassas Eşik" />
+                    <div className="w-[30%] bg-teal-500 h-full" title="1.30 - 1.50 Sağlıklı Denge" />
+                    <div className="w-[25%] bg-emerald-600 h-full" title="> 1.50 Yüksek Kârlılık" />
+                  </div>
+
+                  {/* Mevcut Değer İbresi */}
+                  <div className="relative h-5">
+                    <div 
+                      className="absolute -top-1 transform -translate-x-1/2 flex flex-col items-center transition-all duration-500"
+                      style={{ 
+                        left: `${Math.min(Math.max(((parityRatio - 0.9) / (1.8 - 0.9)) * 100, 5), 95)}%` 
+                      }}
+                    >
+                      <span className="w-0 h-0 border-l-[5px] border-l-transparent border-r-[5px] border-r-transparent border-b-[6px] border-b-slate-900" />
+                      <span className="text-[10px] font-black bg-slate-900 text-white px-1.5 py-0.5 rounded shadow-xs">
+                        {parityRatio.toFixed(2)}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Açıklama & Tavsiye Notu */}
+                <div className={`p-3 rounded-xl border text-xs font-semibold ${
+                  parityRatio >= 1.30 
+                    ? 'bg-emerald-50/80 border-emerald-200 text-emerald-950' 
+                    : 'bg-amber-50/80 border-amber-200 text-amber-950'
+                }`}>
+                  <strong>💡 Sürü & Kârlılık Değerlendirmesi:</strong> {parityStatus.desc}
+                </div>
+              </div>
             </div>
           </div>
 
@@ -950,7 +1135,7 @@ export default function CostAnalysisPage() {
           </div>
 
           {/* Sürü ve Üretim Temel Verileri Barı */}
-          <div className="grid grid-cols-4 gap-2 bg-slate-100 p-2 rounded-lg border border-slate-300 text-center text-[10px]">
+          <div className="grid grid-cols-5 gap-2 bg-slate-100 p-2 rounded-lg border border-slate-300 text-center text-[10px]">
             <div>
               <span className="text-slate-500 font-medium block text-[9px]">Sağmal Sürü</span>
               <strong className="text-slate-900 text-xs font-black">{averageMilkingCows} Baş</strong>
@@ -966,6 +1151,10 @@ export default function CostAnalysisPage() {
             <div>
               <span className="text-slate-500 font-medium block text-[9px]">Çiğ Süt Satış Fiyatı</span>
               <strong className="text-emerald-800 text-xs font-black">{milkSalePrice.toFixed(2)} ₺ / Litre</strong>
+            </div>
+            <div>
+              <span className="text-slate-500 font-medium block text-[9px]">Süt / Yem Paritesi</span>
+              <strong className="text-indigo-900 text-xs font-black">{parityRatio.toFixed(2)} ({parityRatio >= 1.3 ? 'Sağlıklı' : 'Riskli'})</strong>
             </div>
           </div>
 

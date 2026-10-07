@@ -445,8 +445,11 @@ const htmlContent = `<!DOCTYPE html>
     <div style="border-top: 1px solid rgba(255, 255, 255, 0.15); padding-top: 18px; display: flex; justify-content: space-between; align-items: flex-end;">
       <div>
         <div style="font-size: 11px; color: #94a3b8; text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em;">Geliştirici & Sistem Mimarı</div>
-        <div style="font-size: 16px; font-weight: 900; color: #ffffff; margin-top: 2px;">Erkan Erdem</div>
-        <div style="font-size: 12px; color: #34d399; font-weight: 600; margin-top: 2px;">
+        <div style="font-size: 16px; font-weight: 900; color: #ffffff; margin-top: 2px;">Veteriner Hekim Erkan Erdem</div>
+        <div style="font-size: 11px; color: #38bdf8; font-weight: 600; margin-top: 2px;">
+          Full Stack Yazılım Mimarı • Tarım & Hayvancılık Teknolojileri Geliştiricisi
+        </div>
+        <div style="font-size: 12px; color: #34d399; font-weight: 600; margin-top: 4px;">
           🌐 <a href="https://erkanerdem.online" style="color: #34d399; text-decoration: none;">https://erkanerdem.online</a>
         </div>
       </div>
@@ -1113,50 +1116,34 @@ const htmlContent = `<!DOCTYPE html>
         MilkIQ, süt üreticilerinin kârlılığını artırmak ve Türkiye hayvancılığına katma değer sağlamak amacıyla sürekli geliştirilmektedir.
       </p>
 
-      <div class="grid-2" style="margin-bottom: 20px;">
+      <div style="margin-bottom: 20px;">
         <!-- Geliştirici Kartı -->
-        <div class="card" style="border: 2px solid #10b981; background: #f0fdf4;">
+        <div class="card" style="border: 2px solid #10b981; background: #f0fdf4; padding: 18px;">
           <div style="font-size: 11px; font-weight: 800; color: #047857; text-transform: uppercase; letter-spacing: 0.05em;">
             GELİŞTİRİCİ & SİSTEM MİMARI
           </div>
-          <h3 style="font-size: 20px; font-weight: 900; color: #0f172a; margin-top: 4px;">Erkan Erdem</h3>
-          <p style="font-size: 11.5px; color: #475569; margin-top: 4px; line-height: 1.45;">
+          <h3 style="font-size: 22px; font-weight: 900; color: #0f172a; margin-top: 4px;">Veteriner Hekim Erkan Erdem</h3>
+          <p style="font-size: 13px; color: #047857; font-weight: 700; margin-top: 2px;">
             Full Stack Yazılım Mimarı • Tarım & Hayvancılık Teknolojileri Geliştiricisi
           </p>
+          <p style="font-size: 11.5px; color: #475569; margin-top: 6px; line-height: 1.5;">
+            Hayvan besleme, sürü sağlığı ve hayvancılık işletme ekonomisi alanlarındaki saha tecrübesini modern yazılım mimarisiyle birleştirerek aile tipi süt işletmeleri için pratik ve kârlı çözümler sunar.
+          </p>
 
-          <div style="margin-top: 14px; border-top: 1px solid #bbf7d0; padding-top: 10px; font-size: 11px; space-y: 6px;">
-            <div style="margin-bottom: 6px;">
-              🌐 <strong>Web Sitesi:</strong> <a href="https://erkanerdem.online" style="color: #047857; font-weight: bold; text-decoration: none;">https://erkanerdem.online</a>
-            </div>
-            <div style="margin-bottom: 6px;">
-              ✉️ <strong>E-Posta:</strong> erkanerdem8254@gmail.com
+          <div style="margin-top: 16px; border-top: 1px solid #bbf7d0; padding-top: 12px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; font-size: 11px;">
+            <div>
+              <div style="color: #64748b; font-weight: 600; font-size: 10px;">KİŞİSEL PORTAL</div>
+              <a href="https://erkanerdem.online" style="color: #047857; font-weight: bold; text-decoration: none; font-size: 12px;">https://erkanerdem.online</a>
             </div>
             <div>
-              📱 <strong>Canlı Uygulama:</strong> <a href="https://milkiq.erkanerdem.online" style="color: #0369a1; font-weight: bold; text-decoration: none;">https://milkiq.erkanerdem.online</a>
+              <div style="color: #64748b; font-weight: 600; font-size: 10px;">E-POSTA DESTEK</div>
+              <span style="color: #0f172a; font-weight: bold; font-size: 12px;">erkanerdem8254@gmail.com</span>
+            </div>
+            <div>
+              <div style="color: #64748b; font-weight: 600; font-size: 10px;">CANLI UYGULAMA</div>
+              <a href="https://milkiq.erkanerdem.online" style="color: #0369a1; font-weight: bold; text-decoration: none; font-size: 12px;">milkiq.erkanerdem.online</a>
             </div>
           </div>
-        </div>
-
-        <!-- Hizmet & Destek Kapsamı -->
-        <div class="card">
-          <div style="font-size: 11px; font-weight: 800; color: #0284c7; text-transform: uppercase; letter-spacing: 0.05em;">
-            HİZMET VE DESTEK KAPSAMI
-          </div>
-          <h3 style="font-size: 16px; font-weight: 900; color: #0f172a; margin-top: 4px;">Kurumsal Destek & Entegrasyon</h3>
-          <ul class="bullet-list" style="margin-top: 10px;">
-            <li class="bullet-item">
-              <span class="bullet-icon bullet-icon-sky">✓</span>
-              <span><strong>Çiftliğe Özel Yem Entegrasyonu:</strong> Kendi yem analizlerinizin ve rasyon formüllerinizin sisteme tanımlanması.</span>
-            </li>
-            <li class="bullet-item">
-              <span class="bullet-icon bullet-icon-sky">✓</span>
-              <span><strong>TMR Mikser Terazisi Uyarlaması:</strong> Çiftliğinizdeki karma vagonuna özel kümülatif terazi reçetelerinin hazırlanması.</span>
-            </li>
-            <li class="bullet-item">
-              <span class="bullet-icon bullet-icon-sky">✓</span>
-              <span><strong>7/24 Kesintisiz İzleme:</strong> Hata alarmları ve teknik performansın sürekli takibi.</span>
-            </li>
-          </ul>
         </div>
       </div>
 

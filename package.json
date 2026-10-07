@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build:pptx": "node scripts/generate-pptx.js",
+    "build": "node scripts/generate-pptx.js && next build",
     "start": "next start",
     "lint": "next lint",
     "prisma:generate": "prisma generate",

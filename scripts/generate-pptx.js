@@ -3,42 +3,79 @@ const path = require('path');
 const fs = require('fs');
 
 async function createPresentation() {
-  console.log('Sunum oluşturuluyor...');
+  console.log('Sunum oluşturuluyor (Widescreen 16:9 - 13.33" x 7.5")...');
   const pres = new pptxgen();
 
-  pres.layout = 'LAYOUT_16x9';
+  // Widescreen 16:9 Standartı (13.333" x 7.5" - Google Slides & PowerPoint HD Uyumlu)
+  pres.layout = 'LAYOUT_WIDE';
   pres.author = 'Erkan Erdem';
   pres.company = 'MilkIQ - erkanerdem.online';
   pres.subject = 'MilkIQ Akıllı Süt Sığırcılığı Rasyon & Karlılık Yönetim Sistemi';
   pres.title = 'MilkIQ Ürün ve Özellik Tanıtım Sunumu';
 
-  // Ortak Renk Paleti
+  // Renk Paleti (Yüksek Kontrast, Modern SaaS Teması)
   const BG_DARK = '0B1329';
-  const CARD_BG = '1E293B';
-  const CARD_BORDER = '334155';
+  const CARD_BG = '152238';
+  const CARD_BG_LIGHT = '1E293B';
+  const CARD_BORDER = '283852';
   const EMERALD = '10B981';
   const EMERALD_LIGHT = '34D399';
   const BLUE = '38BDF8';
+  const BLUE_LIGHT = '7DD3FC';
   const WHITE = 'FFFFFF';
   const TEXT_MUTED = '94A3B8';
+  const TEXT_LIGHT = 'E2E8F0';
   const GOLD = 'F59E0B';
+  const RED_BORDER = '7F1D1D';
+  const RED_TEXT = 'F87171';
+  const RED_BG = '1E1B24';
 
   const logoPath = path.join(__dirname, '..', 'public', 'logo.png');
   const hasLogo = fs.existsSync(logoPath);
 
-  // Ortak Footer Fonksiyonu
+  // Standart Genişlik ve Hizalama Sabitleri (Toplam genişlik: 13.333", Yükseklik: 7.5")
+  const MARGIN_LEFT = 0.8;
+  const CONTENT_WIDTH = 11.733; // 0.8 + 11.733 = 12.533 (Sağ boşluk: 0.8")
+
+  // Ortak Header Fonksiyonu
+  function addHeader(slide, categoryText, titleText) {
+    slide.addText(categoryText.toUpperCase(), {
+      x: MARGIN_LEFT,
+      y: 0.45,
+      w: CONTENT_WIDTH,
+      h: 0.3,
+      fontSize: 10.5,
+      color: EMERALD_LIGHT,
+      bold: true,
+      fontFace: 'Segoe UI',
+      charSpacing: 1.5
+    });
+
+    slide.addText(titleText, {
+      x: MARGIN_LEFT,
+      y: 0.75,
+      w: CONTENT_WIDTH,
+      h: 0.6,
+      fontSize: 24,
+      color: WHITE,
+      bold: true,
+      fontFace: 'Segoe UI'
+    });
+  }
+
+  // Ortak Footer Fonksiyonu (Slide alt sınır: 7.5", Footer y: 6.9" -> mükemmel sığar)
   function addFooter(slide, currentSlide, totalSlides = 10) {
     slide.addShape(pres.ShapeType.line, {
-      x: 0.8,
-      y: 7.0,
-      w: 11.7,
+      x: MARGIN_LEFT,
+      y: 6.85,
+      w: CONTENT_WIDTH,
       h: 0,
-      line: { color: '1E293B', width: 1 }
+      line: { color: '233348', width: 1 }
     });
 
     slide.addText('MilkIQ • Akıllı Süt Sığırcılığı Rasyon & Karlılık Sistemi', {
-      x: 0.8,
-      y: 7.05,
+      x: MARGIN_LEFT,
+      y: 6.92,
       w: 6.0,
       h: 0.35,
       fontSize: 9,
@@ -47,9 +84,9 @@ async function createPresentation() {
     });
 
     slide.addText(`Developed by Erkan Erdem (erkanerdem.online)  |  ${currentSlide} / ${totalSlides}`, {
-      x: 6.8,
-      y: 7.05,
-      w: 5.7,
+      x: MARGIN_LEFT + 6.0,
+      y: 6.92,
+      w: CONTENT_WIDTH - 6.0,
       h: 0.35,
       align: 'right',
       fontSize: 9,
@@ -65,33 +102,23 @@ async function createPresentation() {
     const slide = pres.addSlide();
     slide.background = { color: BG_DARK };
 
-    // Arka plan dekoratif şekiller
-    slide.addShape(pres.ShapeType.roundRect, {
-      x: 8.5,
-      y: -1.0,
-      w: 6.0,
-      h: 6.0,
-      rectRadius: 0.5,
-      fill: { color: '10B981', transparency: 92 },
-      line: { color: '10B981', width: 1, transparency: 80 }
-    });
-
+    // Sol Alan: Logo, Başlık, Alt Başlık ve Geliştirici Bilgisi
     if (hasLogo) {
       slide.addImage({
         path: logoPath,
         x: 1.0,
-        y: 1.2,
-        w: 1.6,
-        h: 1.6
+        y: 0.9,
+        w: 1.5,
+        h: 1.5
       });
     }
 
     slide.addText('AKILLI SÜT SIĞIRCILIĞI TEKNOLOJİSİ', {
       x: 1.0,
-      y: 3.1,
-      w: 8.0,
-      h: 0.4,
-      fontSize: 12,
+      y: 2.6,
+      w: 6.2,
+      h: 0.35,
+      fontSize: 11,
       fontFace: 'Segoe UI',
       color: EMERALD_LIGHT,
       bold: true,
@@ -100,9 +127,9 @@ async function createPresentation() {
 
     slide.addText('MilkIQ', {
       x: 1.0,
-      y: 3.5,
-      w: 8.0,
-      h: 1.2,
+      y: 2.95,
+      w: 6.2,
+      h: 1.1,
       fontSize: 54,
       fontFace: 'Segoe UI',
       color: WHITE,
@@ -111,43 +138,127 @@ async function createPresentation() {
 
     slide.addText('Rasyon, Karlılık & Sürü Yönetim Sistemi', {
       x: 1.0,
-      y: 4.7,
-      w: 10.0,
-      h: 0.6,
-      fontSize: 22,
+      y: 4.15,
+      w: 6.2,
+      h: 0.5,
+      fontSize: 18,
       fontFace: 'Segoe UI',
       color: TEXT_MUTED
     });
 
-    slide.addText('NRC Standartlarında Bilimsel Besleme • Dinamik Süt/Yem Paritesi • Kapsamlı Maliyet Denetimi', {
+    slide.addText('NRC Standartlarında Bilimsel Besleme  •  Dinamik Süt/Yem Paritesi  •  Net Maliyet Analizi', {
       x: 1.0,
-      y: 5.4,
-      w: 10.0,
-      h: 0.5,
-      fontSize: 13,
+      y: 4.75,
+      w: 6.2,
+      h: 0.6,
+      fontSize: 11.5,
       fontFace: 'Segoe UI',
       color: BLUE
     });
 
-    // Alt künye kartı
+    // Alt Künye Kartı
     slide.addShape(pres.ShapeType.roundRect, {
       x: 1.0,
-      y: 6.2,
-      w: 5.5,
-      h: 0.8,
-      rectRadius: 0.2,
+      y: 5.65,
+      w: 6.0,
+      h: 0.95,
+      rectRadius: 0.15,
       fill: { color: CARD_BG },
-      line: { color: CARD_BORDER, width: 1 }
+      line: { color: CARD_BORDER, width: 1.5 }
     });
 
-    slide.addText('Geliştirici: Erkan Erdem | erkanerdem.online\nSürüm: v1.0 Production Ready • PWA & Mobil Uyumlu', {
+    slide.addText('Geliştirici: Erkan Erdem  |  erkanerdem.online\nSürüm: v1.0 Production Ready • PWA & Mobil Uyumlu • 7/24 Kesintisiz Takip', {
       x: 1.2,
-      y: 6.25,
-      w: 5.1,
-      h: 0.7,
+      y: 5.75,
+      w: 5.6,
+      h: 0.75,
       fontSize: 10,
       fontFace: 'Segoe UI',
-      color: WHITE
+      color: TEXT_LIGHT
+    });
+
+    // Sağ Alan: Öne Çıkan Yetenekler Paneli (SaaS Dashboard Tarzı)
+    slide.addShape(pres.ShapeType.roundRect, {
+      x: 7.6,
+      y: 0.9,
+      w: 4.9,
+      h: 5.7,
+      rectRadius: 0.25,
+      fill: { color: CARD_BG },
+      line: { color: CARD_BORDER, width: 1.5 }
+    });
+
+    slide.addText('ÖNE ÇIKAN YETENEKLER', {
+      x: 7.9,
+      y: 1.2,
+      w: 4.3,
+      h: 0.3,
+      fontSize: 10,
+      color: EMERALD_LIGHT,
+      bold: true,
+      fontFace: 'Segoe UI',
+      charSpacing: 1.5
+    });
+
+    slide.addText('Yeni Nesil Karar Destek Platformu', {
+      x: 7.9,
+      y: 1.5,
+      w: 4.3,
+      h: 0.45,
+      fontSize: 15,
+      bold: true,
+      color: WHITE,
+      fontFace: 'Segoe UI'
+    });
+
+    const coverHighlights = [
+      { icon: '🌿', title: 'Hassas Rasyon Hesaplama', desc: 'KM, HP, Nişasta ve Kaba/Kesif dengesi canlı simülasyonu.' },
+      { icon: '📊', title: 'Dinamik Süt / Yem Paritesi', desc: '1 Litre sütün yem maliyeti ve başa baş katsayı takibi.' },
+      { icon: '🌾', title: 'Geniş Yem & Fabrika Kataloğu', desc: '13+ standart hammadde ve Türkiye tescilli fabrika yemleri.' },
+      { icon: '💰', title: 'Çiftlik Bütçe & Net Karlılık', desc: 'Genel giderler ile harmanlanmış gerçek 1L süt maliyeti.' },
+      { icon: '🛡️', title: 'Audit Log & 7/24 Takip', desc: 'Kullanıcı hareket denetimi ve otomatik Gmail hata bildirimi.' }
+    ];
+
+    coverHighlights.forEach((item, idx) => {
+      const rowY = 2.1 + idx * 0.86;
+      slide.addShape(pres.ShapeType.roundRect, {
+        x: 7.9,
+        y: rowY,
+        w: 4.3,
+        h: 0.75,
+        rectRadius: 0.1,
+        fill: { color: '0D1728' },
+        line: { color: '233348', width: 1 }
+      });
+
+      slide.addText(item.icon, {
+        x: 8.05,
+        y: rowY + 0.12,
+        w: 0.45,
+        h: 0.5,
+        fontSize: 16
+      });
+
+      slide.addText(item.title, {
+        x: 8.55,
+        y: rowY + 0.1,
+        w: 3.5,
+        h: 0.28,
+        fontSize: 11,
+        bold: true,
+        color: WHITE,
+        fontFace: 'Segoe UI'
+      });
+
+      slide.addText(item.desc, {
+        x: 8.55,
+        y: rowY + 0.38,
+        w: 3.5,
+        h: 0.32,
+        fontSize: 9,
+        color: TEXT_MUTED,
+        fontFace: 'Segoe UI'
+      });
     });
   }
 
@@ -158,85 +269,70 @@ async function createPresentation() {
     const slide = pres.addSlide();
     slide.background = { color: BG_DARK };
 
-    slide.addText('SEKTÖREL GERÇEKLER & STRATEJİK DEĞER', {
-      x: 0.8,
-      y: 0.6,
-      w: 10.0,
-      h: 0.3,
-      fontSize: 11,
-      color: EMERALD_LIGHT,
-      bold: true,
-      fontFace: 'Segoe UI'
-    });
+    addHeader(slide, 'Sektörel Gerçekler & Stratejik Değer', 'Geleneksel Çiftlik Yönetimi vs. MilkIQ');
 
-    slide.addText('Geleneksel Çiftlik Yönetimi vs. MilkIQ', {
-      x: 0.8,
-      y: 0.9,
-      w: 10.0,
-      h: 0.6,
-      fontSize: 26,
-      color: WHITE,
-      bold: true,
-      fontFace: 'Segoe UI'
-    });
+    const colWidth = 5.65;
+    const colHeight = 5.1;
+    const cardTopY = 1.5;
 
-    // Sol Kart: Geleneksel Yöntemler (Kırmızı Vurgulu)
+    // Sol Kart: Geleneksel Yöntemler (Kırmızı Temalı)
     slide.addShape(pres.ShapeType.roundRect, {
-      x: 0.8,
-      y: 1.8,
-      w: 5.6,
-      h: 4.8,
-      rectRadius: 0.25,
-      fill: { color: '1E1B24' },
-      line: { color: '7F1D1D', width: 1.5 }
+      x: MARGIN_LEFT,
+      y: cardTopY,
+      w: colWidth,
+      h: colHeight,
+      rectRadius: 0.2,
+      fill: { color: RED_BG },
+      line: { color: RED_BORDER, width: 1.5 }
     });
 
     slide.addText('Geleneksel Besleme Zorlukları', {
-      x: 1.1,
-      y: 2.1,
-      w: 5.0,
+      x: MARGIN_LEFT + 0.3,
+      y: cardTopY + 0.25,
+      w: colWidth - 0.6,
       h: 0.4,
       fontSize: 16,
-      color: 'F87171',
+      color: RED_TEXT,
       bold: true,
       fontFace: 'Segoe UI'
     });
 
     const traditionalPoints = [
-      'Yem maliyeti çiftlik cirosunun %70\'ini oluşturur; plansız alımlar zarara yol açar.',
+      'Yem maliyeti çiftlik cirosunun %70\'ini oluşturur; plansız alımlar doğrudan zarara yol açar.',
       'Göz kararı veya sabit reçeteler nedeniyle gizli asidoz ve metabolik hastalıklar yaşanır.',
-      '1 litre sütün anlık yem maliyeti ve hayvan başı net karı hesaplanamaz.',
-      'Tahıl ve kaba yem fiyat dalgalanmalarına karşı anlık rasyon revizyonu yapılamaz.',
-      'Veriler kağıt veya karışık tablolarda kaybolur, geriye dönük analiz yapılamaz.'
+      '1 litre sütün anlık yem maliyeti ve hayvan başı net karı net olarak hesaplanamaz.',
+      'Tahıl ve kaba yem piyasasındaki fiyat dalgalanmalarına karşı anlık rasyon revizyonu yapılamaz.',
+      'Veriler kağıt veya karışık tablolarda kaybolur; geriye dönük veri analizi yapılamaz.'
     ];
 
     traditionalPoints.forEach((point, i) => {
       slide.addText(`•  ${point}`, {
-        x: 1.1,
-        y: 2.7 + i * 0.72,
-        w: 5.0,
-        h: 0.65,
-        fontSize: 11,
-        color: 'E2E8F0',
+        x: MARGIN_LEFT + 0.3,
+        y: cardTopY + 0.8 + i * 0.82,
+        w: colWidth - 0.6,
+        h: 0.72,
+        fontSize: 10.5,
+        color: TEXT_LIGHT,
         fontFace: 'Segoe UI'
       });
     });
 
-    // Sağ Kart: MilkIQ Çözümü (Yeşil Vurgulu)
+    // Sağ Kart: MilkIQ Çözümü (Yeşil Temalı)
+    const rightX = MARGIN_LEFT + colWidth + 0.433;
     slide.addShape(pres.ShapeType.roundRect, {
-      x: 6.8,
-      y: 1.8,
-      w: 5.6,
-      h: 4.8,
-      rectRadius: 0.25,
+      x: rightX,
+      y: cardTopY,
+      w: colWidth,
+      h: colHeight,
+      rectRadius: 0.2,
       fill: { color: CARD_BG },
       line: { color: EMERALD, width: 2 }
     });
 
     slide.addText('MilkIQ ile Akıllı Dönüşüm', {
-      x: 7.1,
-      y: 2.1,
-      w: 5.0,
+      x: rightX + 0.3,
+      y: cardTopY + 0.25,
+      w: colWidth - 0.6,
       h: 0.4,
       fontSize: 16,
       color: EMERALD_LIGHT,
@@ -245,20 +341,20 @@ async function createPresentation() {
     });
 
     const milkiqPoints = [
-      'Bilimsel NRC standartlarında hassas Kuru Madde, Protein ve Enerji optimizasyonu.',
-      'Dinamik Süt/Yem Paritesi takibiyle minimum maliyetle maksimum pik verimi.',
-      'Fabrika yemleri ve yerel yemlerin güncel borsa/piyasa fiyatlarıyla anlık kıyaslanması.',
-      'Laktasyon dönemi ve canlı ağırlığa göre otomatik besin ihtiyacı simülasyonu.',
-      'Tüm cihazlardan (cep telefonu, tablet, PC) bulut senkronizasyonu ile 7/24 erişim.'
+      'Bilimsel NRC standartlarında hassas Kuru Madde, Protein ve Enerji optimizasyonu sağlanır.',
+      'Dinamik Süt/Yem Paritesi takibiyle minimum maliyetle maksimum pik süt verimi elde edilir.',
+      'Fabrika yemleri ve yerel yemlerin güncel borsa ve piyasa fiyatlarıyla anlık kıyaslanması yapılır.',
+      'Laktasyon dönemi ve canlı ağırlığa göre otomatik besin ihtiyacı simülasyonu çalıştırılır.',
+      'Tüm cihazlardan (cep telefonu, tablet, PC) bulut senkronizasyonu ile 7/24 kesintisiz erişilir.'
     ];
 
     milkiqPoints.forEach((point, i) => {
       slide.addText(`✔  ${point}`, {
-        x: 7.1,
-        y: 2.7 + i * 0.72,
-        w: 5.0,
-        h: 0.65,
-        fontSize: 11,
+        x: rightX + 0.3,
+        y: cardTopY + 0.8 + i * 0.82,
+        w: colWidth - 0.6,
+        h: 0.72,
+        fontSize: 10.5,
         color: WHITE,
         fontFace: 'Segoe UI'
       });
@@ -268,58 +364,42 @@ async function createPresentation() {
   }
 
   // ==========================================
-  // SLAYT 3: AKILLI RASYON OPTİMİZASYONU
+  // SLAYT 3: BİLİMSEL RASYON HESAPLAMA & OPTİMİZASYON
   // ==========================================
   {
     const slide = pres.addSlide();
     slide.background = { color: BG_DARK };
 
-    slide.addText('TEMEL MODÜL 1', {
-      x: 0.8,
-      y: 0.6,
-      w: 10.0,
-      h: 0.3,
-      fontSize: 11,
-      color: EMERALD_LIGHT,
-      bold: true,
-      fontFace: 'Segoe UI'
-    });
-
-    slide.addText('Bilimsel Rasyon Hesaplama & Optimizasyon', {
-      x: 0.8,
-      y: 0.9,
-      w: 10.0,
-      h: 0.6,
-      fontSize: 26,
-      color: WHITE,
-      bold: true,
-      fontFace: 'Segoe UI'
-    });
+    addHeader(slide, 'Temel Modül 1', 'Bilimsel Rasyon Hesaplama & Optimizasyon');
 
     // 4 Önemli Besin Parametre Kartı
     const nutrients = [
-      { name: 'Kuru Madde (KM)', desc: 'İşkembe kapasitesine uygun optimum tokluk ve sindirim.', color: EMERALD },
+      { name: 'Kuru Madde (KM)', desc: 'İşkembe kapasitesine uygun optimum tokluk ve fizyolojik sindirim.', color: EMERALD },
       { name: 'Ham Protein (HP)', desc: 'Süt verimi ve kas dokusu için gerekli bypass & ruminal protein.', color: BLUE },
-      { name: 'Net Enerji (ME / NEL)', desc: 'Pik süt verimi ve kondisyon kaybını önleyen enerji dengesi.', color: GOLD },
+      { name: 'Net Enerji (ME / NEL)', desc: 'Pik süt verimi ve kondisyon kaybını önleyen kritik enerji dengesi.', color: GOLD },
       { name: 'Lif Dengesi (NDF / ADF)', desc: 'Rumen sağlığı, geviş getirme ve asidoz önleyici yapısal lif.', color: 'EC4899' }
     ];
 
+    const cardW = 2.75;
+    const cardGap = 0.244;
+    const topCardY = 1.5;
+
     nutrients.forEach((n, i) => {
-      const colX = 0.8 + i * 2.95;
+      const colX = MARGIN_LEFT + i * (cardW + cardGap);
       slide.addShape(pres.ShapeType.roundRect, {
         x: colX,
-        y: 1.8,
-        w: 2.8,
-        h: 2.1,
-        rectRadius: 0.2,
+        y: topCardY,
+        w: cardW,
+        h: 2.3,
+        rectRadius: 0.15,
         fill: { color: CARD_BG },
         line: { color: n.color, width: 1.5 }
       });
 
       slide.addText(n.name, {
         x: colX + 0.2,
-        y: 2.0,
-        w: 2.4,
+        y: topCardY + 0.2,
+        w: cardW - 0.4,
         h: 0.4,
         fontSize: 13,
         bold: true,
@@ -329,9 +409,9 @@ async function createPresentation() {
 
       slide.addText(n.desc, {
         x: colX + 0.2,
-        y: 2.5,
-        w: 2.4,
-        h: 1.2,
+        y: topCardY + 0.65,
+        w: cardW - 0.4,
+        h: 1.4,
         fontSize: 10,
         color: TEXT_MUTED,
         fontFace: 'Segoe UI'
@@ -339,21 +419,22 @@ async function createPresentation() {
     });
 
     // Alt Detay Kartı
+    const bottomCardY = 4.0;
     slide.addShape(pres.ShapeType.roundRect, {
-      x: 0.8,
-      y: 4.2,
-      w: 11.6,
-      h: 2.4,
-      rectRadius: 0.2,
+      x: MARGIN_LEFT,
+      y: bottomCardY,
+      w: CONTENT_WIDTH,
+      h: 2.6,
+      rectRadius: 0.15,
       fill: { color: CARD_BG },
-      line: { color: CARD_BORDER, width: 1 }
+      line: { color: CARD_BORDER, width: 1.5 }
     });
 
     slide.addText('Hassas Hayvan & Üretim Parametreleri Uyarlaması', {
-      x: 1.1,
-      y: 4.4,
-      w: 10.0,
-      h: 0.4,
+      x: MARGIN_LEFT + 0.3,
+      y: bottomCardY + 0.2,
+      w: CONTENT_WIDTH - 0.6,
+      h: 0.35,
       fontSize: 15,
       bold: true,
       color: EMERALD_LIGHT,
@@ -361,18 +442,18 @@ async function createPresentation() {
     });
 
     const features = [
-      '• Canlı Ağırlık (kg), Günlük Hedef Süt Verimi (L), Süt Yağ Oranı (%) ve Protein (%) girişi.',
-      '• Laktasyon Günü (DIM) ve Gebelik Ayına göre otomatik gereksinim artışı hesaplama.',
-      '• Gerçek zamanlı Kalsiyum (Ca), Fosfor (P) ve Tuz mineral oranı uyarı sistemi.',
-      '• "Rasyonu Kaydet", "Rasyonu Kopyala" ve tek tıkla Excel/PDF formatında çıktı alma.'
+      '• Canlı Ağırlık (kg), Günlük Hedef Süt Verimi (L), Süt Yağ Oranı (%) ve Protein (%) parametreleri girilir.',
+      '• Laktasyon Günü (DIM) ve Gebelik Ayına göre otomatik bilimsel besin gereksinim artışı hesaplanır.',
+      '• Gerçek zamanlı Kalsiyum (Ca), Fosfor (P) ve Tuz mineral oranı güvenlik uyarı sistemi devrededir.',
+      '• "Rasyonu Kaydet", "Rasyonu Kopyala" ve tek tıkla A4 Mikser Reçetesi formatında çıktı imkânı sunar.'
     ];
 
     features.forEach((feat, idx) => {
       slide.addText(feat, {
-        x: 1.1,
-        y: 4.9 + idx * 0.4,
-        w: 11.0,
-        h: 0.35,
+        x: MARGIN_LEFT + 0.3,
+        y: bottomCardY + 0.65 + idx * 0.44,
+        w: CONTENT_WIDTH - 0.6,
+        h: 0.4,
         fontSize: 11,
         color: WHITE,
         fontFace: 'Segoe UI'
@@ -389,29 +470,8 @@ async function createPresentation() {
     const slide = pres.addSlide();
     slide.background = { color: BG_DARK };
 
-    slide.addText('TEMEL MODÜL 2', {
-      x: 0.8,
-      y: 0.6,
-      w: 10.0,
-      h: 0.3,
-      fontSize: 11,
-      color: EMERALD_LIGHT,
-      bold: true,
-      fontFace: 'Segoe UI'
-    });
+    addHeader(slide, 'Temel Modül 2', 'Dinamik Yem & Fabrika Yemleri Kataloğu');
 
-    slide.addText('Dinamik Yem & Fabrika Yemleri Kataloğu', {
-      x: 0.8,
-      y: 0.9,
-      w: 10.0,
-      h: 0.6,
-      fontSize: 26,
-      color: WHITE,
-      bold: true,
-      fontFace: 'Segoe UI'
-    });
-
-    // 3 Kategori Kartı
     const categories = [
       {
         title: 'Kaba Yemler & Silajlar',
@@ -419,35 +479,39 @@ async function createPresentation() {
         badge: 'Temel Rumen Lif Kaynağı'
       },
       {
-        title: 'Tahıllar & Sanayi Yan Ürünleri',
+        title: 'Tahıllar & Küspeler',
         items: ['Mısır Flake & Arpa Kırması', 'Soya Küspesi (HP: %44-%48)', 'Ayçiçeği Küspesi (HP: %32)', 'Pancar Posası & Melas'],
         badge: 'Yüksek Enerji & Protein'
       },
       {
         title: 'Tescilli Fabrika Yemleri',
-        items: ['Eriş Sığır Süt A (19 HP / 2800 ME)', 'Eriş Crown Patlamış Mısır', 'Özel Düve & Geçiş Dönemi Yemleri', 'Premiksler, Mermer Tozu & Tuz'],
+        items: ['Eriş Sığır Süt A (19 HP / 2800 ME)', 'Eriş Crown Patlamış Mısır', 'Özel Düve & Geçiş Yemleri', 'Premiksler & Mineral Katkıları'],
         badge: 'Hazır & Dengeli Karışımlar'
       }
     ];
 
+    const cW = 3.75;
+    const cGap = 0.241;
+    const cY = 1.5;
+
     categories.forEach((cat, idx) => {
-      const cardX = 0.8 + idx * 3.95;
+      const cardX = MARGIN_LEFT + idx * (cW + cGap);
       slide.addShape(pres.ShapeType.roundRect, {
         x: cardX,
-        y: 1.8,
-        w: 3.75,
-        h: 4.8,
-        rectRadius: 0.25,
+        y: cY,
+        w: cW,
+        h: 5.1,
+        rectRadius: 0.2,
         fill: { color: CARD_BG },
-        line: { color: CARD_BORDER, width: 1 }
+        line: { color: CARD_BORDER, width: 1.5 }
       });
 
       slide.addText(cat.badge.toUpperCase(), {
         x: cardX + 0.25,
-        y: 2.1,
-        w: 3.2,
+        y: cY + 0.25,
+        w: cW - 0.5,
         h: 0.3,
-        fontSize: 9,
+        fontSize: 9.5,
         bold: true,
         color: EMERALD_LIGHT,
         fontFace: 'Segoe UI'
@@ -455,9 +519,9 @@ async function createPresentation() {
 
       slide.addText(cat.title, {
         x: cardX + 0.25,
-        y: 2.4,
-        w: 3.2,
-        h: 0.5,
+        y: cY + 0.55,
+        w: cW - 0.5,
+        h: 0.45,
         fontSize: 15,
         bold: true,
         color: WHITE,
@@ -467,32 +531,32 @@ async function createPresentation() {
       cat.items.forEach((item, itemIdx) => {
         slide.addText(`• ${item}`, {
           x: cardX + 0.25,
-          y: 3.1 + itemIdx * 0.6,
-          w: 3.2,
-          h: 0.5,
+          y: cY + 1.2 + itemIdx * 0.65,
+          w: cW - 0.5,
+          h: 0.55,
           fontSize: 11,
           color: 'CBD5E1',
           fontFace: 'Segoe UI'
         });
       });
 
-      // Alt not
+      // Alt Bilgi Notu Kutusu
       slide.addShape(pres.ShapeType.roundRect, {
         x: cardX + 0.25,
-        y: 5.6,
-        w: 3.25,
+        y: cY + 4.1,
+        w: cW - 0.5,
         h: 0.7,
-        rectRadius: 0.15,
-        fill: { color: '0F172A' },
-        line: { color: '334155', width: 1 }
+        rectRadius: 0.12,
+        fill: { color: '0D1728' },
+        line: { color: '233348', width: 1 }
       });
 
-      slide.addText('Fiyat & Besin Değeri Düzenlenebilir', {
+      slide.addText('Fiyat & Besin Değerleri Düzenlenebilir', {
         x: cardX + 0.3,
-        y: 5.75,
-        w: 3.15,
+        y: cY + 4.25,
+        w: cW - 0.6,
         h: 0.4,
-        fontSize: 9,
+        fontSize: 9.5,
         color: TEXT_MUTED,
         align: 'center',
         fontFace: 'Segoe UI'
@@ -509,29 +573,8 @@ async function createPresentation() {
     const slide = pres.addSlide();
     slide.background = { color: BG_DARK };
 
-    slide.addText('FİNANSAL ZEKA & KARLILIK', {
-      x: 0.8,
-      y: 0.6,
-      w: 10.0,
-      h: 0.3,
-      fontSize: 11,
-      color: EMERALD_LIGHT,
-      bold: true,
-      fontFace: 'Segoe UI'
-    });
+    addHeader(slide, 'Finansal Analiz & Karlılık', 'Süt / Yem Paritesi & Kar Marjı Yönetimi');
 
-    slide.addText('Süt / Yem Paritesi & Kar Marjı Yönetimi', {
-      x: 0.8,
-      y: 0.9,
-      w: 10.0,
-      h: 0.6,
-      fontSize: 26,
-      color: WHITE,
-      bold: true,
-      fontFace: 'Segoe UI'
-    });
-
-    // 3 Metrik Gösterge Kutusu
     const metrics = [
       {
         title: '1 Litre Süt Yem Maliyeti',
@@ -553,22 +596,26 @@ async function createPresentation() {
       }
     ];
 
+    const mW = 3.75;
+    const mGap = 0.241;
+    const mY = 1.5;
+
     metrics.forEach((m, idx) => {
-      const boxX = 0.8 + idx * 3.95;
+      const boxX = MARGIN_LEFT + idx * (mW + mGap);
       slide.addShape(pres.ShapeType.roundRect, {
         x: boxX,
-        y: 1.8,
-        w: 3.75,
-        h: 2.2,
-        rectRadius: 0.25,
+        y: mY,
+        w: mW,
+        h: 2.3,
+        rectRadius: 0.18,
         fill: { color: CARD_BG },
         line: { color: m.color, width: 2 }
       });
 
       slide.addText(m.title, {
         x: boxX + 0.2,
-        y: 2.0,
-        w: 3.35,
+        y: mY + 0.2,
+        w: mW - 0.4,
         h: 0.35,
         fontSize: 12,
         bold: true,
@@ -578,8 +625,8 @@ async function createPresentation() {
 
       slide.addText(m.value, {
         x: boxX + 0.2,
-        y: 2.4,
-        w: 3.35,
+        y: mY + 0.55,
+        w: mW - 0.4,
         h: 0.65,
         fontSize: 22,
         bold: true,
@@ -589,32 +636,33 @@ async function createPresentation() {
 
       slide.addText(m.subtext, {
         x: boxX + 0.2,
-        y: 3.1,
-        w: 3.35,
-        h: 0.75,
-        fontSize: 9.5,
-        color: 'E2E8F0',
+        y: mY + 1.25,
+        w: mW - 0.4,
+        h: 0.85,
+        fontSize: 10,
+        color: TEXT_LIGHT,
         fontFace: 'Segoe UI'
       });
     });
 
     // Alt Analiz Paneli
+    const pY = 4.0;
     slide.addShape(pres.ShapeType.roundRect, {
-      x: 0.8,
-      y: 4.3,
-      w: 11.6,
-      h: 2.3,
-      rectRadius: 0.2,
+      x: MARGIN_LEFT,
+      y: pY,
+      w: CONTENT_WIDTH,
+      h: 2.6,
+      rectRadius: 0.18,
       fill: { color: CARD_BG },
-      line: { color: CARD_BORDER, width: 1 }
+      line: { color: CARD_BORDER, width: 1.5 }
     });
 
     slide.addText('Finansal Karar Destek Mekanizması', {
-      x: 1.1,
-      y: 4.5,
-      w: 8.0,
+      x: MARGIN_LEFT + 0.3,
+      y: pY + 0.2,
+      w: CONTENT_WIDTH - 0.6,
       h: 0.35,
-      fontSize: 14,
+      fontSize: 15,
       bold: true,
       color: WHITE,
       fontFace: 'Segoe UI'
@@ -622,18 +670,18 @@ async function createPresentation() {
 
     const finPoints = [
       '• Yem fiyatları arttığında aynı besin değerini koruyarak en ekonomik alternatif hammaddeleri önerir.',
-      '• Süt fiyatı düştüğünde işletmenin başa baş (break-even) noktasını otomatik simüle eder.',
+      '• Süt fiyatı dalgalandığında işletmenin başa baş (break-even) üretim noktasını otomatik simüle eder.',
       '• Sürü genelinde aylık ve yıllık tahmini ciro & net kar projeksiyonları sunar.',
-      '• Çiftliğin finansal sağlığını renk kodlu grafik ve KPI kartlarıyla anlık özetler.'
+      '• Çiftliğin finansal sağlığını renk kodlu göstergeler ve net KPI kartlarıyla anlık özetler.'
     ];
 
     finPoints.forEach((fp, i) => {
       slide.addText(fp, {
-        x: 1.1,
-        y: 4.95 + i * 0.38,
-        w: 11.0,
-        h: 0.35,
-        fontSize: 10.5,
+        x: MARGIN_LEFT + 0.3,
+        y: pY + 0.65 + i * 0.44,
+        w: CONTENT_WIDTH - 0.6,
+        h: 0.4,
+        fontSize: 11,
         color: 'CBD5E1',
         fontFace: 'Segoe UI'
       });
@@ -643,83 +691,68 @@ async function createPresentation() {
   }
 
   // ==========================================
-  // SLAYT 6: SÜRÜ & ÜRETİM TAKİBİ
+  // SLAYT 6: SÜRÜ & LAKTASYON YÖNETİMİ
   // ==========================================
   {
     const slide = pres.addSlide();
     slide.background = { color: BG_DARK };
 
-    slide.addText('SÜRÜ & ÜRETİM YÖNETİMİ', {
-      x: 0.8,
-      y: 0.6,
-      w: 10.0,
-      h: 0.3,
-      fontSize: 11,
-      color: EMERALD_LIGHT,
-      bold: true,
-      fontFace: 'Segoe UI'
-    });
-
-    slide.addText('Laktasyon Gruplandırma & Verim Projeksiyonu', {
-      x: 0.8,
-      y: 0.9,
-      w: 10.0,
-      h: 0.6,
-      fontSize: 26,
-      color: WHITE,
-      bold: true,
-      fontFace: 'Segoe UI'
-    });
+    addHeader(slide, 'Sürü & Üretim Yönetimi', 'Laktasyon Gruplandırma & Besleme Tavsiyeleri');
 
     const herdGroups = [
       {
         title: '1. Erken Laktasyon (Pik Dönemi)',
         dim: 'DIM: 1 - 100 Gün',
-        desc: 'Negatif enerji dengesini önlemek için yüksek enerjili yoğun rasyon. Karaciğer ve rumen koruyucu premiksler.',
+        desc: 'Negatif enerji dengesini önlemek için yüksek enerjili yoğun rasyon. Karaciğer ve rumen koruyucu premiksler ile asidoz kontrolü.',
         color: 'EF4444'
       },
       {
         title: '2. Orta Laktasyon (Plato Dönemi)',
         dim: 'DIM: 101 - 200 Gün',
-        desc: 'Dengeli kondisyon skoru muhafazası, süt proteini ve yağını maksimize eden optimum kaba/kesif yem oranı.',
+        desc: 'Dengeli kondisyon skoru muhafazası, süt proteini ve yağını maksimize eden optimum kaba/kesif yem dengesi.',
         color: BLUE
       },
       {
         title: '3. Geç Laktasyon & Kuru Dönem',
         dim: 'DIM: 201+ Gün & Doğuma 60 Gün',
-        desc: 'Yağlanmayı önleyici yüksek lifli rasyon. Doğum felcini (hipokalsemi) engelleyen anyonik tuz stratejileri.',
+        desc: 'Aşırı yağlanmayı önleyici yüksek lifli rasyon. Doğum felcini (hipokalsemi) engelleyen anyonik besleme stratejileri.',
         color: EMERALD
       }
     ];
 
+    const gW = 3.75;
+    const gGap = 0.241;
+    const gY = 1.5;
+
     herdGroups.forEach((group, idx) => {
-      const gX = 0.8 + idx * 3.95;
+      const gX = MARGIN_LEFT + idx * (gW + gGap);
       slide.addShape(pres.ShapeType.roundRect, {
         x: gX,
-        y: 1.8,
-        w: 3.75,
-        h: 4.8,
-        rectRadius: 0.25,
+        y: gY,
+        w: gW,
+        h: 5.1,
+        rectRadius: 0.2,
         fill: { color: CARD_BG },
-        line: { color: CARD_BORDER, width: 1 }
+        line: { color: CARD_BORDER, width: 1.5 }
       });
 
+      // DIM Badge
       slide.addShape(pres.ShapeType.roundRect, {
         x: gX + 0.25,
-        y: 2.1,
-        w: 3.25,
+        y: gY + 0.25,
+        w: gW - 0.5,
         h: 0.45,
         rectRadius: 0.1,
-        fill: { color: group.color, transparency: 85 },
+        fill: { color: '0D1728' },
         line: { color: group.color, width: 1 }
       });
 
       slide.addText(group.dim, {
         x: gX + 0.3,
-        y: 2.18,
-        w: 3.15,
+        y: gY + 0.32,
+        w: gW - 0.6,
         h: 0.3,
-        fontSize: 10,
+        fontSize: 10.5,
         bold: true,
         color: group.color,
         align: 'center',
@@ -728,10 +761,10 @@ async function createPresentation() {
 
       slide.addText(group.title, {
         x: gX + 0.25,
-        y: 2.7,
-        w: 3.25,
+        y: gY + 0.85,
+        w: gW - 0.5,
         h: 0.6,
-        fontSize: 14,
+        fontSize: 14.5,
         bold: true,
         color: WHITE,
         fontFace: 'Segoe UI'
@@ -739,9 +772,9 @@ async function createPresentation() {
 
       slide.addText(group.desc, {
         x: gX + 0.25,
-        y: 3.4,
-        w: 3.25,
-        h: 1.5,
+        y: gY + 1.55,
+        w: gW - 0.5,
+        h: 1.8,
         fontSize: 11,
         color: TEXT_MUTED,
         fontFace: 'Segoe UI'
@@ -749,18 +782,18 @@ async function createPresentation() {
 
       slide.addShape(pres.ShapeType.line, {
         x: gX + 0.25,
-        y: 5.1,
-        w: 3.25,
+        y: gY + 4.2,
+        w: gW - 0.5,
         h: 0,
-        line: { color: '334155', width: 1 }
+        line: { color: '233348', width: 1 }
       });
 
       slide.addText('Grup Bazlı Rasyon Ataması Aktif', {
         x: gX + 0.25,
-        y: 5.3,
-        w: 3.25,
+        y: gY + 4.4,
+        w: gW - 0.5,
         h: 0.4,
-        fontSize: 10,
+        fontSize: 10.5,
         color: EMERALD_LIGHT,
         bold: true,
         align: 'center',
@@ -778,45 +811,29 @@ async function createPresentation() {
     const slide = pres.addSlide();
     slide.background = { color: BG_DARK };
 
-    slide.addText('BÜTÇE & GİDER MODÜLÜ', {
-      x: 0.8,
-      y: 0.6,
-      w: 10.0,
-      h: 0.3,
-      fontSize: 11,
-      color: EMERALD_LIGHT,
-      bold: true,
-      fontFace: 'Segoe UI'
-    });
+    addHeader(slide, 'Bütçe & Gider Modülü', 'Görünmeyen Maliyetleri Görünür Kılın');
 
-    slide.addText('Görünmeyen Maliyetleri Görünür Kılın', {
-      x: 0.8,
-      y: 0.9,
-      w: 10.0,
-      h: 0.6,
-      fontSize: 26,
-      color: WHITE,
-      bold: true,
-      fontFace: 'Segoe UI'
-    });
+    const colW = 5.65;
+    const colH = 5.1;
+    const cY = 1.5;
 
-    // 2 Ana Kolon: Sol giderler listesi, Sağ gerçek maliyet formülasyonu
+    // Sol Kolon: Gider Kategorileri
     slide.addShape(pres.ShapeType.roundRect, {
-      x: 0.8,
-      y: 1.8,
-      w: 5.6,
-      h: 4.8,
-      rectRadius: 0.25,
+      x: MARGIN_LEFT,
+      y: cY,
+      w: colW,
+      h: colH,
+      rectRadius: 0.2,
       fill: { color: CARD_BG },
-      line: { color: CARD_BORDER, width: 1 }
+      line: { color: CARD_BORDER, width: 1.5 }
     });
 
     slide.addText('Kapsamlı Gider Kategorileri', {
-      x: 1.1,
-      y: 2.1,
-      w: 5.0,
+      x: MARGIN_LEFT + 0.3,
+      y: cY + 0.25,
+      w: colW - 0.6,
       h: 0.4,
-      fontSize: 15,
+      fontSize: 16,
       bold: true,
       color: EMERALD_LIGHT,
       fontFace: 'Segoe UI'
@@ -831,63 +848,64 @@ async function createPresentation() {
 
     expenseCategories.forEach((cat, i) => {
       slide.addText(`📌 ${cat.name}`, {
-        x: 1.1,
-        y: 2.65 + i * 0.95,
-        w: 5.0,
+        x: MARGIN_LEFT + 0.3,
+        y: cY + 0.8 + i * 1.0,
+        w: colW - 0.6,
         h: 0.3,
-        fontSize: 12,
+        fontSize: 12.5,
         bold: true,
         color: WHITE,
         fontFace: 'Segoe UI'
       });
 
       slide.addText(cat.detail, {
-        x: 1.4,
-        y: 2.98 + i * 0.95,
-        w: 4.7,
+        x: MARGIN_LEFT + 0.6,
+        y: cY + 1.15 + i * 1.0,
+        w: colW - 0.9,
         h: 0.5,
-        fontSize: 10,
+        fontSize: 10.5,
         color: TEXT_MUTED,
         fontFace: 'Segoe UI'
       });
     });
 
     // Sağ Kolon: Birim Maliyet Hesaplama
+    const rightX = MARGIN_LEFT + colW + 0.433;
     slide.addShape(pres.ShapeType.roundRect, {
-      x: 6.8,
-      y: 1.8,
-      w: 5.6,
-      h: 4.8,
-      rectRadius: 0.25,
+      x: rightX,
+      y: cY,
+      w: colW,
+      h: colH,
+      rectRadius: 0.2,
       fill: { color: CARD_BG },
       line: { color: BLUE, width: 1.5 }
     });
 
     slide.addText('1 Litre Sütün Gerçek Maliyeti Formülü', {
-      x: 7.1,
-      y: 2.1,
-      w: 5.0,
+      x: rightX + 0.3,
+      y: cY + 0.25,
+      w: colW - 0.6,
       h: 0.4,
-      fontSize: 15,
+      fontSize: 16,
       bold: true,
-      color: BLUE,
+      color: BLUE_LIGHT,
       fontFace: 'Segoe UI'
     });
 
     slide.addShape(pres.ShapeType.roundRect, {
-      x: 7.1,
-      y: 2.65,
-      w: 5.0,
+      x: rightX + 0.3,
+      y: cY + 0.8,
+      w: colW - 0.6,
       h: 1.0,
-      rectRadius: 0.15,
-      fill: { color: '0F172A' },
-      line: { color: '334155', width: 1 }
+      rectRadius: 0.12,
+      fill: { color: '0D1728' },
+      line: { color: '233348', width: 1 }
     });
 
     slide.addText('Gerçek Birim Maliyet = Yem Maliyeti + (Genel Giderler / Toplam Üretim)', {
-      x: 7.2,
-      y: 2.9,
-      w: 4.8,
+      x: rightX + 0.4,
+      y: cY + 1.05,
+      w: colW - 0.8,
       h: 0.5,
       fontSize: 10.5,
       bold: true,
@@ -897,17 +915,17 @@ async function createPresentation() {
     });
 
     const expPoints = [
-      '✔ Yalnızca yem değil, işletmenin tüm operasyonel yükü tek bir ekranda toplanır.',
-      '✔ Aylık gider raporları ve kategorik pasta grafiklerle bütçe kaçakları engellenir.',
+      '✔ Yalnızca yem değil, işletmenin tüm operasyonel gider yükü tek bir ekranda toplanır.',
+      '✔ Aylık gider raporları ve kategorik grafiklerle bütçe kaçakları anında engellenir.',
       '✔ Süt satış fiyatı pazarlığında çiftlik sahibine gerçek maliyet tabanlı tam müzakere gücü verir.'
     ];
 
     expPoints.forEach((ep, i) => {
       slide.addText(ep, {
-        x: 7.1,
-        y: 3.9 + i * 0.75,
-        w: 5.0,
-        h: 0.65,
+        x: rightX + 0.3,
+        y: cY + 2.15 + i * 0.9,
+        w: colW - 0.6,
+        h: 0.75,
         fontSize: 11,
         color: WHITE,
         fontFace: 'Segoe UI'
@@ -924,36 +942,16 @@ async function createPresentation() {
     const slide = pres.addSlide();
     slide.background = { color: BG_DARK };
 
-    slide.addText('GÜVENLİK & DENETİM ALTYAPISI', {
-      x: 0.8,
-      y: 0.6,
-      w: 10.0,
-      h: 0.3,
-      fontSize: 11,
-      color: EMERALD_LIGHT,
-      bold: true,
-      fontFace: 'Segoe UI'
-    });
-
-    slide.addText('Kurumsal Audit Log & Anlık Hata Bildirimi', {
-      x: 0.8,
-      y: 0.9,
-      w: 10.0,
-      h: 0.6,
-      fontSize: 26,
-      color: WHITE,
-      bold: true,
-      fontFace: 'Segoe UI'
-    });
+    addHeader(slide, 'Güvenlik & Denetim Altyapısı', 'Kurumsal Audit Log & Anlık Hata Bildirimi');
 
     const securityCards = [
       {
         title: 'Tam Kapsamlı Audit Log',
         subtitle: 'Kim, Ne Zaman, Hangi Değişikliği Yaptı?',
         bullets: [
-          'Rasyon kayıt, güncelleme ve silme logları.',
-          'Yem fiyat ve besin parametresi güncellemeleri.',
-          'Gider kayıtları ve kullanıcı oturum hareketleri.'
+          'Rasyon kayıt, güncelleme ve silme işlemleri anlık kaydedilir.',
+          'Yem fiyat ve besin parametresi revizyonları kayıt altındadır.',
+          'Gider kayıtları ve kullanıcı oturum hareketleri detaylı izlenir.'
         ],
         icon: '📋'
       },
@@ -961,39 +959,43 @@ async function createPresentation() {
         title: 'IP, Konum & Cihaz Tespiti',
         subtitle: 'Coğrafi ve Donanımsal İzlenebilirlik',
         bullets: [
-          'Kullanıcının bağlandığı IP adresi ve ISP bilgisi.',
-          'Şehir/Ülke düzeyinde geo-location sorgulama.',
-          'Cihaz tipi (Mobil / Tablet / Desktop) ve tarayıcı tespiti.'
+          'Kullanıcının bağlandığı IP adresi ve ISP bilgisi yakalanır.',
+          'Şehir/Ülke düzeyinde geo-location harita sorgulaması yapılır.',
+          'Cihaz tipi (Mobil / Tablet / PC) ve tarayıcı tespiti kaydedilir.'
         ],
         icon: '📍'
       },
       {
         title: 'Gmail Hata Bildirim Servisi',
-        subtitle: 'Kritik Sistem Alarmları Anında Cebinizde',
+        subtitle: 'Kritik Sistem Alarmları 7/24 Takipte',
         bullets: [
-          'Olası API veya veritabanı hatalarında otomatik tetikleme.',
-          'Geliştirici Erkan Erdem\'e hata detayları anında iletilir (7/24 Takip).',
-          'PIN korumalı güvenli SMTP yönetim paneli (/mailayar).'
+          'Olası API veya veritabanı hatalarında otomatik tetikleme çalışır.',
+          'Geliştirici Erkan Erdem\'e hata detayları anında mail olarak iletilir.',
+          'Uygulama 7/24 geliştirici takibindedir; PIN korumalı SMTP paneli mevcuttur.'
         ],
         icon: '✉️'
       }
     ];
 
+    const sW = 3.75;
+    const sGap = 0.241;
+    const sY = 1.5;
+
     securityCards.forEach((card, idx) => {
-      const cX = 0.8 + idx * 3.95;
+      const cX = MARGIN_LEFT + idx * (sW + sGap);
       slide.addShape(pres.ShapeType.roundRect, {
         x: cX,
-        y: 1.8,
-        w: 3.75,
-        h: 4.8,
-        rectRadius: 0.25,
+        y: sY,
+        w: sW,
+        h: 5.1,
+        rectRadius: 0.2,
         fill: { color: CARD_BG },
-        line: { color: CARD_BORDER, width: 1 }
+        line: { color: CARD_BORDER, width: 1.5 }
       });
 
       slide.addText(card.icon, {
         x: cX + 0.3,
-        y: 2.1,
+        y: sY + 0.25,
         w: 1.0,
         h: 0.5,
         fontSize: 24
@@ -1001,10 +1003,10 @@ async function createPresentation() {
 
       slide.addText(card.title, {
         x: cX + 0.3,
-        y: 2.7,
-        w: 3.15,
+        y: sY + 0.85,
+        w: sW - 0.6,
         h: 0.4,
-        fontSize: 14,
+        fontSize: 14.5,
         bold: true,
         color: WHITE,
         fontFace: 'Segoe UI'
@@ -1012,8 +1014,8 @@ async function createPresentation() {
 
       slide.addText(card.subtitle, {
         x: cX + 0.3,
-        y: 3.15,
-        w: 3.15,
+        y: sY + 1.3,
+        w: sW - 0.6,
         h: 0.4,
         fontSize: 10,
         color: EMERALD_LIGHT,
@@ -1024,9 +1026,9 @@ async function createPresentation() {
       card.bullets.forEach((b, bi) => {
         slide.addText(`• ${b}`, {
           x: cX + 0.3,
-          y: 3.7 + bi * 0.7,
-          w: 3.15,
-          h: 0.65,
+          y: sY + 1.85 + bi * 0.95,
+          w: sW - 0.6,
+          h: 0.85,
           fontSize: 10.5,
           color: TEXT_MUTED,
           fontFace: 'Segoe UI'
@@ -1044,63 +1046,47 @@ async function createPresentation() {
     const slide = pres.addSlide();
     slide.background = { color: BG_DARK };
 
-    slide.addText('TEKNOLOJİ & DAĞITIM ALTYAPISI', {
-      x: 0.8,
-      y: 0.6,
-      w: 10.0,
-      h: 0.3,
-      fontSize: 11,
-      color: EMERALD_LIGHT,
-      bold: true,
-      fontFace: 'Segoe UI'
-    });
-
-    slide.addText('Docker, Coolify & Mobil PWA Mimarisi', {
-      x: 0.8,
-      y: 0.9,
-      w: 10.0,
-      h: 0.6,
-      fontSize: 26,
-      color: WHITE,
-      bold: true,
-      fontFace: 'Segoe UI'
-    });
+    addHeader(slide, 'Teknoloji & Dağıtım Altyapısı', 'Docker, Coolify & Mobil PWA Mimarisi');
 
     const stackItems = [
-      { title: 'Next.js 15 & React 19', desc: 'Ultra hızlı SSR & App Router mimarisi ile kusursuz kullanıcı deneyimi.', color: WHITE },
-      { title: 'PostgreSQL & Prisma ORM', desc: 'İlişkisel, güvenilir ve yüksek performanslı veri tabanı altyapısı.', color: BLUE },
-      { title: 'Docker & Docker Compose', desc: 'Uygulama ve veritabanı bağımsız izole containerlarda sıfır konfigürasyonla çalışır.', color: EMERALD },
+      { title: 'Next.js 15 & React 19', desc: 'Ultra hızlı SSR & App Router mimarisi ile mobil cihazlarda ve masaüstünde akıcı kullanıcı deneyimi.', color: WHITE },
+      { title: 'PostgreSQL & Prisma ORM', desc: 'İlişkisel, güvenilir ve yüksek performanslı veri tabanı altyapısı; tip güvenli veri sorgulama.', color: BLUE },
+      { title: 'Docker & Docker Compose', desc: 'Uygulama ve veritabanı bağımsız izole containerlarda sıfır konfigürasyon bağımlılığı ile çalışır.', color: EMERALD },
       { title: 'Coolify Entegrasyonu', desc: 'GitHub üzerinden otomatik CI/CD ve tek tıkla canlıya alma (milkiq.erkanerdem.online).', color: GOLD }
     ];
 
+    const rowH = 1.15;
+    const rowGap = 0.12;
+    const startY = 1.5;
+
     stackItems.forEach((st, i) => {
-      const sY = 1.8 + i * 1.25;
+      const sY = startY + i * (rowH + rowGap);
       slide.addShape(pres.ShapeType.roundRect, {
-        x: 0.8,
+        x: MARGIN_LEFT,
         y: sY,
-        w: 11.6,
-        h: 1.05,
-        rectRadius: 0.2,
+        w: CONTENT_WIDTH,
+        h: rowH,
+        rectRadius: 0.15,
         fill: { color: CARD_BG },
-        line: { color: CARD_BORDER, width: 1 }
+        line: { color: CARD_BORDER, width: 1.5 }
       });
 
       slide.addText(st.title, {
-        x: 1.1,
-        y: sY + 0.15,
-        w: 4.5,
+        x: MARGIN_LEFT + 0.3,
+        y: sY + 0.18,
+        w: 5.0,
         h: 0.35,
-        fontSize: 13,
+        fontSize: 13.5,
         bold: true,
         color: st.color,
         fontFace: 'Segoe UI'
       });
 
       slide.addText(st.desc, {
-        x: 1.1,
-        y: sY + 0.5,
-        w: 10.5,
-        h: 0.45,
+        x: MARGIN_LEFT + 0.3,
+        y: sY + 0.55,
+        w: CONTENT_WIDTH - 0.6,
+        h: 0.5,
         fontSize: 10.5,
         color: TEXT_MUTED,
         fontFace: 'Segoe UI'
@@ -1117,53 +1103,36 @@ async function createPresentation() {
     const slide = pres.addSlide();
     slide.background = { color: BG_DARK };
 
-    slide.addText('STRATEJİK KAZANIMLAR & HEMEN BAŞLAYIN', {
-      x: 0.8,
-      y: 0.6,
-      w: 10.0,
-      h: 0.3,
-      fontSize: 11,
-      color: EMERALD_LIGHT,
-      bold: true,
-      fontFace: 'Segoe UI'
-    });
+    addHeader(slide, 'Stratejik Kazanımlar & Hemen Başlayın', 'MilkIQ ile Çiftliğinizin Geleceğini Yönetin');
 
-    slide.addText('MilkIQ ile Çiftliğinizin Geleceğini Yönetin', {
-      x: 0.8,
-      y: 0.9,
-      w: 10.0,
-      h: 0.6,
-      fontSize: 26,
-      color: WHITE,
-      bold: true,
-      fontFace: 'Segoe UI'
-    });
-
-    // 3 Öne Çıkan Değer Kartı
     const roiCards = [
-      { value: '%15 - 25', label: 'Yem Maliyeti Tasarrufu', desc: 'Fazladan protein/enerji israfının bilimsel olarak önlenmesi.' },
+      { value: '%15 - 25', label: 'Yem Maliyeti Tasarrufu', desc: 'Fazladan protein ve enerji israfının bilimsel olarak önlenmesi.' },
       { value: '+%12', label: 'Süt Verim Artışı', desc: 'Dengeli rumen pH ve optimum laktasyon piki yönetimi.' },
       { value: '360°', label: 'Uçtan Uca Finansal Kontrol', desc: '1 Litre sütün gerçek maliyeti ve günlük hayvan başı net kar.' }
     ];
 
+    const rW = 3.75;
+    const rGap = 0.241;
+    const rY = 1.5;
+
     roiCards.forEach((r, idx) => {
-      const rX = 0.8 + idx * 3.95;
+      const rX = MARGIN_LEFT + idx * (rW + rGap);
       slide.addShape(pres.ShapeType.roundRect, {
         x: rX,
-        y: 1.8,
-        w: 3.75,
-        h: 2.4,
-        rectRadius: 0.25,
+        y: rY,
+        w: rW,
+        h: 2.3,
+        rectRadius: 0.18,
         fill: { color: CARD_BG },
         line: { color: EMERALD, width: 1.5 }
       });
 
       slide.addText(r.value, {
         x: rX + 0.2,
-        y: 2.0,
-        w: 3.35,
-        h: 0.7,
-        fontSize: 32,
+        y: rY + 0.2,
+        w: rW - 0.4,
+        h: 0.65,
+        fontSize: 30,
         bold: true,
         color: EMERALD_LIGHT,
         align: 'center',
@@ -1172,9 +1141,9 @@ async function createPresentation() {
 
       slide.addText(r.label, {
         x: rX + 0.2,
-        y: 2.75,
-        w: 3.35,
-        h: 0.4,
+        y: rY + 0.9,
+        w: rW - 0.4,
+        h: 0.35,
         fontSize: 13,
         bold: true,
         color: WHITE,
@@ -1184,10 +1153,10 @@ async function createPresentation() {
 
       slide.addText(r.desc, {
         x: rX + 0.2,
-        y: 3.2,
-        w: 3.35,
+        y: rY + 1.3,
+        w: rW - 0.4,
         h: 0.8,
-        fontSize: 9.5,
+        fontSize: 10,
         color: TEXT_MUTED,
         align: 'center',
         fontFace: 'Segoe UI'
@@ -1195,52 +1164,53 @@ async function createPresentation() {
     });
 
     // Alt Çağrı & İletişim Kartı
+    const ctaY = 4.0;
     slide.addShape(pres.ShapeType.roundRect, {
-      x: 0.8,
-      y: 4.5,
-      w: 11.6,
-      h: 2.1,
-      rectRadius: 0.25,
+      x: MARGIN_LEFT,
+      y: ctaY,
+      w: CONTENT_WIDTH,
+      h: 2.6,
+      rectRadius: 0.2,
       fill: { color: CARD_BG },
       line: { color: BLUE, width: 2 }
     });
 
     slide.addText('Canlı Uygulama & İletişim', {
-      x: 1.2,
-      y: 4.75,
-      w: 6.0,
+      x: MARGIN_LEFT + 0.4,
+      y: ctaY + 0.3,
+      w: 6.5,
       h: 0.4,
-      fontSize: 16,
+      fontSize: 16.5,
       bold: true,
       color: WHITE,
       fontFace: 'Segoe UI'
     });
 
     slide.addText('Canlı Sistem: https://milkiq.erkanerdem.online\nGeliştirici Portfolyosu: https://erkanerdem.online\n7/24 Kesintisiz Geliştirici Takibi & Teknik Destek', {
-      x: 1.2,
-      y: 5.25,
+      x: MARGIN_LEFT + 0.4,
+      y: ctaY + 0.85,
       w: 6.5,
-      h: 1.1,
-      fontSize: 11,
+      h: 1.3,
+      fontSize: 11.5,
       color: 'CBD5E1',
       fontFace: 'Segoe UI'
     });
 
     slide.addShape(pres.ShapeType.roundRect, {
-      x: 8.4,
-      y: 4.95,
-      w: 3.6,
-      h: 1.2,
-      rectRadius: 0.2,
+      x: MARGIN_LEFT + 7.4,
+      y: ctaY + 0.65,
+      w: 3.8,
+      h: 1.3,
+      rectRadius: 0.18,
       fill: { color: EMERALD }
     });
 
     slide.addText('MilkIQ İle Başlayın\nAkıllı Çiftlik Yönetimi', {
-      x: 8.5,
-      y: 5.2,
-      w: 3.4,
-      h: 0.7,
-      fontSize: 13,
+      x: MARGIN_LEFT + 7.5,
+      y: ctaY + 0.85,
+      w: 3.6,
+      h: 0.85,
+      fontSize: 14,
       bold: true,
       color: WHITE,
       align: 'center',

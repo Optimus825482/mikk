@@ -622,18 +622,18 @@ export default function RationPage() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {/* Canlı Ağırlık */}
-          <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
-            <div className="flex items-center justify-between mb-2">
-              <label className="text-xs font-bold text-slate-700 uppercase">
+          <div className="bg-slate-50 p-3.5 sm:p-4 rounded-xl border border-slate-200">
+            <div className="flex items-center justify-between gap-1 mb-2">
+              <label className="text-[11px] sm:text-xs font-bold text-slate-700 uppercase tracking-tight">
                 Ortalama Canlı Ağırlık (kg)
               </label>
-              <span className="text-xs text-slate-500">Siyah Alaca / Simental</span>
+              <span className="text-[10px] sm:text-xs text-slate-500 shrink-0">Siyah Alaca / Simental</span>
             </div>
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2 w-full">
               <button
                 type="button"
                 onClick={() => setLiveWeight(w => Math.max(250, w - 25))}
-                className="w-10 h-10 rounded-lg bg-white border border-slate-300 font-black text-slate-700 hover:bg-slate-100 flex items-center justify-center text-lg active:scale-95 shadow-xs"
+                className="w-10 h-10 shrink-0 rounded-lg bg-white border border-slate-300 font-black text-slate-700 hover:bg-slate-100 flex items-center justify-center text-lg active:scale-95 shadow-xs"
               >
                 -
               </button>
@@ -642,12 +642,12 @@ export default function RationPage() {
                 inputMode="decimal"
                 value={liveWeight || ''}
                 onChange={(e) => setLiveWeight(parseFloat(e.target.value) || 0)}
-                className="flex-1 h-10 text-center font-black text-xl text-slate-900 bg-white border border-slate-300 rounded-lg focus:border-emerald-500"
+                className="flex-1 min-w-0 w-full h-10 text-center font-black text-lg sm:text-xl text-slate-900 bg-white border border-slate-300 rounded-lg focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
               />
               <button
                 type="button"
                 onClick={() => setLiveWeight(w => w + 25)}
-                className="w-10 h-10 rounded-lg bg-white border border-slate-300 font-black text-slate-700 hover:bg-slate-100 flex items-center justify-center text-lg active:scale-95 shadow-xs"
+                className="w-10 h-10 shrink-0 rounded-lg bg-white border border-slate-300 font-black text-slate-700 hover:bg-slate-100 flex items-center justify-center text-lg active:scale-95 shadow-xs"
               >
                 +
               </button>
@@ -658,18 +658,18 @@ export default function RationPage() {
           </div>
 
           {/* Hedeflenen Süt Ortalaması */}
-          <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
-            <div className="flex items-center justify-between mb-2">
-              <label className="text-xs font-bold text-slate-700 uppercase flex items-center space-x-1">
-                <Milk className="w-3.5 h-3.5 text-blue-600" />
+          <div className="bg-slate-50 p-3.5 sm:p-4 rounded-xl border border-slate-200">
+            <div className="flex items-center justify-between gap-1 mb-2">
+              <label className="text-[11px] sm:text-xs font-bold text-slate-700 uppercase flex items-center space-x-1 tracking-tight">
+                <Milk className="w-3.5 h-3.5 text-blue-600 shrink-0" />
                 <span>Hedef Süt Ortalaması (Litre/gün)</span>
               </label>
             </div>
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2 w-full">
               <button
                 type="button"
                 onClick={() => setTargetMilk(m => Math.max(0, m - 1))}
-                className="w-10 h-10 rounded-lg bg-white border border-slate-300 font-black text-slate-700 hover:bg-slate-100 flex items-center justify-center text-lg active:scale-95 shadow-xs"
+                className="w-10 h-10 shrink-0 rounded-lg bg-white border border-slate-300 font-black text-slate-700 hover:bg-slate-100 flex items-center justify-center text-lg active:scale-95 shadow-xs"
               >
                 -
               </button>
@@ -678,12 +678,12 @@ export default function RationPage() {
                 inputMode="decimal"
                 value={targetMilk || ''}
                 onChange={(e) => setTargetMilk(parseFloat(e.target.value) || 0)}
-                className="flex-1 h-10 text-center font-black text-xl text-slate-900 bg-white border border-slate-300 rounded-lg focus:border-emerald-500"
+                className="flex-1 min-w-0 w-full h-10 text-center font-black text-lg sm:text-xl text-slate-900 bg-white border border-slate-300 rounded-lg focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
               />
               <button
                 type="button"
                 onClick={() => setTargetMilk(m => m + 1)}
-                className="w-10 h-10 rounded-lg bg-white border border-slate-300 font-black text-slate-700 hover:bg-slate-100 flex items-center justify-center text-lg active:scale-95 shadow-xs"
+                className="w-10 h-10 shrink-0 rounded-lg bg-white border border-slate-300 font-black text-slate-700 hover:bg-slate-100 flex items-center justify-center text-lg active:scale-95 shadow-xs"
               >
                 +
               </button>
@@ -981,54 +981,54 @@ export default function RationPage() {
             </div>
 
             {/* Rapor Metrik Kartları */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
               {/* 1L Süt Yem Maliyeti */}
-              <div className="bg-gradient-to-br from-emerald-700 to-teal-900 text-white p-4 sm:p-5 rounded-2xl shadow-md">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-200 block">
+              <div className="bg-gradient-to-br from-emerald-700 to-teal-900 text-white p-3 sm:p-5 rounded-2xl shadow-md">
+                <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-emerald-200 block truncate">
                   1 Litre Süt Yem Maliyeti
                 </span>
-                <div className="mt-2 flex items-baseline space-x-1">
-                  <span className="text-3xl sm:text-4xl font-black tracking-tight">
+                <div className="mt-1.5 flex items-baseline gap-1 flex-wrap">
+                  <span className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight">
                     {results.feedCostPerLiter.toFixed(2)}
                   </span>
-                  <span className="text-xs font-bold text-emerald-200">TL / Litre</span>
+                  <span className="text-[11px] sm:text-xs font-bold text-emerald-200">₺ / Litre</span>
                 </div>
-                <p className="text-[11px] text-emerald-100/80 mt-1">
+                <p className="text-[10px] sm:text-[11px] text-emerald-100/80 mt-1 truncate">
                   Hedef {targetMilk} L süt üzerinden
                 </p>
               </div>
 
               {/* Günlük İnek Başı Yem Tutarı */}
-              <div className="bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-200">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 block">
+              <div className="bg-slate-50 p-3 sm:p-5 rounded-2xl border border-slate-200">
+                <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-500 block truncate">
                   Günlük Yem Masrafı
                 </span>
-                <div className="mt-2 flex items-baseline space-x-1">
-                  <span className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
+                <div className="mt-1.5 flex items-baseline gap-1 flex-wrap">
+                  <span className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">
                     {results.dailyFeedCostPerCow.toFixed(2)}
                   </span>
-                  <span className="text-xs font-bold text-slate-500">TL / baş / gün</span>
+                  <span className="text-[11px] sm:text-xs font-bold text-slate-500">₺ / baş/gün</span>
                 </div>
-                <p className="text-[11px] text-slate-500 mt-1">
+                <p className="text-[10px] sm:text-[11px] text-slate-500 mt-1 truncate">
                   {results.totalFreshKg.toFixed(1)} kg taze karma
                 </p>
               </div>
 
               {/* Tahmini Süt Potansiyeli */}
-              <div className="bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-200">
+              <div className="bg-slate-50 p-3 sm:p-5 rounded-2xl border border-slate-200">
                 <div className="flex items-center justify-between">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 block">
+                  <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-500 block truncate">
                     Tahmini Süt Potansiyeli
                   </span>
-                  <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+                  <Sparkles className="w-3.5 h-3.5 text-amber-500 shrink-0" />
                 </div>
-                <div className="mt-2 flex items-baseline space-x-1">
-                  <span className="text-3xl sm:text-4xl font-black text-blue-600 tracking-tight">
+                <div className="mt-1.5 flex items-baseline gap-1 flex-wrap">
+                  <span className="text-2xl sm:text-3xl lg:text-4xl font-black text-blue-600 tracking-tight">
                     {results.potentialMilkLiters.toFixed(1)}
                   </span>
-                  <span className="text-xs font-bold text-slate-500">Litre / gün</span>
+                  <span className="text-[11px] sm:text-xs font-bold text-slate-500">L / gün</span>
                 </div>
-                <p className="text-[11px] font-bold mt-1">
+                <p className="text-[10px] sm:text-[11px] font-bold mt-1 truncate">
                   {results.milkDeficitOrSurplus >= 0 ? (
                     <span className="text-emerald-700">Hedefin +{results.milkDeficitOrSurplus.toFixed(1)} L üzerinde</span>
                   ) : (
@@ -1038,7 +1038,7 @@ export default function RationPage() {
               </div>
 
               {/* Kaba Yem & Asidoz Durumu */}
-              <div className={`p-4 sm:p-5 rounded-2xl border ${
+              <div className={`p-3 sm:p-5 rounded-2xl border ${
                 results.roughageStatus === 'CRITICAL_ACIDOSIS'
                   ? 'bg-rose-50 border-rose-300 text-rose-950'
                   : results.roughageStatus === 'WARNING_LOW'
@@ -1046,26 +1046,23 @@ export default function RationPage() {
                   : 'bg-emerald-50 border-emerald-300 text-emerald-950'
               }`}>
                 <div className="flex items-center justify-between">
-                  <span className="text-[11px] font-bold uppercase tracking-wider opacity-80">
+                  <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider opacity-80 block truncate">
                     Kaba Yem Oranı
                   </span>
                   {results.roughageStatus === 'CRITICAL_ACIDOSIS' ? (
-                    <AlertTriangle className="w-4 h-4 text-rose-600" />
+                    <AlertTriangle className="w-4 h-4 text-rose-600 shrink-0" />
                   ) : (
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                   )}
                 </div>
-                <div className="mt-2 flex items-baseline space-x-1">
-                  <span className="text-3xl sm:text-4xl font-black tracking-tight">
+                <div className="mt-1.5 flex items-baseline gap-1 flex-wrap">
+                  <span className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight">
                     %{results.roughagePercentage.toFixed(0)}
                   </span>
-                  <span className="text-xs font-bold opacity-75">
-                    (Kesif: %{results.concentratePercentage.toFixed(0)})
-                  </span>
+                  <span className="text-[10px] sm:text-xs font-bold opacity-75">(Kesif: %{results.concentratePercentage.toFixed(0)})</span>
                 </div>
-                <p className="text-[11px] font-bold mt-1 line-clamp-1">
-                  {results.roughageStatus === 'CRITICAL_ACIDOSIS' ? 'Asidoz Riski! Lif Az' :
-                   results.roughageStatus === 'WARNING_LOW' ? 'Kaba Yem Sınırda' : 'İdeal Rumen Dengesi'}
+                <p className="text-[10px] sm:text-[11px] font-bold mt-1 truncate">
+                  {results.roughageStatusMessage.split('.')[0] || 'Kaba Yem Dengeli'}
                 </p>
               </div>
             </div>
@@ -1227,7 +1224,7 @@ export default function RationPage() {
                       <th className="p-3 text-right">Kuru Madde</th>
                       <th className="p-3 text-right">Ham Protein</th>
                       <th className="p-3 text-right">Nişasta</th>
-                      <th className="p-3 text-right">Tutar (TL)</th>
+                      <th className="p-3 text-right">Tutar (₺)</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100">
@@ -1253,7 +1250,7 @@ export default function RationPage() {
                           <td className="p-3 text-right text-slate-600">{dmKg.toFixed(2)} kg</td>
                           <td className="p-3 text-right text-emerald-700 font-bold">{Math.round(prG)} g</td>
                           <td className="p-3 text-right text-amber-700 font-bold">{Math.round(stG)} g</td>
-                          <td className="p-3 text-right font-black text-slate-900">{cost.toFixed(2)} TL</td>
+                          <td className="p-3 text-right font-black text-slate-900">{cost.toFixed(2)} ₺</td>
                         </tr>
                       );
                     })}
@@ -1265,14 +1262,14 @@ export default function RationPage() {
                       <td className="p-3 text-right">{results.totalDryMatterKg.toFixed(2)} kg</td>
                       <td className="p-3 text-right text-emerald-800">{results.totalProteinGrams} g</td>
                       <td className="p-3 text-right text-amber-800">{results.totalStarchGrams} g</td>
-                      <td className="p-3 text-right text-emerald-800 text-sm">{results.dailyFeedCostPerCow.toFixed(2)} TL</td>
+                      <td className="p-3 text-right text-emerald-800 text-sm">{results.dailyFeedCostPerCow.toFixed(2)} ₺</td>
                     </tr>
                   </tfoot>
                 </table>
               </div>
             </div>
 
-            {/* AKILLI ZOOTEKNİK DEĞERLENDİRME & LAKTASYON TAVSİYELERİ (RAPOR BÖLÜMÜ) */}
+            {/* AKILLI BESLEME DEĞERLENDİRME & LAKTASYON TAVSİYELERİ (RAPOR BÖLÜMÜ) */}
             <div className="pt-6 border-t-2 border-slate-200/90 space-y-4">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <div className="flex items-center space-x-2">
@@ -1380,48 +1377,49 @@ export default function RationPage() {
                 {/* Sürü Parametre Girdi Butonları */}
                 <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-4">
                   {/* Toplam Hayvan Sayısı */}
-                  <div className="bg-slate-800/80 p-4 rounded-2xl border border-slate-700">
+                  <div className="bg-slate-800/80 p-3.5 sm:p-4 rounded-2xl border border-slate-700">
                     <div className="flex items-center justify-between mb-2">
-                      <label className="text-xs font-bold text-slate-300 uppercase flex items-center space-x-1.5">
-                        <Users className="w-4 h-4 text-emerald-400" />
+                      <label className="text-[11px] sm:text-xs font-bold text-slate-300 uppercase flex items-center space-x-1.5">
+                        <Users className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400 shrink-0" />
                         <span>Toplam Hayvan Sayısı (Baş)</span>
                       </label>
-                      <span className="text-[11px] text-emerald-400 font-bold">Sağmal Sürü</span>
+                      <span className="text-[10px] sm:text-[11px] text-emerald-400 font-bold shrink-0">Sağmal Sürü</span>
                     </div>
 
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-1 sm:space-x-2 w-full">
                       <button
                         type="button"
                         onClick={() => setAnimalCount(c => Math.max(1, c - 5))}
-                        className="w-10 h-10 rounded-xl bg-slate-700 hover:bg-slate-600 font-black text-white flex items-center justify-center text-sm active:scale-95"
+                        className="w-8 sm:w-10 h-9 sm:h-10 shrink-0 rounded-lg sm:rounded-xl bg-slate-700 hover:bg-slate-600 font-black text-white flex items-center justify-center text-xs sm:text-sm active:scale-95"
                       >
                         -5
                       </button>
                       <button
                         type="button"
                         onClick={() => setAnimalCount(c => Math.max(1, c - 1))}
-                        className="w-10 h-10 rounded-xl bg-slate-700 hover:bg-slate-600 font-black text-white flex items-center justify-center text-lg active:scale-95"
+                        className="w-8 sm:w-10 h-9 sm:h-10 shrink-0 rounded-lg sm:rounded-xl bg-slate-700 hover:bg-slate-600 font-black text-white flex items-center justify-center text-sm sm:text-lg active:scale-95"
                       >
                         -
                       </button>
                       <input
                         type="number"
                         min="1"
+                        inputMode="numeric"
                         value={animalCount || ''}
                         onChange={(e) => setAnimalCount(Math.max(1, parseInt(e.target.value) || 1))}
-                        className="flex-1 h-10 text-center font-black text-xl text-white bg-slate-900 border border-slate-600 rounded-xl focus:border-emerald-500"
+                        className="flex-1 min-w-0 w-full h-9 sm:h-10 text-center font-black text-base sm:text-xl text-white bg-slate-900 border border-slate-600 rounded-lg sm:rounded-xl focus:border-emerald-500"
                       />
                       <button
                         type="button"
                         onClick={() => setAnimalCount(c => c + 1)}
-                        className="w-10 h-10 rounded-xl bg-slate-700 hover:bg-slate-600 font-black text-white flex items-center justify-center text-lg active:scale-95"
+                        className="w-8 sm:w-10 h-9 sm:h-10 shrink-0 rounded-lg sm:rounded-xl bg-slate-700 hover:bg-slate-600 font-black text-white flex items-center justify-center text-sm sm:text-lg active:scale-95"
                       >
                         +
                       </button>
                       <button
                         type="button"
                         onClick={() => setAnimalCount(c => c + 5)}
-                        className="w-10 h-10 rounded-xl bg-slate-700 hover:bg-slate-600 font-black text-white flex items-center justify-center text-sm active:scale-95"
+                        className="w-8 sm:w-10 h-9 sm:h-10 shrink-0 rounded-lg sm:rounded-xl bg-slate-700 hover:bg-slate-600 font-black text-white flex items-center justify-center text-xs sm:text-sm active:scale-95"
                       >
                         +5
                       </button>
@@ -2020,7 +2018,7 @@ export default function RationPage() {
               <div className="p-1.5 rounded-lg border border-slate-300 bg-slate-50/90">
                 <span className="text-[8px] text-slate-500 font-bold block uppercase tracking-wider">1L Süt Yem Maliyeti</span>
                 <strong className="text-emerald-900 text-sm font-black block leading-tight">
-                  {results.feedCostPerLiter.toFixed(2)} TL / L
+                  {results.feedCostPerLiter.toFixed(2)} ₺ / L
                 </strong>
                 <span className="text-[9px] text-slate-600 font-medium">Hedef {targetMilk} L süt bazlı</span>
               </div>
@@ -2028,7 +2026,7 @@ export default function RationPage() {
               <div className="p-1.5 rounded-lg border border-slate-300 bg-slate-50/90">
                 <span className="text-[8px] text-slate-500 font-bold block uppercase tracking-wider">İnek Başı Günlük Yem</span>
                 <strong className="text-slate-900 text-sm font-black block leading-tight">
-                  {results.dailyFeedCostPerCow.toFixed(2)} TL / gün
+                  {results.dailyFeedCostPerCow.toFixed(2)} ₺ / gün
                 </strong>
                 <span className="text-[9px] text-slate-600 font-medium">{results.totalFreshKg.toFixed(1)} kg taze TMR</span>
               </div>
@@ -2140,10 +2138,10 @@ export default function RationPage() {
                         {Math.round(stG)} g
                       </td>
                       <td className="py-1 px-2 text-right text-slate-600 border-r border-slate-300">
-                        {feed.unitPrice.toFixed(2)} TL
+                        {feed.unitPrice.toFixed(2)} ₺
                       </td>
                       <td className="py-1 px-2 text-right font-black text-slate-900">
-                        {cost.toFixed(2)} TL
+                        {cost.toFixed(2)} ₺
                       </td>
                     </tr>
                   );
@@ -2170,7 +2168,7 @@ export default function RationPage() {
                     -
                   </td>
                   <td className="py-1 px-2 text-right font-black text-xs text-emerald-900">
-                    {results.dailyFeedCostPerCow.toFixed(2)} TL
+                    {results.dailyFeedCostPerCow.toFixed(2)} ₺
                   </td>
                 </tr>
               </tfoot>
@@ -2270,19 +2268,19 @@ function FeedCard({
         </div>
         <div className="text-right shrink-0">
           <span className="text-xs font-black text-slate-800 bg-slate-100 px-2 py-0.5 rounded-md">
-            {feed.unitPrice.toFixed(2)} TL/kg
+            {feed.unitPrice.toFixed(2)} ₺/kg
           </span>
         </div>
       </div>
 
       {/* Input & Adjust Buttons */}
-      <div className="mt-3 flex items-center justify-between gap-2">
-        <div className="flex items-center space-x-1">
+      <div className="mt-3 flex items-center justify-between gap-1.5 sm:gap-2">
+        <div className="flex items-center space-x-1 shrink-0">
           <button
             type="button"
             onClick={() => onAdjust(-1)}
             disabled={amount <= 0}
-            className="w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold flex items-center justify-center text-sm disabled:opacity-40"
+            className="w-8 h-8 shrink-0 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold flex items-center justify-center text-sm disabled:opacity-40"
           >
             <Minus className="w-3.5 h-3.5" />
           </button>
@@ -2290,13 +2288,13 @@ function FeedCard({
             type="button"
             onClick={() => onAdjust(-0.5)}
             disabled={amount <= 0}
-            className="px-1.5 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs disabled:opacity-40"
+            className="px-1.5 h-8 shrink-0 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs disabled:opacity-40"
           >
             -0.5
           </button>
         </div>
 
-        <div className="flex items-center space-x-1.5 flex-1 max-w-[130px]">
+        <div className="flex items-center space-x-1.5 flex-1 min-w-0 max-w-[125px] sm:max-w-[140px]">
           <input
             type="number"
             inputMode="decimal"
@@ -2304,7 +2302,7 @@ function FeedCard({
             placeholder="0"
             value={amount || ''}
             onChange={(e) => onAmountChange(e.target.value)}
-            className={`w-full h-10 text-center font-black text-lg rounded-xl border transition-all ${
+            className={`w-full min-w-0 h-9 sm:h-10 text-center font-black text-base sm:text-lg rounded-xl border transition-all ${
               isLimitExceeded
                 ? 'bg-amber-100/70 border-amber-500 text-amber-950 font-black'
                 : isSelected
@@ -2312,21 +2310,21 @@ function FeedCard({
                 : 'bg-white border-slate-300 text-slate-700'
             }`}
           />
-          <span className="text-xs font-bold text-slate-500">kg</span>
+          <span className="text-xs font-bold text-slate-500 shrink-0">kg</span>
         </div>
 
-        <div className="flex items-center space-x-1">
+        <div className="flex items-center space-x-1 shrink-0">
           <button
             type="button"
             onClick={() => onAdjust(0.5)}
-            className="px-1.5 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs"
+            className="px-1.5 h-8 shrink-0 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs"
           >
             +0.5
           </button>
           <button
             type="button"
             onClick={() => onAdjust(1)}
-            className="w-8 h-8 rounded-lg bg-emerald-100 hover:bg-emerald-200 text-emerald-800 font-bold flex items-center justify-center text-sm"
+            className="w-8 h-8 shrink-0 rounded-lg bg-emerald-100 hover:bg-emerald-200 text-emerald-800 font-bold flex items-center justify-center text-sm"
           >
             <Plus className="w-3.5 h-3.5" />
           </button>
@@ -2363,7 +2361,7 @@ function FeedCard({
           </div>
           <div className="bg-emerald-50 p-1 rounded-md">
             <span className="text-emerald-600 block">Maliyet</span>
-            <strong className="text-emerald-800 font-bold">{cost.toFixed(2)} TL</strong>
+            <strong className="text-emerald-800 font-bold">{cost.toFixed(2)} ₺</strong>
           </div>
         </div>
       )}

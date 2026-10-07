@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
       action: 'FEED_CREATE',
       category: 'YEM',
       level: 'INFO',
-      message: `Yeni yem maddesi tanımlandı: "${newFeed.name}" (${newFeed.unitPrice} TL/kg, KM: %${newFeed.dryMatter}, HP: %${newFeed.protein})`,
+      message: `Yeni yem maddesi tanımlandı: "${newFeed.name}" (${newFeed.unitPrice} ₺/kg, KM: %${newFeed.dryMatter}, HP: %${newFeed.protein})`,
       details: newFeed,
       req,
     });

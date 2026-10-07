@@ -678,7 +678,7 @@ function FeedsPageContent() {
                     <div>
                       <span className="text-[10px] text-slate-400 block font-medium">Birim Fiyat</span>
                       <span className="text-base font-black text-emerald-800">
-                        {feed.unitPrice.toFixed(2)} <span className="text-xs font-semibold text-slate-500">TL/kg</span>
+                        {feed.unitPrice.toFixed(2)} <span className="text-xs font-semibold text-slate-500">₺/kg</span>
                       </span>
                     </div>
 
@@ -937,9 +937,9 @@ function FeedsPageContent() {
                         <div>
                           <span className="text-[10px] text-slate-500 block font-bold">Ref. Fiyat</span>
                           <span className="text-xs font-black text-emerald-700">
-                            ₺{feed.approxPrice.toFixed(2)}
+                            {feed.approxPrice.toFixed(2)} ₺
                           </span>
-                          <span className="text-[9px] text-slate-400">TL / kg</span>
+                          <span className="text-[9px] text-slate-400">/ kg</span>
                         </div>
                       </div>
                     </div>
@@ -1108,7 +1108,7 @@ function FeedsPageContent() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block font-bold text-slate-700 mb-1">Birim Fiyat (TL/kg)</label>
+                  <label className="block font-bold text-slate-700 mb-1">Birim Fiyat (₺/kg)</label>
                   <input
                     type="number"
                     step="0.05"
@@ -1184,7 +1184,7 @@ function FeedsPageContent() {
 
               <div>
                 <label className="block text-xs font-bold text-slate-700 mb-1">
-                  Çiftliğe Alış Fiyatınız (TL / kg)
+                  Çiftliğe Alış Fiyatınız (₺ / kg)
                 </label>
                 <div className="relative">
                   <input
@@ -1196,11 +1196,11 @@ function FeedsPageContent() {
                     placeholder="14.50"
                   />
                   <span className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">
-                    TL / kg
+                    ₺ / kg
                   </span>
                 </div>
                 <p className="text-[11px] text-slate-500 mt-1">
-                  50 kg çuval bedeli: yaklaşık {(parseFloat(customPrice || '0') * 50).toFixed(1)} TL
+                  50 kg çuval bedeli: yaklaşık {(parseFloat(customPrice || '0') * 50).toFixed(1)} ₺
                 </p>
               </div>
 
@@ -1303,7 +1303,7 @@ function FeedsPageContent() {
                   </select>
                 </div>
                 <div>
-                  <label className="block font-bold text-slate-700 mb-1">Piyasa Ref. Fiyat (TL/kg)</label>
+                  <label className="block font-bold text-slate-700 mb-1">Piyasa Ref. Fiyat (₺/kg)</label>
                   <input
                     type="number"
                     step="0.1"
@@ -1517,7 +1517,7 @@ function FeedsPageContent() {
                               🟢 1. Sınıf (Normal / Kaliteli)
                             </span>
                             <span className="text-xs font-black text-slate-900">
-                              ~{item.qualities.firstGrade.approxPriceTL.toFixed(2)} TL/kg
+                              ~{item.qualities.firstGrade.approxPriceTL.toFixed(2)} ₺/kg
                             </span>
                           </div>
 
@@ -1564,7 +1564,7 @@ function FeedsPageContent() {
                               🟡 2. Sınıf (Orta Kalite / Geç Biçim)
                             </span>
                             <span className="text-xs font-black text-slate-900">
-                              ~{item.qualities.secondGrade.approxPriceTL.toFixed(2)} TL/kg
+                              ~{item.qualities.secondGrade.approxPriceTL.toFixed(2)} ₺/kg
                             </span>
                           </div>
 

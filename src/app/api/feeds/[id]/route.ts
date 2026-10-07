@@ -25,7 +25,7 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
       action: 'FEED_UPDATE',
       category: 'YEM',
       level: 'INFO',
-      message: `Yem bilgileri güncellendi: "${updated.name}" (Fiyat: ${updated.unitPrice} TL/kg, KM: %${updated.dryMatter}, HP: %${updated.protein})`,
+      message: `Yem bilgileri güncellendi: "${updated.name}" (Fiyat: ${updated.unitPrice} ₺/kg, KM: %${updated.dryMatter}, HP: %${updated.protein})`,
       details: updated,
       req,
     });

@@ -478,16 +478,16 @@ export default function CostAnalysisPage() {
                 <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 block">
                   1L Yem Maliyeti
                 </span>
-                <div className="mt-2 flex items-baseline space-x-1">
-                  <span className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
+                <div className="mt-1.5 flex items-baseline gap-1 flex-wrap">
+                  <span className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">
                     {feedCostPerLiter.toFixed(2)}
                   </span>
-                  <span className="text-xs font-bold text-slate-500">TL/L</span>
+                  <span className="text-[11px] sm:text-xs font-bold text-slate-500">₺/L</span>
                 </div>
               </div>
               <p className="text-[11px] text-slate-600 font-bold mt-2 pt-2 border-t border-slate-100 flex items-center justify-between">
                 <span>İnek başı:</span>
-                <span className="text-emerald-700">{dailyFeedCostPerCow.toFixed(2)} TL / gün</span>
+                <span className="text-emerald-700">{dailyFeedCostPerCow.toFixed(2)} ₺ / gün</span>
               </p>
             </div>
 
@@ -497,11 +497,11 @@ export default function CostAnalysisPage() {
                 <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 block">
                   1L Genel Gider Payı
                 </span>
-                <div className="mt-2 flex items-baseline space-x-1">
-                  <span className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
+                <div className="mt-1.5 flex items-baseline gap-1 flex-wrap">
+                  <span className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">
                     {overheadCostPerLiter.toFixed(2)}
                   </span>
-                  <span className="text-xs font-bold text-slate-500">TL/L</span>
+                  <span className="text-[11px] sm:text-xs font-bold text-slate-500">₺/L</span>
                 </div>
               </div>
               <p className="text-[11px] text-slate-500 font-semibold mt-2 pt-2 border-t border-slate-100 truncate">
@@ -515,11 +515,11 @@ export default function CostAnalysisPage() {
                 <span className="text-[11px] font-bold uppercase tracking-wider text-slate-300 block">
                   1L Toplam Maliyet
                 </span>
-                <div className="mt-2 flex items-baseline space-x-1">
-                  <span className="text-3xl sm:text-4xl font-black text-emerald-400 tracking-tight">
+                <div className="mt-1.5 flex items-baseline gap-1 flex-wrap">
+                  <span className="text-2xl sm:text-3xl lg:text-4xl font-black text-emerald-400 tracking-tight">
                     {totalCostPerLiter.toFixed(2)}
                   </span>
-                  <span className="text-xs font-bold text-slate-400">TL/L</span>
+                  <span className="text-[11px] sm:text-xs font-bold text-slate-400">₺/L</span>
                 </div>
               </div>
               <p className="text-[11px] text-slate-300 font-semibold mt-2 pt-2 border-t border-slate-800">
@@ -537,16 +537,16 @@ export default function CostAnalysisPage() {
                 <span className="text-[11px] font-bold uppercase tracking-wider opacity-80 block">
                   1L Net Kâr Marjı
                 </span>
-                <div className="mt-2 flex items-baseline space-x-1">
-                  <span className="text-3xl sm:text-4xl font-black tracking-tight">
+                <div className="mt-1.5 flex items-baseline gap-1 flex-wrap">
+                  <span className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight">
                     {netProfitPerLiter >= 0 ? '+' : ''}{netProfitPerLiter.toFixed(2)}
                   </span>
-                  <span className="text-xs font-bold opacity-80">TL/L</span>
+                  <span className="text-[11px] sm:text-xs font-bold opacity-80">₺/L</span>
                 </div>
               </div>
               <p className="text-[11px] font-bold mt-2 pt-2 border-t border-black/10 flex items-center justify-between">
                 <span>Süt Satış:</span>
-                <span>{milkSalePrice.toFixed(2)} TL</span>
+                <span>{milkSalePrice.toFixed(2)} ₺</span>
               </p>
             </div>
           </div>
@@ -575,15 +575,15 @@ export default function CostAnalysisPage() {
               <div className="bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
                 <span className="text-slate-400 block font-semibold text-[11px]">Toplam Süt Geliri</span>
                 <strong className="text-lg sm:text-xl font-black text-slate-900 block mt-0.5">
-                  {Math.round(totalMonthlyRevenue).toLocaleString('tr-TR')} TL
+                  {Math.round(totalMonthlyRevenue).toLocaleString('tr-TR')} ₺
                 </strong>
-                <span className="text-[10px] text-slate-500">{monthTotalMilk} L × {milkSalePrice.toFixed(2)} TL</span>
+                <span className="text-[10px] text-slate-500">{monthTotalMilk} L × {milkSalePrice.toFixed(2)} ₺</span>
               </div>
 
               <div className="bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
                 <span className="text-slate-400 block font-semibold text-[11px]">Toplam Yem Gideri</span>
                 <strong className="text-lg sm:text-xl font-black text-amber-700 block mt-0.5">
-                  {Math.round(totalMonthlyFeedCost).toLocaleString('tr-TR')} TL
+                  {Math.round(totalMonthlyFeedCost).toLocaleString('tr-TR')} ₺
                 </strong>
                 <span className="text-[10px] text-slate-500">Maliyetin %{feedCostPercent.toFixed(0)}&apos;i</span>
               </div>
@@ -591,7 +591,7 @@ export default function CostAnalysisPage() {
               <div className="bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
                 <span className="text-slate-400 block font-semibold text-[11px]">Genel İşletme Gideri</span>
                 <strong className="text-lg sm:text-xl font-black text-indigo-700 block mt-0.5">
-                  {Math.round(totalMonthlyExpense).toLocaleString('tr-TR')} TL
+                  {Math.round(totalMonthlyExpense).toLocaleString('tr-TR')} ₺
                 </strong>
                 <span className="text-[10px] text-slate-500">Elektrik, mazot, veteriner vb.</span>
               </div>
@@ -603,7 +603,7 @@ export default function CostAnalysisPage() {
               }`}>
                 <span className="opacity-80 block font-bold text-[11px]">Aylık Net Kâr</span>
                 <strong className="text-lg sm:text-xl font-black block mt-0.5">
-                  {totalMonthlyNetProfit >= 0 ? '+' : ''}{Math.round(totalMonthlyNetProfit).toLocaleString('tr-TR')} TL
+                  {totalMonthlyNetProfit >= 0 ? '+' : ''}{Math.round(totalMonthlyNetProfit).toLocaleString('tr-TR')} ₺
                 </strong>
                 <span className="text-[10px] opacity-75">Tüm masraflar düşüldükten sonra</span>
               </div>
@@ -621,7 +621,7 @@ export default function CostAnalysisPage() {
                     <span>{formattedMonthTitle} Genel Gider Dökümü</span>
                   </h4>
                   <p className="text-[11px] text-slate-500">
-                    Toplam {expenses.length} adet gider kaydı ({totalMonthlyExpense.toLocaleString('tr-TR')} TL)
+                    Toplam {expenses.length} adet gider kaydı ({totalMonthlyExpense.toLocaleString('tr-TR')} ₺)
                   </p>
                 </div>
 
@@ -654,7 +654,7 @@ export default function CostAnalysisPage() {
                         <span className="font-bold text-slate-800">{item.categoryLabel}</span>
                         <div className="flex items-center space-x-2">
                           <span className="text-slate-500 text-[11px]">%{item.percentage}</span>
-                          <strong className="font-black text-slate-900">{item.amount.toLocaleString('tr-TR')} TL</strong>
+                          <strong className="font-black text-slate-900">{item.amount.toLocaleString('tr-TR')} ₺</strong>
                         </div>
                       </div>
                       <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
@@ -700,7 +700,7 @@ export default function CostAnalysisPage() {
                     </button>
                     <div className="px-2 text-center min-w-16">
                       <span className="text-lg font-black text-slate-900">{milkSalePrice.toFixed(2)}</span>
-                      <span className="text-[10px] text-slate-500 ml-1">TL</span>
+                      <span className="text-[10px] text-slate-500 ml-1">₺</span>
                     </div>
                     <button
                       type="button"
@@ -715,10 +715,10 @@ export default function CostAnalysisPage() {
                 {/* Maliyet vs Satış Dağılım Çubuğu */}
                 <div className="mt-4 space-y-1.5">
                   <div className="flex justify-between text-xs font-bold text-slate-600">
-                    <span>Yem: {feedCostPerLiter.toFixed(2)} TL</span>
-                    <span>Gider: {overheadCostPerLiter.toFixed(2)} TL</span>
+                    <span>Yem: {feedCostPerLiter.toFixed(2)} ₺</span>
+                    <span>Gider: {overheadCostPerLiter.toFixed(2)} ₺</span>
                     <span className={netProfitPerLiter >= 0 ? 'text-emerald-700' : 'text-rose-700'}>
-                      Kâr: {netProfitPerLiter.toFixed(2)} TL
+                      Kâr: {netProfitPerLiter.toFixed(2)} ₺
                     </span>
                   </div>
 
@@ -748,7 +748,7 @@ export default function CostAnalysisPage() {
               </div>
 
               <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 text-slate-500 text-[11px] mt-4">
-                💡 <strong>Başabaş Noktası:</strong> Çiftliğinizin zarar etmemesi için 1 litre sütü en az <strong>{totalCostPerLiter.toFixed(2)} TL</strong>&apos;ye satması gerekir.
+                💡 <strong>Başabaş Noktası:</strong> Çiftliğinizin zarar etmemesi için 1 litre sütü en az <strong>{totalCostPerLiter.toFixed(2)} ₺</strong>&apos;ye satması gerekir.
               </div>
             </div>
           </div>
@@ -857,18 +857,18 @@ export default function CostAnalysisPage() {
                         {/* Metrik Rozetleri */}
                         <div className="flex flex-wrap items-center gap-2 pt-1 text-xs">
                           <span className="bg-slate-100 text-slate-700 px-2.5 py-1 rounded-lg font-bold">
-                            1L Yem: {rep.feedCostPerLiter.toFixed(2)} TL
+                            1L Yem: {rep.feedCostPerLiter.toFixed(2)} ₺
                           </span>
                           <span className="bg-slate-100 text-slate-700 px-2.5 py-1 rounded-lg font-bold">
-                            1L Genel Gider: {rep.overheadCostPerLiter.toFixed(2)} TL
+                            1L Genel Gider: {rep.overheadCostPerLiter.toFixed(2)} ₺
                           </span>
                           <span className="bg-slate-900 text-emerald-400 px-2.5 py-1 rounded-lg font-bold">
-                            1L Toplam: {rep.totalCostPerLiter.toFixed(2)} TL
+                            1L Toplam: {rep.totalCostPerLiter.toFixed(2)} ₺
                           </span>
                           <span className={`px-2.5 py-1 rounded-lg font-black ${
                             rep.netProfitPerLiter >= 0 ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'
                           }`}>
-                            Net Kâr: {rep.netProfitPerLiter >= 0 ? '+' : ''}{rep.netProfitPerLiter.toFixed(2)} TL/L
+                            Net Kâr: {rep.netProfitPerLiter >= 0 ? '+' : ''}{rep.netProfitPerLiter.toFixed(2)} ₺/L
                           </span>
                         </div>
                       </div>
@@ -965,7 +965,7 @@ export default function CostAnalysisPage() {
             </div>
             <div>
               <span className="text-slate-500 font-medium block text-[9px]">Çiğ Süt Satış Fiyatı</span>
-              <strong className="text-emerald-800 text-xs font-black">{milkSalePrice.toFixed(2)} TL / Litre</strong>
+              <strong className="text-emerald-800 text-xs font-black">{milkSalePrice.toFixed(2)} ₺ / Litre</strong>
             </div>
           </div>
 
@@ -977,23 +977,23 @@ export default function CostAnalysisPage() {
             <div className="grid grid-cols-4 gap-2">
               <div className="p-2 rounded-lg border border-emerald-300 bg-emerald-50/60 text-center">
                 <span className="text-[9px] font-bold text-emerald-800 block">1L YEM MALİYETİ</span>
-                <div className="text-sm font-black text-emerald-950 mt-0.5">{feedCostPerLiter.toFixed(2)} TL</div>
+                <div className="text-sm font-black text-emerald-950 mt-0.5">{feedCostPerLiter.toFixed(2)} ₺</div>
                 <span className="text-[8px] text-emerald-700 font-semibold">Pay: %{feedCostPercent.toFixed(0)}</span>
               </div>
               <div className="p-2 rounded-lg border border-indigo-300 bg-indigo-50/60 text-center">
                 <span className="text-[9px] font-bold text-indigo-800 block">1L GENEL GİDER</span>
-                <div className="text-sm font-black text-indigo-950 mt-0.5">{overheadCostPerLiter.toFixed(2)} TL</div>
+                <div className="text-sm font-black text-indigo-950 mt-0.5">{overheadCostPerLiter.toFixed(2)} ₺</div>
                 <span className="text-[8px] text-indigo-700 font-semibold">Pay: %{overheadPercent.toFixed(0)}</span>
               </div>
               <div className="p-2 rounded-lg border border-slate-400 bg-slate-100 text-center">
                 <span className="text-[9px] font-bold text-slate-800 block">1L TOPLAM MALİYET</span>
-                <div className="text-sm font-black text-slate-950 mt-0.5">{totalCostPerLiter.toFixed(2)} TL</div>
+                <div className="text-sm font-black text-slate-950 mt-0.5">{totalCostPerLiter.toFixed(2)} ₺</div>
                 <span className="text-[8px] text-slate-600 font-semibold">Başabaş Satış Eşiği</span>
               </div>
               <div className={`p-2 rounded-lg border text-center ${netProfitPerLiter >= 0 ? 'border-emerald-500 bg-emerald-100/70' : 'border-rose-400 bg-rose-50'}`}>
                 <span className={`text-[9px] font-bold block ${netProfitPerLiter >= 0 ? 'text-emerald-900' : 'text-rose-800'}`}>1L NET KÂR MARJI</span>
                 <div className={`text-sm font-black mt-0.5 ${netProfitPerLiter >= 0 ? 'text-emerald-900' : 'text-rose-950'}`}>
-                  {netProfitPerLiter >= 0 ? '+' : ''}{netProfitPerLiter.toFixed(2)} TL
+                  {netProfitPerLiter >= 0 ? '+' : ''}{netProfitPerLiter.toFixed(2)} ₺
                 </div>
                 <span className={`text-[8px] font-bold ${netProfitPerLiter >= 0 ? 'text-emerald-800' : 'text-rose-700'}`}>
                   Kâr Oranı: %{marginPercent.toFixed(0)}
@@ -1010,20 +1010,20 @@ export default function CostAnalysisPage() {
             <div className="grid grid-cols-4 gap-2 text-center">
               <div className="p-2 bg-slate-50 border border-slate-300 rounded-lg">
                 <span className="text-[8px] text-slate-500 font-bold block">TOPLAM SÜT GELİRİ</span>
-                <div className="text-xs font-black text-slate-900 mt-0.5">{Math.round(totalMonthlyRevenue).toLocaleString('tr-TR')} TL</div>
+                <div className="text-xs font-black text-slate-900 mt-0.5">{Math.round(totalMonthlyRevenue).toLocaleString('tr-TR')} ₺</div>
               </div>
               <div className="p-2 bg-slate-50 border border-slate-300 rounded-lg">
                 <span className="text-[8px] text-slate-500 font-bold block">TOPLAM YEM GİDERİ</span>
-                <div className="text-xs font-black text-slate-900 mt-0.5">{Math.round(totalMonthlyFeedCost).toLocaleString('tr-TR')} TL</div>
+                <div className="text-xs font-black text-slate-900 mt-0.5">{Math.round(totalMonthlyFeedCost).toLocaleString('tr-TR')} ₺</div>
               </div>
               <div className="p-2 bg-slate-50 border border-slate-300 rounded-lg">
                 <span className="text-[8px] text-slate-500 font-bold block">TOPLAM GENEL GİDER</span>
-                <div className="text-xs font-black text-slate-900 mt-0.5">{Math.round(totalMonthlyExpense).toLocaleString('tr-TR')} TL</div>
+                <div className="text-xs font-black text-slate-900 mt-0.5">{Math.round(totalMonthlyExpense).toLocaleString('tr-TR')} ₺</div>
               </div>
               <div className={`p-2 border rounded-lg ${totalMonthlyNetProfit >= 0 ? 'bg-emerald-50 border-emerald-400' : 'bg-rose-50 border-rose-400'}`}>
                 <span className={`text-[8px] font-black block ${totalMonthlyNetProfit >= 0 ? 'text-emerald-800' : 'text-rose-800'}`}>DÖNEMLİK NET KÂR</span>
                 <div className={`text-xs font-black mt-0.5 ${totalMonthlyNetProfit >= 0 ? 'text-emerald-950' : 'text-rose-950'}`}>
-                  {totalMonthlyNetProfit >= 0 ? '+' : ''}{Math.round(totalMonthlyNetProfit).toLocaleString('tr-TR')} TL
+                  {totalMonthlyNetProfit >= 0 ? '+' : ''}{Math.round(totalMonthlyNetProfit).toLocaleString('tr-TR')} ₺
                 </div>
               </div>
             </div>
@@ -1035,13 +1035,13 @@ export default function CostAnalysisPage() {
             <div className="border border-slate-300 rounded-lg overflow-hidden">
               <div className="bg-slate-100 px-2 py-1 font-black text-[9px] text-slate-800 border-b border-slate-300 uppercase flex justify-between">
                 <span>Aylık Genel Gider Kalemleri</span>
-                <span>Toplam: {Math.round(totalMonthlyExpense).toLocaleString('tr-TR')} TL</span>
+                <span>Toplam: {Math.round(totalMonthlyExpense).toLocaleString('tr-TR')} ₺</span>
               </div>
               <table className="w-full text-left">
                 <thead>
                   <tr className="bg-slate-50 text-[8px] text-slate-500 border-b border-slate-200">
                     <th className="py-1 px-2">Gider Türü</th>
-                    <th className="py-1 px-1 text-right">Tutar (TL)</th>
+                    <th className="py-1 px-1 text-right">Tutar (₺)</th>
                     <th className="py-1 px-1 text-right">Pay (%)</th>
                     <th className="py-1 px-2 text-right">1L Payı</th>
                   </tr>
@@ -1075,7 +1075,7 @@ export default function CostAnalysisPage() {
                 <div className="space-y-1.5 mt-1.5 text-[9px]">
                   <div className="flex justify-between items-center py-0.5 border-b border-slate-100">
                     <span className="text-slate-600">1 İnek Günlük Rasyon Maliyeti:</span>
-                    <strong className="text-slate-900 font-bold">{dailyFeedCostPerCow.toFixed(2)} TL / Gün</strong>
+                    <strong className="text-slate-900 font-bold">{dailyFeedCostPerCow.toFixed(2)} ₺ / Gün</strong>
                   </div>
                   <div className="flex justify-between items-center py-0.5 border-b border-slate-100">
                     <span className="text-slate-600">Aktif Rasyondaki Yem Çeşidi:</span>
@@ -1083,10 +1083,10 @@ export default function CostAnalysisPage() {
                   </div>
                   <div className="flex justify-between items-center py-0.5 border-b border-slate-100">
                     <span className="text-slate-600">İşletme Başabaş Noktası (Eşik):</span>
-                    <strong className="text-slate-900 font-black">{totalCostPerLiter.toFixed(2)} TL / Litre</strong>
+                    <strong className="text-slate-900 font-black">{totalCostPerLiter.toFixed(2)} ₺ / Litre</strong>
                   </div>
                   <div className="p-1.5 bg-slate-50 rounded border border-slate-200 text-[8.5px] text-slate-600 leading-tight">
-                    💡 <strong>Not:</strong> 1 litre sütün satış fiyatı <strong>{totalCostPerLiter.toFixed(2)} TL</strong> altına düşerse işletme zarar eder. Mevcut {milkSalePrice.toFixed(2)} TL satış fiyatı ile litre başı <strong>{netProfitPerLiter.toFixed(2)} TL</strong> kâr elde edilmektedir.
+                    💡 <strong>Not:</strong> 1 litre sütün satış fiyatı <strong>{totalCostPerLiter.toFixed(2)} ₺</strong> altına düşerse işletme zarar eder. Mevcut {milkSalePrice.toFixed(2)} ₺ satış fiyatı ile litre başı <strong>{netProfitPerLiter.toFixed(2)} ₺</strong> kâr elde edilmektedir.
                   </div>
                 </div>
               </div>

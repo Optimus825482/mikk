@@ -380,7 +380,7 @@ function AyarlarContent() {
 
                   <div>
                     <label className="text-xs font-bold text-slate-700 uppercase block mb-1">
-                      Varsayılan Süt Satış Fiyatı (TL / Litre)
+                      Varsayılan Süt Satış Fiyatı (₺ / Litre)
                     </label>
                     <input
                       type="number"

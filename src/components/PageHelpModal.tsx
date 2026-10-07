@@ -138,7 +138,7 @@ export default function PageHelpModal({ isOpen, onClose, currentPath }: PageHelp
       title: 'Yemler & Katalog Kullanım Kılavuzu',
       subtitle: 'Kaba ve kesif yemlerin besin analizleri, fiyatları ve ortalama katalog rehberi',
       icon: Wheat,
-      purpose: 'İşletmenizde kullanılan tüm yemlerin birim fiyatlarını (TL/kg), kuru madde, ham protein ve nişasta oranlarını yönetmenizi sağlar.',
+      purpose: 'İşletmenizde kullanılan tüm yemlerin birim fiyatlarını (₺/kg), kuru madde, ham protein ve nişasta oranlarını yönetmenizi sağlar.',
       steps: [
         {
           title: '1. Yem Fiyatlarını Güncelleyin',
@@ -165,7 +165,7 @@ export default function PageHelpModal({ isOpen, onClose, currentPath }: PageHelp
         'Kaba ve Kesif Yem Sınıflandırması',
         'Ortalama Kaba Yem Değerleri Kataloğu (Normal & 2. Sınıf Kalite)',
         'Fabrika Yemleri Analiz Kataloğuna Doğrudan Bağlantı',
-        'Anlık Birim Fiyat (TL/kg) Değiştirme'
+        'Anlık Birim Fiyat (₺/kg) Değiştirme'
       ]
     },
 
@@ -208,7 +208,7 @@ export default function PageHelpModal({ isOpen, onClose, currentPath }: PageHelp
       steps: [
         {
           title: '1. Süt Satış Fiyatınızı Belirleyin',
-          desc: 'Sütü mandıraya, kooperatife veya perakende sattığınız litre fiyatını (TL/L) girin.'
+          desc: 'Sütü mandıraya, kooperatife veya perakende sattığınız litre fiyatını (₺/L) girin.'
         },
         {
           title: '2. 1L Maliyet Dağılımını İnceleyin',

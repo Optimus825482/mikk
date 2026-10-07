@@ -202,7 +202,7 @@ export default function ExpensesPage() {
             <span className="text-3xl font-black text-slate-900 tracking-tight">
               {totalMonthlyExpense.toLocaleString('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
             </span>
-            <span className="text-sm font-bold text-slate-500">TL</span>
+            <span className="text-sm font-bold text-slate-500">₺</span>
           </div>
           <p className="text-[11px] text-slate-500 mt-1">
             Bu ay toplam {expenses.length} adet gider kaydı
@@ -218,7 +218,7 @@ export default function ExpensesPage() {
             <span className="text-3xl font-black text-slate-900 tracking-tight">
               {dailyAverageExpense.toFixed(2)}
             </span>
-            <span className="text-sm font-bold text-slate-500">TL / gün</span>
+            <span className="text-sm font-bold text-slate-500">₺ / gün</span>
           </div>
           <p className="text-[11px] text-slate-500 mt-1">
             Ayın {daysInMonth} gününe bölünerek hesaplandı
@@ -234,7 +234,7 @@ export default function ExpensesPage() {
             <span className="text-3xl font-black tracking-tight text-white">
               {overheadPerLiter.toFixed(2)}
             </span>
-            <span className="text-sm font-bold text-indigo-200">TL / Litre</span>
+            <span className="text-sm font-bold text-indigo-200">₺ / Litre</span>
           </div>
           <p className="text-[11px] text-indigo-200/90 mt-1">
             Günlük {dailyTotalMilkLiters} L toplam süt üretimi bazında
@@ -286,9 +286,9 @@ export default function ExpensesPage() {
                     </div>
                   </div>
 
-                  <div className="flex items-center space-x-3">
+                    <div className="flex items-center space-x-3">
                     <span className="font-black text-slate-900 text-base">
-                      {expense.amount.toLocaleString('tr-TR', { minimumFractionDigits: 2 })} TL
+                      {expense.amount.toLocaleString('tr-TR', { minimumFractionDigits: 2 })} ₺
                     </span>
                     <button
                       onClick={() => handleDeleteExpense(expense.id)}
@@ -353,7 +353,7 @@ export default function ExpensesPage() {
               {/* Tutar */}
               <div>
                 <label className="text-xs font-bold text-slate-700 uppercase block mb-1">
-                  Gider Tutarı (TL)
+                  Gider Tutarı (₺)
                 </label>
                 <input
                   type="number"

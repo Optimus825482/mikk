@@ -38,6 +38,16 @@ input:focus, select:focus, button:focus {
   outline-offset: 1px;
 }
 
+/* Mobile input overflow prevention & remove number spin buttons */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
 /* Print Styles for Professional A4 PDF Output */
 @media print {
   * {

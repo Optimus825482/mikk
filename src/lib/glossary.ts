@@ -140,7 +140,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
       '1 litre çiğ süt satıldığında elinize geçen parayla kaç kilogram fabrika süt yemi (örneğin 18 veya 19 HP süt yemi) satın alabildiğinizi gösteren ekonomik orandır.',
     importance:
       'Veteriner Notu: Dünya genelinde kabul gören sürdürülebilir kârlılık eşiği 1.3 - 1.5 seviyesidir. Yani 1 litre süt ile en az 1.3 - 1.5 kg yem alınabilmelidir. Parite 1.0 altına indiğinde işletme cepten yemeye başlar.',
-    examplesOrFormula: 'Formül: Parite = 1 Litre Çiğ Süt Satış Fiyatı (TL) / 1 Kg Süt Yemi Fiyatı (TL)'
+    examplesOrFormula: 'Formül: Parite = 1 Litre Çiğ Süt Satış Fiyatı (₺) / 1 Kg Süt Yemi Fiyatı (₺)'
   },
   {
     id: 'kuru-donem',
@@ -163,7 +163,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     definition:
       'Yem gideri haricinde işletmede yapılan elektrik, hayvan sağlığı (veteriner, ilaç, aşı), işçilik, mazot, amortisman ve bakım harcamalarının o ay sağılan toplam süt miktarına oranlanmasıyla bulunan litre başı ek maliyettir.',
     importance:
-      'Veteriner Notu: Birçok yetiştirici maliyeti sadece "yediği yem" sanır. Oysa genel giderler litre başına 1.5 - 3.5 TL ek yük getirebilir. MilkIQ bu kalemi net olarak hesaplayarak gerçek kârı gösterir.',
+      'Veteriner Notu: Birçok yetiştirici maliyeti sadece "yediği yem" sanır. Oysa genel giderler litre başına 1.5 - 3.5 ₺ ek yük getirebilir. MilkIQ bu kalemi net olarak hesaplayarak gerçek kârı gösterir.',
     examplesOrFormula: 'Formül: Litre Başı Genel Gider = Aylık Toplam Harcamalar / Aylık Toplam Sağılan Süt Litresi'
   },
   {

@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
       action: 'EXPENSE_CREATE',
       category: 'GIDER',
       level: 'INFO',
-      message: `Genel işletme gideri kaydedildi: ${newExpense.category} (${newExpense.amount} TL - Dönem: ${newExpense.month}${newExpense.description ? ` - ${newExpense.description}` : ''})`,
+      message: `Genel işletme gideri kaydedildi: ${newExpense.category} (${newExpense.amount} ₺ - Dönem: ${newExpense.month}${newExpense.description ? ` - ${newExpense.description}` : ''})`,
       details: newExpense,
       req,
     });

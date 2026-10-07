@@ -475,9 +475,9 @@ export default function FactoryFeedsPage() {
                     <div>
                       <span className="text-[10px] text-slate-500 block font-bold">Ref. Fiyat</span>
                       <span className="text-xs font-black text-emerald-700">
-                        ₺{feed.approxPrice.toFixed(2)}
+                        {feed.approxPrice.toFixed(2)} ₺
                       </span>
-                      <span className="text-[9px] text-slate-400">TL / kg</span>
+                      <span className="text-[9px] text-slate-400">/ kg</span>
                     </div>
                   </div>
                 </div>
@@ -535,7 +535,7 @@ export default function FactoryFeedsPage() {
 
               <div>
                 <label className="block text-xs font-bold text-slate-700 mb-1">
-                  Çiftliğe Alış Fiyatınız (TL / kg)
+                  Çiftliğe Alış Fiyatınız (₺ / kg)
                 </label>
                 <div className="relative">
                   <input
@@ -547,11 +547,11 @@ export default function FactoryFeedsPage() {
                     placeholder="14.50"
                   />
                   <span className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">
-                    TL / kg
+                    ₺ / kg
                   </span>
                 </div>
                 <p className="text-[11px] text-slate-500 mt-1">
-                  50 kg çuval bedeli: yaklaşık {(parseFloat(customPrice || '0') * 50).toFixed(1)} TL
+                  50 kg çuval bedeli: yaklaşık {(parseFloat(customPrice || '0') * 50).toFixed(1)} ₺
                 </p>
               </div>
 
@@ -652,7 +652,7 @@ export default function FactoryFeedsPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block font-bold text-slate-700 mb-1">Piyasa Ref. Fiyat (TL/kg)</label>
+                  <label className="block font-bold text-slate-700 mb-1">Piyasa Ref. Fiyat (₺/kg)</label>
                   <input
                     type="number"
                     step="0.1"

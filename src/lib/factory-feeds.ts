@@ -1122,7 +1122,7 @@ export const FACTORY_FEEDS: FactoryFeed[] = [
     phosphorus: 0.60,
     approxPrice: 20.00,
     bagWeight: 50,
-    description: 'Yüksek süt verimli ineklerin laktasyon dönemi boyunca ihtiyaç duyduğu besin maddelerini karşılar. Homojen pelet/granül formda (50 kg çuval: 1000 TL).',
+    description: 'Yüksek süt verimli ineklerin laktasyon dönemi boyunca ihtiyaç duyduğu besin maddelerini karşılar. Homojen pelet/granül formda (50 kg çuval: 1000 ₺).',
   },
   {
     id: 'eris-crown-patlamis-misir',
@@ -1139,7 +1139,7 @@ export const FACTORY_FEEDS: FactoryFeed[] = [
     phosphorus: 0.28,
     approxPrice: 23.75,
     bagWeight: 40,
-    description: 'Crown Head Expander teknolojisi ile üretilen %100 jelatinize mısır. Yüksek sindirilebilirlik ve enerji desteği sağlar (40 kg çuval: 950 TL).',
+    description: 'Crown Head Expander teknolojisi ile üretilen %100 jelatinize mısır. Yüksek sindirilebilirlik ve enerji desteği sağlar (40 kg çuval: 950 ₺).',
   },
   {
     id: 'eris-sut-21',

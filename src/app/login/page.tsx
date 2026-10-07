@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Delete, KeyRound, ShieldCheck, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
+import { Delete, KeyRound, ShieldCheck, ArrowRight, Presentation } from 'lucide-react';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -160,8 +161,17 @@ export default function LoginPage() {
           )}
         </div>
 
+        {/* Tanıtım Sunumu Butonu */}
+        <Link
+          href="/tanitim"
+          className="mt-4 w-full py-2.5 px-4 bg-slate-900/80 hover:bg-slate-800/90 text-slate-300 hover:text-white rounded-2xl border border-slate-800 text-xs font-bold transition-all flex items-center justify-center space-x-2 shadow-xs group"
+        >
+          <Presentation className="w-4 h-4 text-emerald-400 group-hover:scale-110 transition-transform" />
+          <span>MilkIQ Ürün Tanıtım Sunumu (Web & PPTX) →</span>
+        </Link>
+
         {/* Security badge footer */}
-        <div className="mt-8 flex items-center space-x-2 text-slate-500 text-xs">
+        <div className="mt-6 flex items-center space-x-2 text-slate-500 text-xs">
           <ShieldCheck className="w-4 h-4 text-emerald-500" />
           <span>Güvenli Çiftlik Yönetim Sistemi</span>
         </div>

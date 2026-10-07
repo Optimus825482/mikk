@@ -7,6 +7,7 @@ export function middleware(request: NextRequest) {
   // Public paths
   if (
     pathname.startsWith('/login') ||
+    pathname.startsWith('/tanitim') ||
     pathname.startsWith('/mailayar') ||
     pathname.startsWith('/api/auth') ||
     pathname.startsWith('/api/mail-settings') ||
@@ -14,7 +15,10 @@ export function middleware(request: NextRequest) {
     pathname.startsWith('/favicon.ico') ||
     pathname.startsWith('/manifest.json') ||
     pathname.startsWith('/icon.svg') ||
-    pathname.startsWith('/logo.jpg')
+    pathname.startsWith('/logo') ||
+    pathname.endsWith('.png') ||
+    pathname.endsWith('.jpg') ||
+    pathname.endsWith('.pptx')
   ) {
     return NextResponse.next();
   }

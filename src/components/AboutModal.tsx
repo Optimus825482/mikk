@@ -2,11 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
+import Link from 'next/link';
 import { 
   HeartHandshake, 
   X, 
   Check, 
-  Sparkles 
+  Sparkles,
+  Presentation 
 } from 'lucide-react';
 
 interface AboutModalProps {
@@ -166,6 +168,21 @@ export default function AboutModal({ forceOpen = false, onClose }: AboutModalPro
               </div>
             </div>
           </div>
+
+          {/* Tanıtım Sunumu Butonu */}
+          <Link
+            href="/tanitim"
+            onClick={handleClose}
+            className="w-full py-2.5 px-4 bg-slate-900 hover:bg-slate-800 text-white rounded-2xl border border-slate-700/80 text-xs font-bold transition-all flex items-center justify-between group shadow-xs active:scale-95"
+          >
+            <div className="flex items-center space-x-2">
+              <Presentation className="w-4 h-4 text-emerald-400 group-hover:scale-110 transition-transform" />
+              <span>MilkIQ Ürün Tanıtım Sunumu (Web & PPTX)</span>
+            </div>
+            <span className="text-emerald-400 text-[11px] font-black group-hover:translate-x-1 transition-transform">
+              İncele →
+            </span>
+          </Link>
         </div>
 
         {/* Footer & Checkbox */}

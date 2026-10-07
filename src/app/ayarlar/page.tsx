@@ -28,7 +28,9 @@ import {
   Tractor,
   FolderArchive,
   Mail,
-  Lock
+  Lock,
+  Presentation,
+  Download
 } from 'lucide-react';
 import { SystemSetting } from '@/types';
 import { DEFAULT_SETTINGS } from '@/lib/calculator';
@@ -437,6 +439,39 @@ function AyarlarContent() {
               <Lock className="w-4 h-4 text-emerald-200" />
               <span>Mail & Bildirim Ayarları →</span>
             </Link>
+          </div>
+
+          {/* TANITIM SUNUMU (WEB & PPTX) ACCESS CARD */}
+          <div className="bg-gradient-to-r from-slate-900 via-slate-850 to-teal-950 text-white p-6 rounded-3xl shadow-sm border border-teal-800/60 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-start space-x-3">
+              <div className="w-10 h-10 rounded-xl bg-teal-500/20 border border-teal-500/30 flex items-center justify-center text-teal-400 shrink-0">
+                <Presentation className="w-5 h-5" />
+              </div>
+              <div>
+                <h2 className="text-base font-black text-white">MilkIQ Ürün & Özellik Tanıtım Sunumu</h2>
+                <p className="text-xs text-slate-300 mt-0.5">
+                  Mobil uyumlu kaydırmalı interaktif web sunumunu inceleyin veya toplantılarınız için PPTX formatında indirin.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-2 shrink-0">
+              <Link
+                href="/tanitim"
+                className="px-4 py-2.5 bg-teal-600 hover:bg-teal-500 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center space-x-1.5 active:scale-95"
+              >
+                <Presentation className="w-4 h-4 text-teal-200" />
+                <span>Web Sunumu →</span>
+              </Link>
+              <a
+                href="/MilkIQ_Tanitim_Sunumu.pptx"
+                download="MilkIQ_Tanitim_Sunumu.pptx"
+                className="px-3.5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white font-bold text-xs rounded-xl border border-slate-700 shadow-sm transition-all flex items-center space-x-1.5 active:scale-95"
+              >
+                <Download className="w-4 h-4 text-emerald-400" />
+                <span>PPTX</span>
+              </a>
+            </div>
           </div>
         </div>
       )}

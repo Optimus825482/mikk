@@ -14,7 +14,7 @@ import {
 export default function BottomNav() {
   const pathname = usePathname();
 
-  if (pathname === '/login') return null;
+  if (pathname === '/login' || pathname === '/tanitim') return null;
 
   const mobileNav = [
     { href: '/', label: 'Ana Sayfa', icon: Home },

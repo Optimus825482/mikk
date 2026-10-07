@@ -22,8 +22,8 @@ export default function Navbar() {
   const [loggingOut, setLoggingOut] = useState(false);
   const [showHelpModal, setShowHelpModal] = useState(false);
 
-  // Don't show nav on login page
-  if (pathname === '/login') return null;
+  // Don't show nav on login and presentation pages
+  if (pathname === '/login' || pathname === '/tanitim') return null;
 
   const handleLogout = async () => {
     setLoggingOut(true);

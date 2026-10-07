@@ -152,7 +152,16 @@ export default function AboutModal({ forceOpen = false, onClose }: AboutModalPro
                   Geliştirme & İthaf
                 </span>
                 <p className="text-xs sm:text-sm font-bold tracking-tight text-white leading-snug">
-                  <span className="text-emerald-400 font-black">MilkIQ</span>, <span className="text-white font-black">Veteriner Hekim Erkan Erdem</span> tarafından <span className="text-emerald-300 font-black">Fatih Dinç</span> için geliştirilmiştir. <span className="text-emerald-200">Hayvan besleme, sürü yönetimi ve hayvancılık işletme ekonomisi alanlarındaki saha tecrübesinin modern yazılım teknolojisiyle sentezinden doğmuştur.</span>
+                  <span className="text-emerald-400 font-black">MilkIQ</span>,{' '}
+                  <a
+                    href="https://erkanerdem.online"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white hover:text-emerald-300 underline underline-offset-2 font-black transition-colors"
+                  >
+                    Veteriner Hekim Erkan Erdem
+                  </a>{' '}
+                  tarafından <span className="text-emerald-300 font-black">Fatih Dinç</span> için geliştirilmiştir. <span className="text-emerald-200">Hayvan besleme, sürü yönetimi ve hayvancılık işletme ekonomisi alanlarındaki saha tecrübesinin modern yazılım teknolojisiyle sentezinden doğmuştur.</span>
                 </p>
               </div>
             </div>

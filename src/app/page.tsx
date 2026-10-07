@@ -14,7 +14,8 @@ import {
   CheckCircle2, 
   ArrowUpRight,
   ShieldCheck,
-  Plus
+  Plus,
+  ExternalLink
 } from 'lucide-react';
 import { Feed, MonthlyExpense, DailyProduction, SystemSetting } from '@/types';
 import { calculateRation, DEFAULT_SETTINGS } from '@/lib/calculator';
@@ -308,7 +309,16 @@ export default function DashboardPage() {
           </div>
           <div>
             <p className="text-xs font-bold text-slate-900">
-              MilkIQ, Veteriner Hekim Erkan Erdem tarafından Fatih Dinç için geliştirilmiştir.
+              MilkIQ, Veteriner Hekim{' '}
+              <a
+                href="https://erkanerdem.online"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-emerald-700 hover:text-emerald-800 underline underline-offset-2 font-black transition-colors"
+              >
+                Erkan Erdem
+              </a>{' '}
+              tarafından Fatih Dinç için geliştirilmiştir.
             </p>
             <p className="text-[11px] text-slate-500 mt-0.5">
               Hayvan besleme, sürü yönetimi ve hayvancılık işletme ekonomisi alanlarındaki saha tecrübesinin modern yazılım teknolojisiyle sentezinden doğmuştur.
@@ -346,9 +356,15 @@ export default function DashboardPage() {
         </p>
         <p className="text-[11px] font-medium text-slate-400 flex items-center justify-center gap-1.5">
           <span>Developed by</span>
-          <span className="font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200/60 shadow-2xs">
-            Erkan Erdem
-          </span>
+          <a
+            href="https://erkanerdem.online"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-bold text-emerald-700 hover:text-emerald-800 bg-emerald-50 hover:bg-emerald-100/90 transition-all px-2 py-0.5 rounded-md border border-emerald-200/70 shadow-2xs inline-flex items-center gap-1 group"
+          >
+            <span>Erkan Erdem</span>
+            <ExternalLink className="w-3 h-3 text-emerald-600 group-hover:translate-x-0.5 transition-transform" />
+          </a>
         </p>
       </footer>
 

@@ -35,12 +35,12 @@
     },
     {
       "id": "kaba-bugday-samani",
-      "name": "Buğday Samanı",
+      "name": "Saman (Buğday Samanı)",
       "type": "KABA",
       "dryMatter": 90,
       "protein": 3.5,
       "starch": 1,
-      "unitPrice": 2.2,
+      "unitPrice": 4,
       "isDefault": true,
       "category": "SAMAN",
       "maxLimitKg": 2.5
@@ -107,12 +107,12 @@
     },
     {
       "id": "kesif-aycicek-kuspesi",
-      "name": "Ayçiçeği Tohumu Küspesi (%36 HP)",
+      "name": "ATK (Ayçiçek Küspesi %36 HP)",
       "type": "KESIF",
       "dryMatter": 90,
       "protein": 36,
       "starch": 4,
-      "unitPrice": 12,
+      "unitPrice": 16,
       "isDefault": true,
       "category": "KUSPE",
       "maxLimitKg": 3.5
@@ -164,15 +164,83 @@
       "isDefault": true,
       "category": "YAS_KUSPE",
       "maxLimitKg": 15
+    },
+    {
+      "id": "kaba-misir-silaji-24km",
+      "name": "Mısır Silajı (%24 KM)",
+      "type": "KABA",
+      "category": "SILAJ",
+      "maxLimitKg": 30,
+      "dryMatter": 24,
+      "protein": 7.5,
+      "starch": 22,
+      "unitPrice": 3,
+      "isDefault": true
+    },
+    {
+      "id": "kesif-eris-sigir-sut-20a",
+      "name": "Eriş Sığır Süt 20 A",
+      "type": "KESIF",
+      "category": "HAZIR_YEM",
+      "maxLimitKg": 12,
+      "dryMatter": 88,
+      "protein": 20,
+      "starch": 27.5,
+      "unitPrice": 20,
+      "isDefault": true
+    },
+    {
+      "id": "kesif-eris-crown-patlamis-misir",
+      "name": "Eriş Crown Patlamış Mısır",
+      "type": "KESIF",
+      "category": "HUBUBAT",
+      "maxLimitKg": 6,
+      "dryMatter": 88.5,
+      "protein": 8.8,
+      "starch": 68,
+      "unitPrice": 23.75,
+      "isDefault": true
     }
   ],
   "rations": [
+    {
+      "id": "ration-eris-sut-20a-crown",
+      "title": "Eriş Süt 20 A & Crown Patlamış Mısır Rasyonu",
+      "liveWeight": 650,
+      "targetMilk": 28,
+      "isActive": true,
+      "notes": "Eriş Süt 20 A (7.5 kg) ve Eriş Crown Patlamış Mısır (2.5 kg) ile dengelenmiş, 36.5 kg TMR ve günlük 310.38 TL yem maliyetli rasyon tablosu.",
+      "items": [
+        {
+          "feedId": "kaba-misir-silaji-24km",
+          "freshAmount": 23
+        },
+        {
+          "feedId": "kaba-bugday-samani",
+          "freshAmount": 2
+        },
+        {
+          "feedId": "kesif-eris-sigir-sut-20a",
+          "freshAmount": 7.5
+        },
+        {
+          "feedId": "kesif-aycicek-kuspesi",
+          "freshAmount": 1.5
+        },
+        {
+          "feedId": "kesif-eris-crown-patlamis-misir",
+          "freshAmount": 2.5
+        }
+      ],
+      "createdAt": "2026-10-07T09:45:00.000Z",
+      "updatedAt": "2026-10-07T09:45:00.000Z"
+    },
     {
       "id": "default-active-ration",
       "title": "Standart Laktasyon Rasyonu",
       "liveWeight": 600,
       "targetMilk": 25,
-      "isActive": true,
+      "isActive": false,
       "notes": "600 kg canlı ağırlık ve 25 L süt için dengelenmiş başlangıç rasyonu.",
       "items": [
         {
@@ -1800,6 +1868,40 @@
       "approxPrice": 13.1,
       "bagWeight": 50,
       "description": "Döl verimi yüksek, çatısı geniş sağlıklı damızlık düve yetiştirmek için dengeli büyüme yemi."
+    },
+    {
+      "id": "eris-sigir-sut-20a",
+      "brand": "Eriş Yem",
+      "name": "Eriş Sığır Süt 20 A",
+      "category": "SUT_YEMI",
+      "categoryLabel": "Yüksek Verim Süt Yemi",
+      "protein": 20,
+      "starch": 27.5,
+      "dryMatter": 88,
+      "energyME": 2750,
+      "cellulose": 9,
+      "calcium": 1.15,
+      "phosphorus": 0.6,
+      "approxPrice": 20,
+      "bagWeight": 50,
+      "description": "Yüksek süt verimli ineklerin laktasyon dönemi boyunca ihtiyaç duyduğu besin maddelerini karşılar. Homojen pelet/granül formda (50 kg çuval: 1000 TL)."
+    },
+    {
+      "id": "eris-crown-patlamis-misir",
+      "brand": "Eriş Yem",
+      "name": "Eriş Crown Patlamış Mısır",
+      "category": "SUT_YEMI",
+      "categoryLabel": "Expander Jelatinize Mısır / Enerji Yemi",
+      "protein": 8.8,
+      "starch": 68,
+      "dryMatter": 88.5,
+      "energyME": 3220,
+      "cellulose": 2.3,
+      "calcium": 0.05,
+      "phosphorus": 0.28,
+      "approxPrice": 23.75,
+      "bagWeight": 40,
+      "description": "Crown Head Expander teknolojisi ile üretilen %100 jelatinize mısır. Yüksek sindirilebilirlik ve enerji desteği sağlar (40 kg çuval: 950 TL)."
     }
   ],
   "costReports": [

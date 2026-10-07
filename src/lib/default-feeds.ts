@@ -3,6 +3,18 @@ import { Feed } from '@/types';
 export const DEFAULT_FEEDS: Feed[] = [
   // --- KABA YEMLER ---
   {
+    id: 'kaba-misir-silaji-24km',
+    name: 'Mısır Silajı (%24 KM)',
+    type: 'KABA',
+    category: 'SILAJ',
+    maxLimitKg: 30.0,
+    dryMatter: 24.0,   // %24 Kuru Madde
+    protein: 7.5,      // %7.5 Ham Protein
+    starch: 22.0,      // %22 Nişasta
+    unitPrice: 3.00,   // 3.00 TL/kg
+    isDefault: true,
+  },
+  {
     id: 'kaba-misir-silaji',
     name: 'Mısır Silajı (İdeal Kalite)',
     type: 'KABA',
@@ -28,14 +40,14 @@ export const DEFAULT_FEEDS: Feed[] = [
   },
   {
     id: 'kaba-bugday-samani',
-    name: 'Buğday Samanı',
+    name: 'Saman (Buğday Samanı)',
     type: 'KABA',
     category: 'SAMAN',
-    maxLimitKg: 2.5,
+    maxLimitKg: 3.0,
     dryMatter: 90.0,   // %90 Kuru Madde
     protein: 3.5,      // %3.5 Ham Protein
     starch: 1.0,       // %1.0 Nişasta
-    unitPrice: 2.20,   // 2.20 TL/kg
+    unitPrice: 4.00,   // 4.00 TL/kg
     isDefault: true,
   },
   {
@@ -138,14 +150,14 @@ export const DEFAULT_FEEDS: Feed[] = [
   },
   {
     id: 'kesif-aycicek-kuspesi',
-    name: 'Ayçiçeği Tohumu Küspesi (%36 HP)',
+    name: 'ATK (Ayçiçek Küspesi %36 HP)',
     type: 'KESIF',
     category: 'KUSPE',
     maxLimitKg: 3.5,
     dryMatter: 90.0,
     protein: 36.0,
     starch: 4.0,
-    unitPrice: 12.00,
+    unitPrice: 16.00,  // 16.00 TL/kg (800 TL / 50kg)
     isDefault: true,
   },
   {
@@ -170,6 +182,30 @@ export const DEFAULT_FEEDS: Feed[] = [
     protein: 15.0,
     starch: 18.0,
     unitPrice: 8.00,
+    isDefault: true,
+  },
+  {
+    id: 'kesif-eris-sigir-sut-20a',
+    name: 'Eriş Sığır Süt 20 A',
+    type: 'KESIF',
+    category: 'HAZIR_YEM',
+    maxLimitKg: 12.0,
+    dryMatter: 88.0,
+    protein: 20.0,
+    starch: 27.5,
+    unitPrice: 20.00,  // 20.00 TL/kg (1000 TL / 50kg)
+    isDefault: true,
+  },
+  {
+    id: 'kesif-eris-crown-patlamis-misir',
+    name: 'Eriş Crown Patlamış Mısır',
+    type: 'KESIF',
+    category: 'HUBUBAT',
+    maxLimitKg: 6.0,
+    dryMatter: 88.5,
+    protein: 8.8,
+    starch: 68.0,
+    unitPrice: 23.75,  // 23.75 TL/kg (950 TL / 40kg)
     isDefault: true,
   },
 ];

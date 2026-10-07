@@ -15,7 +15,7 @@
    - Her yem için Kuru Madde (KM %), Ham Protein (HP %), Nişasta (%) ve Birim Fiyat (TL/kg) kaydedilir.
    - Türkiye standartlarına uygun 13 adet hazır yem kütüphanesi tek tıkla yüklenebilir.
 
-3. **⚡ Gerçek Zamanlı (Real-Time) Zooteknik Rasyon Motoru:**
+3. **⚡ Gerçek Zamanlı (Real-Time) Bilimsel Rasyon Motoru:**
    - Hayvanın canlı ağırlığı (kg) ve hedeflenen günlük süt verimi (L) girilir.
    - Seçilen yemlerin taze miktarları girildikçe veya `+/-` butonlarına basıldıkça anında:
      - Toplam Kuru Madde (KM) tüketimi,

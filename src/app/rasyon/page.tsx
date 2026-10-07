@@ -187,7 +187,7 @@ export default function RationPage() {
     return calculateRation(itemsForCalc, feeds, liveWeight, targetMilk, settings);
   }, [itemsForCalc, feeds, liveWeight, targetMilk, settings]);
 
-  // Akıllı Zooteknik Tavsiye ve Yönlendirme Listesi (Laktasyon Evresi Bazlı)
+  // Akıllı Besleme Tavsiye ve Yönlendirme Listesi (Laktasyon Evresi Bazlı)
   const advisoryList: LactationAdvice[] = useMemo(() => {
     return generateLactationAdvice(selectedLactationGroup, results, liveWeight, targetMilk);
   }, [selectedLactationGroup, results, liveWeight, targetMilk]);
@@ -701,7 +701,7 @@ export default function RationPage() {
               <div className="flex items-center space-x-2">
                 <Sparkles className="w-4 h-4 text-emerald-600" />
                 <h3 className="text-xs font-black text-slate-900 uppercase tracking-wider">
-                  Akıllı Laktasyon Danışmanı & Zooteknik Tavsiyeler
+                  Akıllı Laktasyon Danışmanı & Besleme Tavsiyeleri
                 </h3>
                 <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-900 text-emerald-300">
                   {LACTATION_GROUPS.find(g => g.id === selectedLactationGroup)?.name}
@@ -1070,7 +1070,7 @@ export default function RationPage() {
               </div>
             </div>
 
-            {/* Zooteknik Biyolojik Parametreler Çubuğu */}
+            {/* Biyolojik Besleme Parametreleri Çubuğu */}
             <div className="bg-slate-900 text-white p-4 sm:p-5 rounded-2xl grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
               <div className="p-2 rounded-xl bg-slate-800/60 border border-slate-700/50">
                 <div className="flex items-center justify-between">
@@ -1206,7 +1206,7 @@ export default function RationPage() {
                 <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-900 text-xs flex items-center space-x-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                   <span className="font-bold">
-                    Tebrikler! Rasyondaki tüm yem maddeleri önerilen güvenli fizyolojik ve zooteknik sınırlar içerisindedir.
+                    Tebrikler! Rasyondaki tüm yem maddeleri önerilen güvenli fizyolojik ve besleme sınırları içerisindedir.
                   </span>
                 </div>
               )}
@@ -1278,7 +1278,7 @@ export default function RationPage() {
                 <div className="flex items-center space-x-2">
                   <Sparkles className="w-5 h-5 text-emerald-600" />
                   <h3 className="text-base font-black text-slate-900 tracking-tight">
-                    Uzman Zooteknik Değerlendirme & Laktasyon Besleme Tavsiyeleri
+                    Değerlendirme ve Laktasyon Besleme Tavsiyeleri
                   </h3>
                 </div>
                 <span className="text-xs font-bold px-3 py-1 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300 self-start sm:self-auto">
@@ -2034,7 +2034,7 @@ export default function RationPage() {
               </div>
             </div>
 
-            {/* Alt Sıra: Biyolojik & Zooteknik Rumen Dengesi */}
+            {/* Alt Sıra: Biyolojik Rumen & Besleme Dengesi */}
             <div className="grid grid-cols-4 gap-1.5 text-[10px]">
               <div className="p-1.5 bg-slate-50/90 rounded-lg border border-slate-200">
                 <span className="text-[8px] text-slate-500 uppercase font-bold block">Kuru Madde Tüketimi (KM)</span>
@@ -2192,7 +2192,7 @@ export default function RationPage() {
               </div>
             ) : (
               <p className="text-emerald-900 font-semibold">
-                • Tebrikler! Rasyonda kullanılan tüm yemler zooteknik ve fizyolojik üst sınır limitleri dahilindedir.
+                • Tebrikler! Rasyonda kullanılan tüm yemler güvenli fizyolojik üst sınır limitleri dahilindedir.
               </p>
             )}
           </div>

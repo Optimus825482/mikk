@@ -88,7 +88,7 @@ export function calculateRation(
     ? (totalDryMatterKg / safeLiveWeight) * 100
     : 0;
 
-  // Kuru Madde Tolerans ve Zooteknik Değerlendirmesi (Hedef vs Gerçekleşen)
+  // Kuru Madde Tolerans ve Besleme Değerlendirmesi (Hedef vs Gerçekleşen)
   let dryMatterStatus: RationCalculationResult['dryMatterStatus'] = 'IDEAL';
   let dryMatterDiffPercent = 0;
   let dryMatterStatusMessage = 'Rasyona yem ekleyerek kuru madde dengesini görüntüleyin.';

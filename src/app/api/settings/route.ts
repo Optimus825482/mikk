@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
       action: 'SETTINGS_UPDATE',
       category: 'AYARLAR',
       level: 'INFO',
-      message: `Sistem zooteknik ve fiyat parametreleri güncellendi (Süt Satış: ${updated.milkSalePrice} TL/L, Canlı Ağırlık: ${updated.defaultLiveWeight} kg, Hedef Süt: ${updated.defaultTargetMilk} L)`,
+      message: `Sistem besleme ve fiyat parametreleri güncellendi (Süt Satış: ${updated.milkSalePrice} TL/L, Canlı Ağırlık: ${updated.defaultLiveWeight} kg, Hedef Süt: ${updated.defaultTargetMilk} L)`,
       details: updated,
       req,
     });

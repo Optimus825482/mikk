@@ -92,7 +92,7 @@ export default function PageHelpModal({ isOpen, onClose, currentPath }: PageHelp
     '/rasyon': {
       badge: 'RASYON STÜDYOSU & TMR MİKSER YÖNETİMİ',
       title: 'Rasyon Stüdyosu Kullanım Kılavuzu',
-      subtitle: 'Zooteknik rasyon hazırlama, asidoz denetimi ve mikser vagon tartım reçetesi',
+      subtitle: 'Akıllı rasyon hazırlama, asidoz denetimi ve mikser vagon tartım reçetesi',
       icon: Calculator,
       purpose: 'İneklerinizin canlı ağırlığına ve hedef süt verimine göre fizyolojik olarak dengeli rasyon oluşturmanızı, yemlik artık/kokuşma risklerini önlemenizi ve yem karma vagonu (mikser) tartım listesi almanızı sağlar.',
       steps: [
@@ -105,7 +105,7 @@ export default function PageHelpModal({ isOpen, onClose, currentPath }: PageHelp
           desc: 'Sol panelden kaba yemleri (yonca, mısır silajı, saman vb.), sağ panelden fabrika yemleri ve tahılları (süt yemi, arpa, mısır kırması vb.) inek başı günlük kg olarak belirleyin.'
         },
         {
-          title: '3. Zooteknik Sınırları ve KM Kapasitesini İzleyin',
+          title: '3. Fizyolojik Sınırları ve KM Kapasitesini İzleyin',
           desc: 'Kaba yem oranının en az %40 olmasına dikkat edin. Kuru Madde (KM) hedefi aşılırsa yemlikte artık ve kokuşma uyarısı, az olursa açlık ve verim kaybı uyarısı verilir.'
         },
         {
@@ -118,7 +118,7 @@ export default function PageHelpModal({ isOpen, onClose, currentPath }: PageHelp
         },
         {
           title: '6. Mikser Reçetesini veya Raporu PDF Olarak Alın',
-          desc: '"Mikser Reçetesini PDF Çıkar / Yazdır" butonuyla operatör için terazi kümülatifi olan tartım çizelgesini, "Rasyon Raporu (PDF)" butonuyla ise tek sayfalık zooteknik analiz raporunu yazdırın.'
+          desc: '"Mikser Reçetesini PDF Çıkar / Yazdır" butonuyla operatör için terazi kümülatifi olan tartım çizelgesini, "Rasyon Raporu (PDF)" butonuyla ise tek sayfalık rasyon analiz raporunu yazdırın.'
         }
       ],
       tips: [
@@ -128,7 +128,7 @@ export default function PageHelpModal({ isOpen, onClose, currentPath }: PageHelp
       keyFeatures: [
         'Hedeflenen KM Tolerans & Kokuşma/Verim Kaybı Uyarı Sistemi',
         'Operatör Odaklı Kümülatif Terazi Mikser Reçetesi (A4 PDF)',
-        'Tek Sayfa (Single-Page) Zooteknik Analiz Raporu',
+        'Tek Sayfa (Single-Page) Rasyon Analiz Raporu',
         'Geçmiş Rasyonları Tarih Damgasıyla Kaydetme & Arşivleme'
       ]
     },
@@ -298,9 +298,9 @@ export default function PageHelpModal({ isOpen, onClose, currentPath }: PageHelp
     '/ayarlar': {
       badge: 'İŞLETME AYARLARI & PROFİL',
       title: 'Ayarlar & Çiftlik Profili Kılavuzu',
-      subtitle: 'Çiftlik unvanı, sistem varsayılanları, güvenlik PIN ve zooteknik sözlük',
+      subtitle: 'Çiftlik unvanı, sistem varsayılanları, güvenlik PIN ve besleme sözlüğü',
       icon: Settings,
-      purpose: 'Çiftliğinizin adını belirlemenizi (reçete ve raporların antetinde çıkar), varsayılan canlı ağırlık/süt hedeflerini kaydetmenizi ve detaylı kullanım kılavuzu ile zooteknik sözlüğe erişmenizi sağlar.',
+      purpose: 'Çiftliğinizin adını belirlemenizi (reçete ve raporların antetinde çıkar), varsayılan canlı ağırlık/süt hedeflerini kaydetmenizi ve detaylı kullanım kılavuzu ile besleme sözlüğüne erişmenizi sağlar.',
       steps: [
         {
           title: '1. Çiftlik Adınızı Kaydedin',
@@ -316,7 +316,7 @@ export default function PageHelpModal({ isOpen, onClose, currentPath }: PageHelp
         },
         {
           title: '4. Kullanım Kılavuzu & Sözlük Sekmelerini Ziyaret Edin',
-          desc: 'Zooteknik terimler sözlüğü (KM, HP, Nişasta, Rumen Asidozu vb.) ve detaylı rehberleri inceleyin.'
+          desc: 'Besleme terimleri sözlüğü (KM, HP, Nişasta, Rumen Asidozu vb.) ve detaylı rehberleri inceleyin.'
         }
       ],
       tips: [
@@ -425,11 +425,11 @@ export default function PageHelpModal({ isOpen, onClose, currentPath }: PageHelp
             </ul>
           </div>
 
-          {/* Püf Noktaları & Zooteknik Tavsiyeler */}
+          {/* Püf Noktaları & Saha Tavsiyeleri */}
           <div className="space-y-2">
             <h3 className="text-xs font-black text-slate-900 uppercase tracking-wider flex items-center space-x-1.5">
               <Lightbulb className="w-4 h-4 text-amber-600" />
-              <span>Zooteknik Püf Noktaları & Saha İpuçları</span>
+              <span>Pratik Püf Noktaları & Saha İpuçları</span>
             </h3>
 
             <div className="p-3.5 bg-amber-50/80 border border-amber-200 rounded-xl text-amber-950 text-xs space-y-1.5">

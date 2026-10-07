@@ -520,7 +520,7 @@ function AyarlarContent() {
             </div>
             <div className="pl-11 pt-1">
               <div className="bg-emerald-50 border border-emerald-200 p-2.5 rounded-xl text-emerald-950 text-xs">
-                🌾 <strong>Yem Referans Rehberi (Kaba Yem & Hububat Kırmaları):</strong> Laboratuvar analizi yaptırmanıza gerek kalmadan; yonca, mısır silajı, pancar posası, saman, fiğ, korunga, reygras gibi kaba yemlerin yanı sıra çiftlikte kullanılan <strong>Arpa Kırması</strong>, <strong>Mısır Kırması</strong> ve <strong>Buğday Kırması</strong> için hem <strong>1. Sınıf (Normal/Dolgun)</strong> hem de <strong>2. Sınıf (Orta Kalite/Cılız)</strong> zooteknik standart KM, Protein, Nişasta ve güvenli üst sınır değerlerini tek tıkla yeni yem ekleme formuna aktarabilirsiniz.
+                🌾 <strong>Yem Referans Rehberi (Kaba Yem & Hububat Kırmaları):</strong> Laboratuvar analizi yaptırmanıza gerek kalmadan; yonca, mısır silajı, pancar posası, saman, fiğ, korunga, reygras gibi kaba yemlerin yanı sıra çiftlikte kullanılan <strong>Arpa Kırması</strong>, <strong>Mısır Kırması</strong> ve <strong>Buğday Kırması</strong> için hem <strong>1. Sınıf (Normal/Dolgun)</strong> hem de <strong>2. Sınıf (Orta Kalite/Cılız)</strong> bilimsel standart KM, Protein, Nişasta ve güvenli üst sınır değerlerini tek tıkla yeni yem ekleme formuna aktarabilirsiniz.
               </div>
             </div>
             <p className="text-[11px] text-slate-500 pl-11">
@@ -568,7 +568,7 @@ function AyarlarContent() {
               </div>
             </div>
             <p className="text-xs text-slate-600 leading-relaxed pl-11">
-              İneklerin sağlıklı süt üretebilmesi ve sindirim sisteminin bozulmaması için MilkIQ üç aşamalı zooteknik güvenlik kontrolü uygular:
+              İneklerin sağlıklı süt üretebilmesi ve sindirim sisteminin bozulmaması için MilkIQ üç aşamalı bilimsel besleme ve güvenlik kontrolü uygular:
             </p>
             <div className="pl-11 space-y-2.5 text-xs">
               <div className="bg-emerald-50 border border-emerald-200 p-3 rounded-xl text-emerald-950 font-medium">
@@ -581,7 +581,7 @@ function AyarlarContent() {
                 🔴 <strong>Yetersiz Kuru Madde & Açlık Stresi (-%15 Altı):</strong> Yem erkenden biter, hayvan doymadığı için açlık stresine girer ve ani süt verim kaybı yaşanır.
               </div>
               <div className="bg-amber-50 border border-amber-200 p-3 rounded-xl text-amber-950 font-medium">
-                ⚠️ <strong>Kaba Yem & Zooteknik Yem Üst Sınırları:</strong> Kaba yem oranı %40 altına indiğinde asidoz riski bildirilir; ayrıca 40 kg silaj veya 3 kg üzeri saman gibi riskli tekil miktarlar zooteknik limit sistemiyle anında uyarılır.
+                ⚠️ <strong>Kaba Yem & Fizyolojik Yem Üst Sınırları:</strong> Kaba yem oranı %40 altına indiğinde asidoz riski bildirilir; ayrıca 40 kg silaj veya 3 kg üzeri saman gibi riskli tekil miktarlar güvenli üst limit sistemiyle anında uyarılır.
               </div>
             </div>
           </div>
@@ -730,7 +730,7 @@ function AyarlarContent() {
                     Süt Hayvancılığı Terimler Sözlüğü
                   </h2>
                   <p className="text-xs text-slate-500 mt-0.5">
-                    MilkIQ içerisinde ve süt sığırcılığında sıkça kullanılan temel kavramların zooteknik ve veteriner hekimlik açıklamaları.
+                    MilkIQ içerisinde ve süt sığırcılığında sıkça kullanılan temel kavramların hayvan besleme ve veteriner hekimlik açıklamaları.
                   </p>
                 </div>
               </div>

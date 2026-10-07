@@ -25,7 +25,7 @@ export function generateLactationAdvice(
         type: 'INFO',
         category: 'GENEL',
         title: 'Rasyon Oluşturmaya Başlayın',
-        message: 'Aşağıdaki yem kütüphanesinden yem miktarları ekleyerek seçilen laktasyon dönemine uygun akıllı zooteknik analizi ve tavsiyeleri görüntüleyin.',
+        message: 'Aşağıdaki yem kütüphanesinden yem miktarları ekleyerek seçilen laktasyon dönemine uygun akıllı besleme analizi ve tavsiyeleri görüntüleyin.',
         action: 'Kaba yemler (mısır silajı, yonca) ve kesif yemler ekleyerek rasyonunuzu dengeleyin.'
       }
     ];

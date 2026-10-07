@@ -1,5 +1,5 @@
 # MilkIQ: Akıllı Süt, Rasyon & Maliyet Sistemi
-## Detaylı Uygulama Mimarisi, Zooteknik Hesaplama ve Geliştirme Planı
+## Detaylı Uygulama Mimarisi, Bilimsel Besleme Hesaplama ve Geliştirme Planı
 
 ---
 
@@ -35,7 +35,7 @@ Yetiştirici;
 * **Güneş Işığı & Ahır Ortamı Uyumu:** Yüksek kontrastlı renkler (WCAG AAA uyumlu), net yazılar, kafa karıştırmayan sade kartlar.
 * **Sayısal Girdi Kolaylığı:** Mobil klavyede doğrudan ondalıklı sayı tuş takımını açan `inputmode="decimal"` yapısı ve hızlı +/- artırma butonları.
 * **Anlık Reaktif Hesaplama:** "Hesapla" butonuna basmaya gerek kalmadan, kullanıcı gram/kilo değiştirdiği milisaniyede tüm grafik ve göstergelerin akıcı şekilde güncellenmesi.
-* **Görsel Durum Göstergeleri:** Karmaşık zooteknik terimler yerine:
+* **Görsel Durum Göstergeleri:** Karmaşık teknik terimler yerine:
   - 🟢 **Mükemmel / Yeterli:** Kaba yem oranı ve protein dengeli.
   - 🟡 **Dikkat / Sınırda:** Kaba yem biraz düşük veya nişasta yüksek.
   - 🔴 **Kritik / Tehlike:** Kaba yem çok düşük (Asidoz riski!) veya protein çok yetersiz.
@@ -57,7 +57,7 @@ Yetiştirici;
 
 ---
 
-### 5. Zooteknik Hesaplama Motoru (Rasyon Algoritmaları)
+### 5. Bilimsel Besleme Hesaplama Motoru (Rasyon Algoritmaları)
 
 #### A. Kuru Madde (KM) Tüketimi
 Hayvanın biyolojik doygunluk sınırı ve besin alımı su hariç **Kuru Madde (KM)** üzerinden hesaplanır:
@@ -88,7 +88,7 @@ $$\text{Toplam HP (gram)} = \sum \text{HP (kg)} \times 1000$$
   - **1 Litre Süt İçin Gerekli HP:** $\approx 90 \text{ gram}$ (Kullanıcı ayarlarından özelleştirilebilir, varsayılan 90g)
   - **Üretilebilir Süt Potansiyeli (Litre):**
     $$\text{Potansiyel Süt (L)} = \frac{\text{Toplam HP (g)} - \text{Yaşama Payı HP (g)}}{\text{1 L Süt İçin Gereken HP (90g)}}$$
-  *(Not: Uygulamada hem bu zooteknik net süt potansiyeli hem de kullanıcının talep ettiği sadeleştirilmiş oranlama bir arada gösterilir).*
+  *(Not: Uygulamada hem bu bilimsel net süt potansiyeli hem de kullanıcının talep ettiği sadeleştirilmiş oranlama bir arada gösterilir).*
 
 #### D. Nişasta Dengesi
 $$\text{Nişasta (kg)} = KM_{\text{yem}} \times \frac{\text{Nişasta Oranı (\%)}}{100}$$

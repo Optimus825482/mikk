@@ -108,7 +108,7 @@ export interface FactoryFeed {
   category: 'SUT_YEMI' | 'DENGELIYICI' | 'DUVE_BUZAGI' | 'KURU_DONEM';
   categoryLabel?: string;
   protein: number;       // % Ham Protein (min)
-  starch: number;        // % Nişasta (tahmini zooteknik değer)
+  starch: number;        // % Nişasta (tahmini besleme değeri)
   dryMatter: number;     // % Kuru Madde (standart %88-89)
   energyME: number;      // kcal/kg Metabolik Enerji
   cellulose: number;     // % Ham Selüloz (max)
@@ -196,7 +196,7 @@ export interface RationCalculationResult {
   starchStatusMessage: string;
 
   // Süt Potansiyeli
-  potentialMilkLiters: number;       // Bilimsel zooteknik potansiyel (Yaşama payı düşüldükten sonra)
+  potentialMilkLiters: number;       // Bilimsel süt potansiyeli (Yaşama payı düşüldükten sonra)
   rawProteinPotentialMilkLiters: number; // Toplam protein / katsayı sadeleştirilmiş hesap
   milkDeficitOrSurplus: number;      // Potansiyel Süt - Hedef Süt
 

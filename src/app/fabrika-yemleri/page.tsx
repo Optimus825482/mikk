@@ -243,7 +243,7 @@ export default function FactoryFeedsPage() {
           </div>
         </div>
 
-        {/* Quick Zooteknik Insight Cards */}
+        {/* Quick Besleme Insight Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-6 pt-6 border-t border-white/10 text-xs">
           <div className="bg-white/5 p-3 rounded-xl border border-white/10">
             <span className="text-slate-400 block font-medium">Standart Süt Yemleri</span>

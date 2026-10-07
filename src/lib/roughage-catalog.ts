@@ -19,7 +19,7 @@ export interface RoughageReferenceFeed {
   category: FeedCategory;
   categoryLabel: string;
   icon: string;                // '🌿', '🌽', '🌾', '🌱', '🍯'
-  generalInfo: string;         // Zooteknik genel bilgi
+  generalInfo: string;         // Besleme genel bilgi
   qualities: {
     firstGrade: RoughageQualityOption;
     secondGrade: RoughageQualityOption;

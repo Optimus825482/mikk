@@ -168,7 +168,7 @@ export default function MailAyarPage() {
             <span>Ayarlar Menüsüne Dön</span>
           </Link>
           <span className="text-[11px] font-mono text-emerald-400 bg-emerald-950/70 border border-emerald-800/60 px-2.5 py-1 rounded-lg">
-            Sistem Yönetimi (Port: 518518)
+            Sistem Güvenlik Yönetimi
           </span>
         </div>
 

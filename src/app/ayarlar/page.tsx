@@ -435,7 +435,7 @@ function AyarlarContent() {
               className="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl shadow-md transition-all shrink-0 flex items-center space-x-1.5 active:scale-95"
             >
               <Lock className="w-4 h-4 text-emerald-200" />
-              <span>Mail Ayarları (518518) →</span>
+              <span>Mail & Bildirim Ayarları →</span>
             </Link>
           </div>
         </div>

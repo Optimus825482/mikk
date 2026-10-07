@@ -147,7 +147,7 @@ export default function AuditLogViewer() {
           className="inline-flex items-center justify-center space-x-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl shadow-md transition-all active:scale-95 shrink-0"
         >
           <Mail className="w-4 h-4" />
-          <span>Gmail Hata Bildirim Ayarları (518518) →</span>
+          <span>Gmail Hata Bildirim Ayarları →</span>
         </Link>
       </div>
 

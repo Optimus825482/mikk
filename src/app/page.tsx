@@ -339,6 +339,19 @@ export default function DashboardPage() {
         </div>
       </div>
 
+      {/* COPYRIGHT & DEVELOPER FOOTER */}
+      <footer className="pt-4 pb-12 sm:pb-6 border-t border-slate-200/80 text-center space-y-1">
+        <p className="text-xs font-semibold text-slate-500 tracking-wide">
+          © {new Date().getFullYear()} <span className="font-bold text-slate-800">MilkIQ</span>. Tüm hakları saklıdır.
+        </p>
+        <p className="text-[11px] font-medium text-slate-400 flex items-center justify-center gap-1.5">
+          <span>Developed by</span>
+          <span className="font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200/60 shadow-2xs">
+            Erkan Erdem
+          </span>
+        </p>
+      </footer>
+
       {/* MilkIQ HAKKINDA MODAL PENCERESİ */}
       <AboutModal
         forceOpen={showAboutModal}

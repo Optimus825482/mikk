@@ -1,0 +1,136 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model SystemSetting {
+  id                       String   @id @default("singleton")
+  farmName                 String?  @default("MilkIQ Süt Sığırcılığı İşletmesi")
+  pinCode                  String   @default("1234")
+  milkSalePrice            Float    @default(16.5) // TL/Litre süt satış fiyatı
+  proteinPerLiter          Float    @default(90.0) // 1L süt için gerekli Ham Protein (gram)
+  maintenanceProteinFactor Float    @default(0.67) // Canlı ağırlık başına yaşama payı HP (g/kg CA)
+  defaultLiveWeight        Float    @default(600.0)
+  defaultTargetMilk        Float    @default(25.0)
+  updatedAt                DateTime @updatedAt
+}
+
+enum FeedType {
+  KABA
+  KESIF
+}
+
+model Feed {
+  id          String       @id @default(cuid())
+  name        String
+  type        FeedType
+  category    String?      // SILAJ, KURU_OT, SAMAN, HAZIR_YEM, HUBUBAT vb.
+  maxLimitKg  Float?       // Önerilen günlük üst sınır
+  dryMatter   Float        // Kuru Madde % (ör. 32.0 mısır silajı, 88.0 kuru ot, 90.0 arpa)
+  protein     Float        // Ham Protein % (KM üzerinden, ör. 8.5 silaj, 16.0 yonca, 19.0 fabrika yemi)
+  starch      Float        // Nişasta % (KM üzerinden, ör. 30.0 silaj, 55.0 arpa, 2.0 saman)
+  unitPrice   Float        // TL/kg taze yem alış fiyatı
+  isDefault   Boolean      @default(false)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  rationItems RationItem[]
+}
+
+model FactoryFeed {
+  id            String   @id @default(cuid())
+  brand         String   // Proyem, CP, Abalıoğlu, vb.
+  name          String
+  category      String   // SUT_YEMI, DENGELIYICI, DUVE_BUZAGI, KURU_DONEM
+  categoryLabel String?
+  protein       Float
+  starch        Float
+  dryMatter     Float
+  energyME      Float
+  cellulose     Float
+  calcium       Float?
+  phosphorus    Float?
+  approxPrice   Float
+  bagWeight     Float?   @default(50)
+  description   String
+  createdAt     DateTime @default(now())
+}
+
+model Ration {
+  id          String       @id @default(cuid())
+  title       String
+  liveWeight  Float        @default(600.0) // Canlı Ağırlık kg
+  targetMilk  Float        @default(25.0)  // Hedef Süt Ortalaması L/gün
+  isActive    Boolean      @default(true)
+  notes       String?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  items       RationItem[]
+}
+
+model RationItem {
+  id          String   @id @default(cuid())
+  rationId    String
+  feedId      String
+  freshAmount Float    // Günlük verilen taze miktar kg/baş/gün
+  ration      Ration   @relation(fields: [rationId], references: [id], onDelete: Cascade)
+  feed        Feed     @relation(fields: [feedId], references: [id], onDelete: Cascade)
+}
+
+enum ExpenseCategory {
+  ELEKTRIK
+  SU
+  VETERINER_ILAC
+  ISCILIK
+  MAZOT_TRAKTOR
+  TOHUMLAMA
+  BAKIM_ONARIM
+  DIGER
+}
+
+model MonthlyExpense {
+  id          String          @id @default(cuid())
+  category    ExpenseCategory
+  amount      Float           // Tutar TL
+  month       String          // YYYY-MM formatında (ör. "2026-10")
+  description String?
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+}
+
+model DailyProduction {
+  id            String   @id @default(cuid())
+  date          String   @unique // YYYY-MM-DD
+  totalMilk     Float    // İşletmede sağılan günlük toplam süt (Litre)
+  milkingCows   Int      // Sağılan inek sayısı (baş)
+  averagePerCow Float    @default(0.0)
+  notes         String?
+  createdAt     DateTime @default(now())
+}
+
+model MonthlyCostReport {
+  id                  String   @id @default(cuid())
+  month               String   // YYYY-MM
+  title               String
+  daysInMonth         Int
+  totalMilkProduction Float
+  dailyAverageMilk    Float
+  milkingCowsCount    Int
+  feedCostPerLiter    Float
+  dailyFeedCostPerCow Float
+  overheadCostPerLiter Float
+  totalCostPerLiter   Float
+  netProfitPerLiter   Float
+  milkSalePrice       Float
+  totalFeedCost       Float
+  totalOverheadCost   Float
+  totalOperatingCost  Float
+  totalRevenue        Float
+  netProfitTotal      Float
+  expenseBreakdown    Json     // Gider kategorileri dağılım dizisi
+  notes               String?
+  createdAt           DateTime @default(now())
+}

@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: milkiq-db
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-milkiq}
+      POSTGRES_USER: ${POSTGRES_USER:-milkiq}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-milkiq_secret_2026}
+    volumes:
+      - milkiq_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-milkiq} -d ${POSTGRES_DB:-milkiq}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - milkiq-network
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: milkiq-app
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DATABASE_URL: postgresql://${POSTGRES_USER:-milkiq}:${POSTGRES_PASSWORD:-milkiq_secret_2026}@db:5432/${POSTGRES_DB:-milkiq}?schema=public
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-https://milkiq.erkanerdem.online}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:-milkiq_production_secret_key_889900}
+    volumes:
+      - milkiq_app_data:/app/data
+    ports:
+      - "3000:3000"
+    networks:
+      - milkiq-network
+
+volumes:
+  milkiq_db_data:
+  milkiq_app_data:
+
+networks:
+  milkiq-network:
+    driver: bridge

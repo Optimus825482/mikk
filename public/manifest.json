@@ -1,0 +1,36 @@
+{
+  "name": "MilkIQ - Akıllı Süt, Rasyon & Maliyet Asistanı",
+  "short_name": "MilkIQ",
+  "description": "Süt sığırcılığı işletmeleri için rasyon hazırlama, kaba yem yeterlilik kontrolü, süt potansiyeli ve anlık 1 litre süt maliyeti hesaplama sistemi.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#064e3b",
+  "theme_color": "#059669",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
